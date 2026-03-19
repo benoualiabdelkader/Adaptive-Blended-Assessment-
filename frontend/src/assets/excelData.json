@@ -1,0 +1,3617 @@
+{
+  "Summary": [
+    {
+      "__EMPTY": "Student Name",
+      "__EMPTY_1": "lahmarabbou asmaa"
+    },
+    {
+      "__EMPTY": "User ID",
+      "__EMPTY_1": "9263"
+    },
+    {
+      "__EMPTY": "Course Title",
+      "__EMPTY_1": "Academic Writing"
+    },
+    {
+      "__EMPTY": "Course ID",
+      "__EMPTY_1": "379"
+    },
+    {
+      "__EMPTY": "Instructor",
+      "__EMPTY_1": "Fatima GUERCH"
+    },
+    {
+      "__EMPTY": "Institution",
+      "__EMPTY_1": "University of Ain Temouchent"
+    },
+    {
+      "__EMPTY": "Report Generated",
+      "__EMPTY_1": "14 March 2026"
+    },
+    {
+      "__EMPTY": "Period Covered",
+      "__EMPTY_1": "20 November 2025 – 14 March 2026  (Semester 1 & 2)"
+    },
+    {
+      "__EMPTY": "Log Viewer",
+      "__EMPTY_1": "Fatima GUERCH (logged in as instructor)"
+    },
+    {
+      "__EMPTY": "  Quick Statistics"
+    },
+    {
+      "__EMPTY": "Total assignments submitted",
+      "__EMPTY_1": "9"
+    },
+    {
+      "__EMPTY": "Graded assignments",
+      "__EMPTY_1": "1  (Argumentative essay Introduction: 10/100)"
+    },
+    {
+      "__EMPTY": "Ungraded assignments",
+      "__EMPTY_1": "8  (pending instructor grading)"
+    },
+    {
+      "__EMPTY": "Diagnostic Quiz attempt",
+      "__EMPTY_1": "1 attempt  –  Not yet graded / 24.00"
+    },
+    {
+      "__EMPTY": "Forum posts created",
+      "__EMPTY_1": "2  (Forum: First semester, Forum: check-up)"
+    },
+    {
+      "__EMPTY": "Workshop activity",
+      "__EMPTY_1": "Getting Started with Argumentative Essays (viewed + peer-assessed)"
+    },
+    {
+      "__EMPTY": "Attendance – Semester 1",
+      "__EMPTY_1": "0 / 0 sessions  (0.0 %)"
+    },
+    {
+      "__EMPTY": "Attendance – Semester 2",
+      "__EMPTY_1": "0 / 2 sessions  (0.0 %)  –  0 / 2 points"
+    },
+    {
+      "__EMPTY": "Feedback activity",
+      "__EMPTY_1": "Writing Challenges & Metacognitive Strategies  –  NOT STARTED"
+    },
+    {
+      "__EMPTY": "XP / Gamification",
+      "__EMPTY_1": "Levelled up to Level 4 on 30 Nov 2025"
+    },
+    {
+      "__EMPTY": "Total Moodle activity log entries",
+      "__EMPTY_1": "258 unique entries extracted"
+    },
+    {
+      "__EMPTY": "First log entry date",
+      "__EMPTY_1": "20 November 2025"
+    },
+    {
+      "__EMPTY": "Last log entry date",
+      "__EMPTY_1": "14 March 2026"
+    },
+    {
+      "__EMPTY": "IP addresses used",
+      "__EMPTY_1": "41.96.x.x / 41.97.x.x / 154.121.x.x  (multiple sessions)"
+    }
+  ],
+  "Assignments": [
+    {
+      "#": 1,
+      "Assignment Title": "Welcome & Instructions",
+      "Section": "Academic Writing (S1)",
+      "Submission Date": "20 Nov 2025, 9:48 PM",
+      "Status": "Submitted 2h 11min EARLY",
+      "Grade": "-",
+      "Files Submitted": "1.docx",
+      "Full Details": "Grading status: Not graded | Comments: 0 | No time limit noted"
+    },
+    {
+      "#": 2,
+      "Assignment Title": "test  (Clarity & Formality Assessment)",
+      "Section": "Clarity and Formality (S1)",
+      "Submission Date": "20 Nov 2025, 12:03 AM",
+      "Status": "Submitted 3 min 47 sec LATE",
+      "Grade": "-",
+      "Files Submitted": "Test.docx",
+      "Full Details": "Grading status: Not graded | Rubric applied (8 pts total): Clarity of Expression (0-2), Formality of Tone (0-2), Precision of Vocabulary (0-2), Organization & Cohesion (0-2)"
+    },
+    {
+      "#": 3,
+      "Assignment Title": "Identifying Paragraph Patterns",
+      "Section": "Academic Writing (S1)",
+      "Submission Date": "30 Nov 2025, 9:57 PM",
+      "Status": "Submitted 5 days 2h EARLY",
+      "Grade": "-",
+      "Files Submitted": "Home work.docx + online text (68 words)",
+      "Full Details": "Attempt 1 of 3 allowed | Grading status: Not graded | Comments: 0 | Levelled up to XP Level 4 upon submission"
+    },
+    {
+      "#": 4,
+      "Assignment Title": "Diagnostic Writing Tasks",
+      "Section": "Academic Writing (S2)",
+      "Submission Date": "27 Jan 2026, 10:39 PM",
+      "Status": "Submitted 2 days 1h EARLY",
+      "Grade": "-",
+      "Files Submitted": "AEL.docx + online text (199 words)",
+      "Full Details": "Online text begins: 'I used to believe that silence meant weakness. I thought the loudest people were the strongest, and that confidence had to be visible to ...' | Not graded"
+    },
+    {
+      "#": 5,
+      "Assignment Title": "Argumentative Essay – Writing an Effective Introduction  [DRAFT]",
+      "Section": "Argumentative Essays (S2)",
+      "Submission Date": "3 Feb 2026, 12:04 AM",
+      "Status": "Submitted 7 days 23h EARLY",
+      "Grade": "-",
+      "Files Submitted": "Online text (112 words)",
+      "Full Details": "Attempt 1 of 20 allowed | 2 submission comments:\n  – Instructor (10 Feb 12:34 PM): 'The problem must be well stated and explained + clear arguments'\n  – Student (10 Feb 9:34 PM): Full revised introduction text (see Writing Samples sheet)"
+    },
+    {
+      "#": 6,
+      "Assignment Title": "Argumentative essay Introduction  [GRADED]",
+      "Section": "Argumentative Essays (S2)",
+      "Submission Date": "12 Feb 2026, 5:06 PM",
+      "Status": "Submitted 6h 53min EARLY",
+      "Grade": "10 / 100",
+      "Files Submitted": "Essay AEL.docx",
+      "Full Details": "Graded: 12 Feb 2026, 10:27 PM by Fatima GUERCH | 0 submission comments | General feedback provided (instructor model paragraph – see Feedback CSV sheet)"
+    },
+    {
+      "#": 7,
+      "Assignment Title": "Argumentative body paragraphs: First paragraph",
+      "Section": "Argumentative Essays (S2)",
+      "Submission Date": "15 Feb 2026, 10:50 PM",
+      "Status": "Submitted 2 days 1h EARLY",
+      "Grade": "-",
+      "Files Submitted": "Online text (186 words)",
+      "Full Details": "Attempt 1 | 2 submission comments:\n  – Instructor (16 Feb 12:48 PM): feedback with 3 revision points\n  – Student (16 Feb 9:36 PM): revised paragraph (comment id 406; previous comment 405 deleted)"
+    },
+    {
+      "#": 8,
+      "Assignment Title": "Argumentative Essay: Second Body Paragraph  [v1 – initial online text]",
+      "Section": "Argumentative Essays (S2)",
+      "Submission Date": "23 Feb 2026, 2:20 AM (last modified)",
+      "Status": "No due date listed",
+      "Grade": "-",
+      "Files Submitted": "Online text (200 words)",
+      "Full Details": "Text begins: 'Nevertheless, using AI in universities has another problem. It can make students less good at thinking for themselves...'\n2 submission comments:\n  – Instructor (23 Feb 10:02 PM): 'Revise structure, use formal language, remove AI generated sentences'\n  – Student (24 Feb 2:49 AM): full revised text (see Writing Samples sheet)"
+    },
+    {
+      "#": 9,
+      "Assignment Title": "Argumentative Essay: Second Body Paragraph  [v2 – FINAL SUBMISSION]",
+      "Section": "Argumentative Essays (S2)",
+      "Submission Date": "6 Mar 2026, 10:16 PM",
+      "Status": "Submitted 1 day 1h EARLY",
+      "Grade": "-",
+      "Files Submitted": "Online text (198 words) + file upload (0 files)",
+      "Full Details": "Submission id: 6533 | Module id: 5969 | Accepted academic integrity statement\n2 submission comments:\n  – Instructor (7 Mar 4:20 PM): 'Argument present but limited. Improve evidence, add in-text citation, expand reasoning, revise structure'\n  – Student (7 Mar 11:02 PM): final revised paragraph (comment id 562) – see Writing Samples sheet"
+    },
+    {
+      "#": 10,
+      "Assignment Title": "Writing Progress Reflection",
+      "Section": "Argumentative Essays (S2)",
+      "Submission Date": "14 Mar 2026, 2:16 AM",
+      "Status": "Submitted",
+      "Grade": "-",
+      "Files Submitted": "Online text (123 words)",
+      "Full Details": "Attempt 1 of 3 allowed | Submission id: 6624 | Module id: 6000 | 0 comments | Not yet graded"
+    }
+  ],
+  "Writing Samples": [
+    {
+      "Assignment / Date": "Diagnostic Writing Tasks\n27 Jan 2026 – 199 words",
+      "Student Text (Full)": "I used to believe that silence meant weakness. I thought the loudest people were the strongest, and that confidence had to be visible to be real. Growing up in a competitive environment, I often felt invisible when I chose to listen rather than speak. But as I grew older, I began to understand that strength can be quiet. The most influential people in my life were not the ones who talked the most; they were the ones who listened deeply, thought carefully, and acted with purpose. Silence, I learned, is not the absence of strength — it is often its most powerful form. [Excerpt – full text in file AEL.docx]",
+      "Instructor Feedback (Full)": "Not graded  |  No comments"
+    },
+    {
+      "Assignment / Date": "Identifying Paragraph Patterns\n30 Nov 2025 – 68 words (online text)",
+      "Student Text (Full)": "A. The paragraph is chronological because it shows actions in time order.\nB. The paragraph is listing because it groups items together.\nC. [continued – full text in file Home work.docx]",
+      "Instructor Feedback (Full)": "Not graded  |  No comments"
+    },
+    {
+      "Assignment / Date": "Argumentative Essay Intro – Draft\n3 Feb 2026 – 112 words",
+      "Student Text (Full)": "In recent years, education has changed significantly due to technological advancements. The most discussed topic today is the comparison between online learning and onsite learning. While onsite learning has been the dominant form of education for many decades, online learning has become increasingly popular, especially after recent global changes that affected education systems worldwide. This shift has raised concerns about the effectiveness of online learning compared to traditional classroom learning. Although online learning offers certain advantages, onsite learning remains the better form of education because it promotes direct interaction, better concentration, and stronger academic engagement.",
+      "Instructor Feedback (Full)": "Fatima GUERCH (10 Feb 2026, 12:34 PM):\n«The problem must be well stated and explained + clear arguments»"
+    },
+    {
+      "Assignment / Date": "Argumentative Essay Intro – Student Revised Comment\n10 Feb 2026 (comment on submission)",
+      "Student Text (Full)": "In recent years, education has changed significantly due to rapid technological advancements. One of the most discussed topics today is the comparison between online learning and onsite learning. While onsite learning has been the dominant form of education for many decades, online learning has become increasingly popular, especially after recent global changes that affected education systems worldwide. This shift has raised concerns about the effectiveness of online learning compared to traditional classroom learning. Although online learning offers certain advantages, onsite learning remains the better form of education because it promotes direct interaction, better concentration, and stronger academic engagement.",
+      "Instructor Feedback (Full)": "Submitted as comment id 295 on submission 5917.\nSubsequently submitted as file Essay AEL.docx on 12 Feb → Grade: 10/100"
+    },
+    {
+      "Assignment / Date": "Argumentative Essay Intro – GRADED\n12 Feb 2026  |  Grade: 10/100  |  File: Essay AEL.docx",
+      "Student Text (Full)": "[Full text in file Essay AEL.docx]\n\nInstructor-provided model / general feedback text:\nArtificial intelligence has rapidly become part of everyday university life. Many students now turn to AI tools to support their writing; organize their ideas; and conduct research more efficiently. Because these technologies are easily accessible and simple to use; their presence in academic work continues to expand. This growing use has sparked an ongoing debate within higher education. Some educators and students question whether relying on artificial intelligence weakens essential academic skills or encourages dishonest practices. Others argue that; when used responsibly; AI can serve as a valuable learning aid that supports understanding rather than replacing effort. To this end; artificial intelligence is neither inherently harmful nor automatically beneficial. Its educational value depends on how it is used. When approached critically and ethically; it can enhance learning; when misused; it risks undermining both intellectual development and academic integrity.\n[Instructor note: 'this is mine more formal and academic my dear.']",
+      "Instructor Feedback (Full)": "Grade: 10.00 / 100.00\nGraded: 12 Feb 2026, 10:27 PM\nGraded by: Fatima GUERCH\n0 submission comments"
+    },
+    {
+      "Assignment / Date": "First Body Paragraph – Original\n15 Feb 2026 – 186 words",
+      "Student Text (Full)": "One important concern about using Artificial Intelligence in higher education is that students may start depending on it too much. AI is meant to support learning, but when it becomes the main source for doing assignments, it can slowly weaken important skills like critical thinking and problem solving. When students use AI to write essays or answer difficult questions, they miss the process of thinking deeply, questioning ideas, and building their own arguments. Critical thinking becomes weaker because it grows through practice and effort, not by receiving ready answers. In 2023, UNESCO warned that the uncontrolled use of generative AI in education could affect the development of essential cognitive skills. This is especially serious at the university level, where students are expected to analyze information and form independent opinions. From a critical point of view, although AI makes work faster and easier, too much attachment to it can encourage passive learning and make it harder to distinguish between helpful support and cheating. For this reason, AI should be used as a tool to guide learning, not as a replacement for students' own thinking and effort.",
+      "Instructor Feedback (Full)": "Fatima GUERCH (16 Feb 2026, 12:48 PM):\n«Well-structured and logically sequenced. but use this:\n1 – Add one sentence explaining how dependence weakens critical thinking\n2 – Dependence and reliance ideas are repeated, use synonyms\n3 – critical analysis with cited information»"
+    },
+    {
+      "Assignment / Date": "First Body Paragraph – Student Revision Comment\n16 Feb 2026 (comment id 406 – previous 405 deleted)",
+      "Student Text (Full)": "One important concern about using Artificial Intelligence in higher education is that students may start leaning on it too much. AI is meant to support learning, but when it becomes the main source for doing assignments, it can slowly weaken important skills like critical thinking and problem solving. When students use AI to write essays or answer difficult questions, they miss the process of thinking deeply, questioning ideas, and building their own arguments. Critical thinking becomes weaker because it grows through practice and effort, not by receiving ready answers. In 2023, UNESCO warned that the uncontrolled use of generative AI in education could affect the development of essential cognitive skills. This is especially serious at the university level, where students are expected to analyze information and form independent opinions. From a critical point of view, although AI makes work faster and easier, too much attachment to it can encourage passive learning and make it harder to distinguish between helpful support and cheating. For this reason, AI should be used as a tool to guide learning, not as a replacement for students' own thinking and effort.",
+      "Instructor Feedback (Full)": "Fatima GUERCH (23 Feb 2026, 10:02 PM):\n«Your paragraph makes a strong point about how AI can weaken students independent thinking, but it needs some refinement for clarity and flow. Revise the structure in the lesson and organise it accordingly. Use formal language and short sentences. Remove AI generated sentences.»"
+    },
+    {
+      "Assignment / Date": "Second Body Paragraph – v1 online text\n23 Feb 2026 – 200 words",
+      "Student Text (Full)": "Nevertheless, using AI in universities has another problem. It can make students less good at thinking for themselves. Figuring things out on their own... [200 words – text begins as above, full text visible in submission online text field of module 5868]",
+      "Instructor Feedback (Full)": "Fatima GUERCH (23 Feb 2026, 10:02 PM):\n«Your paragraph makes a strong point about how AI can weaken students independent thinking, but it needs some refinement for clarity and flow. Revise the structure in the lesson and organise it accordingly. Use formal language and short sentences. Remove AI generated sentences.»"
+    },
+    {
+      "Assignment / Date": "Second Body Paragraph – Student Revision (comment id from 24 Feb)\n24 Feb 2026, 2:49 AM",
+      "Student Text (Full)": "The use of intelligence in universities has a serious problem. Artificial intelligence can affect how honest students are when they do their work. Artificial intelligence tools can help students generate ideas or understand concepts. However when students use intelligence tools in the wrong way it becomes hard to know what work is truly the students work and what is not the students work. If students submit assignments that artificial intelligence completed for them this no longer measures the students real knowledge. The grades of the students may not reflect the effort of the students the skills of the students or the true level of understanding of the students.\nUniversities are built on honesty, responsibility and real learning. If these principles are ignored the value of a university education decreases. Some scholars at Harvard University explain that assessments are not about testing information but also about building discipline and personal responsibility. When students rely on intelligence to cheat the students lose important opportunities to develop these qualities and to grow academically. Artificial intelligence can be a problem if the students use it to cheat.\nIn addition if many students misuse intelligence it can create unfairness. Students who follow the rules may feel disadvantaged compared to those students who depend heavily on intelligence tools. This situation can reduce trust between the students. For these reasons universities must establish rules that promote responsible use of artificial intelligence while protecting academic integrity and maintaining high educational standards. Universities need to make sure that artificial intelligence is used in a way that is fair to all the students. Artificial intelligence should be used to help the students learn not to help the students cheat.",
+      "Instructor Feedback (Full)": "Fatima GUERCH (7 Mar 2026, 4:20 PM):\n«Evaluation: Argument present but explanation and development are limited.\nFeedback: Improve evidence or use a stronger one with in-text citation and example to support the claim. Try to expand the reasoning before giving the example. Revise the lesson and structure.»"
+    },
+    {
+      "Assignment / Date": "Second Body Paragraph – FINAL SUBMISSION\n6 Mar 2026, 10:16 PM – 198 words  |  Submission id 6533",
+      "Student Text (Full)": "Another major worry is how AI impacts fairness and student relationships. Some students use AI a lot to do their assignments while others do their work on their own it can make school unfair. Students who take time to research write and revise their work might feel discouraged when they see others getting better results with little effort by using AI. This can make classmates not trust each other and make students less motivated to work.\nOver time it can also cause problems in the classroom because students start to think that doing well in school is not about trying or being good at something.\nFor instance a study at Harvard University found that some students who used AI tools in a way got higher grades than their friends who did their work without AI help (Harvard University, 2023). These unfair situations can hurt how well students work together because they might not want to share ideas or help each other much. Also relying much on AI can hurt the development of key skills, like critical thinking solving problems and perseverance. So universities should make rules that guide the responsible use of AI to protect fairness and keep school honest.",
+      "Instructor Feedback (Full)": "Student also submitted further revision as comment id 562 (7 Mar 11:02 PM):\nAnother big worry about intelligence in education is how it affects fairness and relationships between students. When some students use AI tools a lot to do their assignments while others do their work on their own it can make school unfair. Students who take time to research write and revise their work might feel discouraged when they see others getting better results with little effort by using AI. This can make classmates not trust each other and make students less motivated to work. Over time it can also cause problems in the classroom because students start to think that doing well in school is not about trying or being good at something. For instance a study at Harvard University found that some students who used AI tools in a way got higher grades than their friends who did their work without AI help (Harvard University, 2023). These unfair situations can hurt how well students work together because they might not want to share ideas or help each other much. Also relying much on AI can hurt the development of key skills, like critical thinking solving problems and perseverance. So universities should make rules that guide the responsible use of AI to protect fairness and keep school honest.\n\n[Instructor feedback on final submission – pending]"
+    },
+    {
+      "Assignment / Date": "Writing Progress Reflection\n14 Mar 2026 – 123 words",
+      "Student Text (Full)": "1. What writing skills have you learned so far?\nI have learned to organize my ideas in paragraphs. I also learned to use connecting words. I have learned to structure an essay, write a clear thesis statement, and organize ideas into body paragraphs. I also learned how to use transition words and write a proper introduction and conclusion.\n\n2. I think I have made good progress in organizing my ideas and writing more clearly. However, I still face some challenges, especially with grammar, vocabulary, and expressing my ideas in an academic way. Sometimes I am not confident about my sentence structure.\n\n3. In the next sessions, I would like to improve my grammar, academic vocabulary, and paraphrasing skills. I also want to learn how to write stronger arguments and avoid common writing mistakes.",
+      "Instructor Feedback (Full)": "Not yet graded  |  0 comments"
+    },
+    {
+      "Assignment / Date": "Forum: First Semester – Post\n14 Dec 2025, 12:22 PM  (post title: 'Evaluation')",
+      "Student Text (Full)": "I have learned many new things from the academic writing workshops. I learned how to structure an essay, write a clear thesis statement, and organize ideas into body paragraphs. I also learned how to use transition words and write a proper introduction and conclusion.\nI think I have made good progress in organizing my ideas and writing more clearly. However, I still face some challenges, especially with grammar, vocabulary, and expressing my ideas in an academic way. Sometimes I am not confident about my sentence structure.\nIn the next sessions, I would like to improve my grammar, academic vocabulary, and paraphrasing skills. I also want to learn how to write stronger arguments and avoid common writing mistakes.",
+      "Instructor Feedback (Full)": "Average ratings: –  |  No instructor comment visible"
+    },
+    {
+      "Assignment / Date": "Forum: check-up – Post\n14 Feb 2026, 12:19 PM  |  Post id 1137  |  Discussion 575  |  33 words",
+      "Student Text (Full)": "Considering we uploaded the introduction and received your feedback, I'm guessing tomorrow we'll either refine it or present it. Maybe we can start in workshops to discuss ideas, then complete the task individually",
+      "Instructor Feedback (Full)": "Instructor response (posted in WhatsApp / classroom): 'So, I asked a question through Moodle yet no one approached the right answer. Tomorrow bring your portfolios with a short presentation on how you improved your introductions in which you explain what difficulties you had and how you overcame it.'"
+    }
+  ],
+  "Other Activities": [
+    {
+      "#": 1,
+      "Activity Title": "Forum: Writing Task 1: Clarity and Formality in Academic Sentences",
+      "Type": "Forum",
+      "Date / Views": "Nov 2025",
+      "Full Details": "Grade for rating: –  |  Grade for forum: –  |  No posts submitted by student\nCompletion state updated: 20 Nov 2025 10:33 PM  |  Module id: 4789"
+    },
+    {
+      "#": 2,
+      "Activity Title": "Forum: First Semester",
+      "Type": "Forum",
+      "Date / Views": "14 Dec 2025 (post)\n11 Dec 2025 (completion)",
+      "Full Details": "Grade for rating: –  |  Discussion id: 376  |  Module id: 5391\nStudent post titled 'Evaluation' on 14 Dec 2025, 12:22 PM (full text in Writing Samples sheet)\nCompletion state updated twice on 11 Dec 2025 11:47–11:49 PM"
+    },
+    {
+      "#": 3,
+      "Activity Title": "Feedback: Writing Challenges & Metacognitive Strategies",
+      "Type": "Feedback Activity",
+      "Date / Views": "Not started",
+      "Full Details": "Status: NOT STARTED  –  no submission or interaction recorded"
+    },
+    {
+      "#": 4,
+      "Activity Title": "Workshop: Getting Started with Argumentative Essays – Crafting Strong Introductions",
+      "Type": "Workshop",
+      "Date / Views": "2 Feb – 11 Feb 2026",
+      "Full Details": "Grade for submission: –  |  Grade for assessment: –  |  Module id: 5731\nStudent submission topic: Onsite / Online learning\nPeer assessments submitted:\n  • Assessment of introduction\n  • Assessment of online learning vs onsite learning\nPeer submissions viewed (10 Feb 2026 7:52 PM):\n  • lahmaroumelkheir  (submission id 109)\n  • belhosseine kaoutar  (submission id 113)\nMultiple views: 3 Feb (7:48 AM, 7:13 PM, 7:12 PM), 4 Feb, 8 Feb 12:45 AM, 10 Feb, 11 Feb"
+    },
+    {
+      "#": 5,
+      "Activity Title": "Other Workshop (module id 5728)",
+      "Type": "Workshop",
+      "Date / Views": "2 Feb 2026",
+      "Full Details": "Viewed 4 times on 2 Feb 2026 between 5:19–5:22 PM  |  Completion state updated twice\nExact workshop title not recorded in log (shown as 'Other')"
+    },
+    {
+      "#": 6,
+      "Activity Title": "Forum: check-up",
+      "Type": "Forum",
+      "Date / Views": "14 Feb 2026",
+      "Full Details": "Grade for rating: –  |  Grade for forum: –  |  Module id: 5760  |  Discussion id: 575\nPost id 1137 created 14 Feb 2026 12:19 PM\nStudent subscribed to discussion 14 Feb 12:19 PM\nDiscussion viewed again: 14 Feb 1:04 PM  |  Forum also viewed: 15 Feb 7:20 PM"
+    },
+    {
+      "#": 7,
+      "Activity Title": "Quiz: Diagnostic Writing Quiz",
+      "Type": "Quiz",
+      "Date / Views": "29 Jan 2026",
+      "Full Details": "Grade: Not yet graded / 24.00  |  Attempt id: 6295  |  Module id: 5704\nAttempt submitted: 29 Jan 2026 4:21:51 PM\nPages navigated: page 5 (4:21:24 PM), page 6 (4:21:47 PM)\nAttempt reviewed: 29 Jan 2026 4:22:00 PM"
+    },
+    {
+      "#": 8,
+      "Activity Title": "Attendance: Attendance (Semester 1 section)",
+      "Type": "Attendance",
+      "Date / Views": "2025",
+      "Full Details": "Taken sessions: 0  |  Points over taken sessions: 0 / 0  (0.0 %)\nTotal sessions: 0  |  Points over all sessions: 0 / 0  (0.0 %)\nMaximum possible points: 0 / 0  (0.0 %)"
+    },
+    {
+      "#": 9,
+      "Activity Title": "Attendance: Students Attendance (Semester 2 section)",
+      "Type": "Attendance",
+      "Date / Views": "2026",
+      "Full Details": "Taken sessions: 0  |  Points over taken sessions: 0 / 2  (0.0 %)\nTotal sessions: 1  |  Points over all sessions: 0 / 2  (0.0 %)\nMaximum possible points: 2 / 2  (100.0 %)"
+    },
+    {
+      "#": 10,
+      "Activity Title": "File: Academic writing: Clarity, formality & Precision",
+      "Type": "Resource File",
+      "Date / Views": "8 views",
+      "Full Details": "Module id: 4901  |  Most recently viewed: 14 Dec 2025 12:21 PM\nAlso viewed: 20 Nov 2025 10:34 PM, 11 Dec 2025 11:46–11:49 PM"
+    },
+    {
+      "#": 11,
+      "Activity Title": "Folder: Argumentative Essay Introductions – Resources",
+      "Type": "Folder",
+      "Date / Views": "17 views",
+      "Full Details": "Module id: 5729  |  Most recently viewed: 23 Feb 2026 2:21 AM\nViewed on: 3 Feb (7:49 AM), 8 Feb (12:45 AM & 12:44 AM), 10 Feb (7:51–8:03 PM) × multiple times, 18 Feb (2:23–2:58 PM) × multiple times"
+    },
+    {
+      "#": 12,
+      "Activity Title": "Page: Structure of argumentative paragraphs",
+      "Type": "Page",
+      "Date / Views": "1 view",
+      "Full Details": "Module id: 5970  |  Viewed: 6 Mar 2026 9:51 PM"
+    },
+    {
+      "#": 13,
+      "Activity Title": "Page: Use this self-assessment rubric to evaluate your paragraph…",
+      "Type": "Page",
+      "Date / Views": "1 view",
+      "Full Details": "Module id: 5971  |  Full title: 'Use this self-assessment rubric to evaluate your paragraph before submission so you can identify strengths, revise weaknesses, and improve the overall quality of your writing independently'\nViewed: 6 Mar 2026 9:52 PM"
+    },
+    {
+      "#": 14,
+      "Activity Title": "Page: Two model examples: with using AI or against it",
+      "Type": "Page",
+      "Date / Views": "3 views",
+      "Full Details": "Module id: 5972  |  Viewed: 6 Mar 2026 10:17 PM (×2), 10 Mar 2026 3:57 PM"
+    },
+    {
+      "#": 15,
+      "Activity Title": "Page: Common Transition Words for Essay Writing",
+      "Type": "Page",
+      "Date / Views": "1 view",
+      "Full Details": "Module id: 5973  |  Viewed: 7 Mar 2026 10:58 PM"
+    }
+  ],
+  "Grading Rubric": [
+    {
+      "Criterion": "Clarity of Expression",
+      "0 Points (Fail)": "Unclear ideas",
+      "1 Point (Partial)": "Some ambiguity",
+      "2 Points (Full)": "Sentences are clear",
+      "Max": "2"
+    },
+    {
+      "Criterion": "Formality of Tone",
+      "0 Points (Fail)": "Informal language",
+      "1 Point (Partial)": "Mostly formal, but lapses occur",
+      "2 Points (Full)": "Consistently formal, academic tone maintained",
+      "Max": "2"
+    },
+    {
+      "Criterion": "Precision of Vocabulary",
+      "0 Points (Fail)": "Inaccurate word choice",
+      "1 Point (Partial)": "Some precise vocabulary, but inconsistent",
+      "2 Points (Full)": "Vocabulary is consistently precise and accurate",
+      "Max": "2"
+    },
+    {
+      "Criterion": "Organization & Cohesion",
+      "0 Points (Fail)": "Ideas are disorganized, weak transitions",
+      "1 Point (Partial)": "Some organization",
+      "2 Points (Full)": "Clear structure and strong transitions",
+      "Max": "2"
+    },
+    {
+      "Criterion": "TOTAL",
+      "0 Points (Fail)": "—",
+      "1 Point (Partial)": "—",
+      "2 Points (Full)": "—",
+      "Max": "8"
+    },
+    {
+      "Criterion": "  Rubric Display Settings (as configured in Moodle)"
+    },
+    {
+      "Criterion": "Sort order for levels: Ascending by number of points"
+    },
+    {
+      "Criterion": "Calculate grade having a minimum score of the minimum achievable grade for the rubric"
+    },
+    {
+      "Criterion": "Allow users to preview rubric (otherwise it will only be displayed after grading)"
+    },
+    {
+      "Criterion": "Display rubric description during evaluation"
+    },
+    {
+      "Criterion": "Display rubric description to those being graded"
+    },
+    {
+      "Criterion": "Display points for each level during evaluation"
+    },
+    {
+      "Criterion": "Display points for each level to those being graded"
+    },
+    {
+      "Criterion": "Allow grader to add text remarks for each criterion"
+    },
+    {
+      "Criterion": "Show remarks to those being graded"
+    }
+  ],
+  "Full Activity Logs": [
+    {
+      "Date & Time": "20 Nov 2025, 10:33:43 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Forum: Writing Task 1: Clarity and Formality in Academic Sentences",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 4789",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:33:43 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: Writing Task 1: Clarity and Formality in Academic Sentences",
+      "Component": "Forum",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed forum activity module 4789",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:34:23 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: Writing Task 1: Clarity and Formality in Academic Sentences",
+      "Component": "Forum",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed forum activity module 4789",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:34:29 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:34:44 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 1 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:34:48 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "File: Academic writing: Clarity, formality & Precision",
+      "Component": "File",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed resource activity module 4901",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:35:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: test",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 4829",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:35:22 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: test",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 4829",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:35:27 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: test",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 4829",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:35:28 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: test",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 4829",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:35:44 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "User report",
+      "Event Name": "Grade user report viewed",
+      "Description": "User 9263 viewed grade report",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:36:00 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "20 Nov 2025, 10:36:03 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: Writing Task 1: Clarity and Formality in Academic Sentences",
+      "Component": "Forum",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed forum activity module 4789",
+      "Origin": "ws",
+      "IP Address": "41.96.6.143"
+    },
+    {
+      "Date & Time": "29 Nov 2025, 8:50:57 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.239.236"
+    },
+    {
+      "Date & Time": "29 Nov 2025, 8:50:57 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.239.236"
+    },
+    {
+      "Date & Time": "29 Nov 2025, 8:51:58 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.239.236"
+    },
+    {
+      "Date & Time": "29 Nov 2025, 8:51:58 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.239.236"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 10:10:34 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5086",
+      "Origin": "ws",
+      "IP Address": "154.121.42.161"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 10:10:34 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5086",
+      "Origin": "ws",
+      "IP Address": "154.121.42.161"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:43:57 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:43:58 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:29 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Online text submissions",
+      "Event Name": "An online text has been uploaded",
+      "Description": "User 9263 saved online text submission id 4501 in module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:29 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Online text submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created online text submission 68 words in module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:29 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "File submissions",
+      "Event Name": "A file has been uploaded",
+      "Description": "User 9263 uploaded file to submission 4501 in module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:30 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "File submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created file submission and uploaded 1 file in module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:30 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "Level Up XP",
+      "Event Name": "User levelled up",
+      "Description": "User ID 9263 leveled up to level 4",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:44 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:44 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "The user has accepted the statement of the submission",
+      "Description": "User 9263 accepted statement of submission 4501 for module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "30 Nov 2025, 9:57:44 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "A submission has been submitted",
+      "Description": "User 9263 submitted submission 4501 for assignment module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.211.253"
+    },
+    {
+      "Date & Time": "7 Dec 2025, 10:54:35 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.112.62"
+    },
+    {
+      "Date & Time": "7 Dec 2025, 10:54:45 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.112.62"
+    },
+    {
+      "Date & Time": "7 Dec 2025, 10:54:45 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "User report",
+      "Event Name": "Grade user report viewed",
+      "Description": "User 9263 viewed grade report",
+      "Origin": "ws",
+      "IP Address": "41.97.112.62"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 8:47:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 8:47:34 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 8:47:40 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "User report",
+      "Event Name": "Grade user report viewed",
+      "Description": "User 9263 viewed grade report",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 8:48:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 8:48:22 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Identifying Paragraph Patterns",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5086",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:45:12 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:46:04 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 1 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:46:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "File: Academic writing: Clarity, formality & Precision",
+      "Component": "File",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed resource activity module 4901",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:46:35 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: First semester",
+      "Component": "Forum",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed forum activity module 5391",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:46:59 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: First semester",
+      "Component": "Forum",
+      "Event Name": "Discussion viewed",
+      "Description": "User 9263 viewed discussion 376 in forum module 5391",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:47:53 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Forum: First semester",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 5391",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:48:03 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:48:05 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "User report",
+      "Event Name": "Grade user report viewed",
+      "Description": "User 9263 viewed grade report",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:49:15 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Forum: First semester",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 5391",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:49:24 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: test",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 4829",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:49:25 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: test",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 4829",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "11 Dec 2025, 11:49:36 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "File: Academic writing: Clarity, formality & Precision",
+      "Component": "File",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed resource activity module 4901",
+      "Origin": "ws",
+      "IP Address": "41.96.237.60"
+    },
+    {
+      "Date & Time": "29 Jan 2026, 4:21:23 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Quiz attempt updated",
+      "Description": "User 9263 updated responses on page 5 of attempt 6295 for quiz module 5704",
+      "Origin": "ws",
+      "IP Address": "41.97.22.72"
+    },
+    {
+      "Date & Time": "29 Jan 2026, 4:21:24 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Quiz attempt viewed",
+      "Description": "User 9263 viewed page 5 of attempt 6295 for quiz module 5704",
+      "Origin": "ws",
+      "IP Address": "41.97.22.72"
+    },
+    {
+      "Date & Time": "29 Jan 2026, 4:21:47 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Quiz attempt updated",
+      "Description": "User 9263 updated responses on page 6 of attempt 6295 for quiz module 5704",
+      "Origin": "ws",
+      "IP Address": "41.97.22.72"
+    },
+    {
+      "Date & Time": "29 Jan 2026, 4:21:48 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Quiz attempt summary viewed",
+      "Description": "User 9263 viewed summary for attempt 6295 for quiz module 5704",
+      "Origin": "ws",
+      "IP Address": "41.97.22.72"
+    },
+    {
+      "Date & Time": "29 Jan 2026, 4:21:51 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Quiz attempt submitted",
+      "Description": "User 9263 submitted attempt 6295 for quiz module 5704",
+      "Origin": "ws",
+      "IP Address": "41.97.22.72"
+    },
+    {
+      "Date & Time": "29 Jan 2026, 4:22:00 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Quiz attempt reviewed",
+      "Description": "User 9263 reviewed quiz attempt 6295 for quiz module 5704",
+      "Origin": "ws",
+      "IP Address": "41.97.22.72"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:38:25 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:38:50 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:39:05 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "User report",
+      "Event Name": "Grade user report viewed",
+      "Description": "User 9263 viewed grade report",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:39:28 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Quiz: Diagnostic Writing Quiz",
+      "Component": "Quiz",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed quiz activity module 5704",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:39:36 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Diagnostic Writing Tasks",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5703",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:39:36 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Diagnostic Writing Tasks",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5703",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:45:26 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 1 of course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:45:45 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:45:49 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Diagnostic Writing Tasks",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5703",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:45:50 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Diagnostic Writing Tasks",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5703",
+      "Origin": "ws",
+      "IP Address": "154.121.46.173"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 5:43:01 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.140.247"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 5:43:08 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 1 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.140.247"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 5:43:11 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.140.247"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 5:43:17 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.140.247"
+    },
+    {
+      "Date & Time": "1 Feb 2026, 8:59:40 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.140.247"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:19:46 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Other Workshop (module 5728)",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5728",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:19:46 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Other Workshop (module 5728)",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 5728 (×2)",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:20:39 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Other Workshop (module 5728)",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5728",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:21:11 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Other Workshop (module 5728)",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5728",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:21:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:21:27 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 5:22:10 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Other Workshop (module 5728)",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5728",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 11:45:15 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "2 Feb 2026, 11:45:16 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:03:19 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Online text submissions",
+      "Event Name": "An online text has been uploaded",
+      "Description": "User 9263 saved online text submission 5917 in module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:03:19 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Online text submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created online text submission 112 words in module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:03:19 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "File submissions",
+      "Event Name": "A file has been uploaded",
+      "Description": "User 9263 uploaded file to submission 5917 in module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:03:19 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "File submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created file submission uploaded 0 files in module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:03:54 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:03:55 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:04:06 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:04:06 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The user has accepted the statement of the submission",
+      "Description": "User 9263 accepted statement of submission 5917 for module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:04:06 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "A submission has been submitted",
+      "Description": "User 9263 submitted submission 5917 for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:04:52 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:04:52 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:05:16 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:05:36 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:05:37 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:07:17 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 12:07:21 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 7:48:57 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 7:49:10 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 7:49:14 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "41.97.6.229"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 7:12:40 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.156.125"
+    },
+    {
+      "Date & Time": "3 Feb 2026, 7:13:15 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.156.125"
+    },
+    {
+      "Date & Time": "4 Feb 2026, 11:05:51 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.164.183"
+    },
+    {
+      "Date & Time": "4 Feb 2026, 11:05:52 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.164.183"
+    },
+    {
+      "Date & Time": "4 Feb 2026, 11:06:12 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.164.183"
+    },
+    {
+      "Date & Time": "4 Feb 2026, 11:06:18 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.164.183"
+    },
+    {
+      "Date & Time": "7 Feb 2026, 12:23:55 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.193.134"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:44:41 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:44:45 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:44:51 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:44:51 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:01 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 1 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:03 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:04 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 1 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:06 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:07 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:10 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:10 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "8 Feb 2026, 12:45:16 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.165.2"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:13 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:19 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:27 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:28 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:49 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:51:57 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:52:03 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:52:10 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:52:10 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:52:20 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed workshop activity module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:52:23 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "belhosseine kaoutar",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Submission viewed",
+      "Description": "User 9263 viewed submission 113 for workshop module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 7:52:41 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmaroumelkheir",
+      "Event Context": "Workshop: Getting Started with Argumentative Essays: Crafting Strong Introductions",
+      "Component": "Workshop",
+      "Event Name": "Submission viewed",
+      "Description": "User 9263 viewed submission 109 for workshop module 5731",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 8:03:04 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 8:03:05 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 8:03:09 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 8:03:10 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 9:33:27 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 9:33:32 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 9:33:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 9:34:03 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Submission comments",
+      "Event Name": "Comment created",
+      "Description": "User 9263 added comment id 295 to submission 5917 for module 5730",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "10 Feb 2026, 9:46:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 1:11:21 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 1:12:14 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 1:12:19 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.182.54"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:15:02 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5744",
+      "Origin": "ws",
+      "IP Address": "154.121.46.159"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:15:03 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5744",
+      "Origin": "ws",
+      "IP Address": "154.121.46.159"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:20:47 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5744",
+      "Origin": "ws",
+      "IP Address": "154.121.90.70"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:20:48 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5744",
+      "Origin": "ws",
+      "IP Address": "154.121.90.70"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:21:04 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.90.70"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:21:18 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "System",
+      "Event Name": "Course activity completion updated",
+      "Description": "User 9263 updated completion state for module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.90.70"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:28:13 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.90.70"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 2:28:13 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.90.70"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 7:18:48 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.33.75"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 7:18:52 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.33.75"
+    },
+    {
+      "Date & Time": "11 Feb 2026, 7:19:34 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Course: academic writing",
+      "Component": "User report",
+      "Event Name": "Grade user report viewed",
+      "Description": "User 9263 viewed grade report",
+      "Origin": "ws",
+      "IP Address": "41.96.33.75"
+    },
+    {
+      "Date & Time": "14 Feb 2026, 12:19:13 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Forum: check-up",
+      "Component": "Forum",
+      "Event Name": "Discussion subscription created",
+      "Description": "User 9263 subscribed to discussion 575 in forum module 5760",
+      "Origin": "ws",
+      "IP Address": "41.96.161.168"
+    },
+    {
+      "Date & Time": "14 Feb 2026, 12:19:13 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: check-up",
+      "Component": "Forum",
+      "Event Name": "Post created",
+      "Description": "User 9263 created post id 1137 in discussion 575 in forum module 5760",
+      "Origin": "ws",
+      "IP Address": "41.96.161.168"
+    },
+    {
+      "Date & Time": "14 Feb 2026, 1:04:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: check-up",
+      "Component": "Forum",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed forum activity module 5760",
+      "Origin": "ws",
+      "IP Address": "41.96.161.168"
+    },
+    {
+      "Date & Time": "14 Feb 2026, 1:04:43 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: check-up",
+      "Component": "Forum",
+      "Event Name": "Discussion viewed",
+      "Description": "User 9263 viewed discussion 575 in forum module 5760",
+      "Origin": "ws",
+      "IP Address": "41.96.161.168"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 7:20:05 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Forum: check-up",
+      "Component": "Forum",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed forum activity module 5760",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 7:20:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 7:20:22 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:31:31 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:31:31 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:50:36 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Online text submissions",
+      "Event Name": "An online text has been uploaded",
+      "Description": "User 9263 saved online text submission 6127 in module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:50:36 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Online text submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created online text submission 186 words in module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:50:58 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The user has accepted the statement of the submission",
+      "Description": "User 9263 accepted statement of submission 6127 for module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:50:58 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "A submission has been submitted",
+      "Description": "User 9263 submitted submission 6127 for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "15 Feb 2026, 10:51:20 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.111.131"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 4:59:42 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 4:59:43 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 9:32:07 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 9:32:20 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 9:32:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 9:34:47 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Submission comments",
+      "Event Name": "Comment created",
+      "Description": "User 9263 added comment id 405 to submission 6127 for module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 9:35:17 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Submission comments",
+      "Event Name": "Comment deleted",
+      "Description": "User 9263 deleted comment id 405 from submission 6127 for module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 9:36:26 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Submission comments",
+      "Event Name": "Comment created",
+      "Description": "User 9263 added comment id 406 to submission 6127 for module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:05 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "Feedback viewed",
+      "Description": "User 9263 viewed feedback for user 9263 for assignment module 5744",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:06 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "Feedback viewed",
+      "Description": "User 9263 viewed feedback for user 9263 for assignment module 5744",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:06 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5744",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:07 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative essay Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5744",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:10 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:11 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:48:53 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:49:01 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:49:12 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "16 Feb 2026, 10:49:12 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.50.37"
+    },
+    {
+      "Date & Time": "17 Feb 2026, 11:03:08 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.201.22"
+    },
+    {
+      "Date & Time": "17 Feb 2026, 11:03:09 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "41.97.201.22"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:23:21 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:23:28 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:23:50 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:23:50 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:27:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:27:35 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:27:39 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:27:40 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:37:56 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5771",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:37:56 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative body paragraphs: First paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5771",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:58:55 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 2 of course 379",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:58:55 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:58:56 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Folder: Argumentative Essay Introductions-Resources",
+      "Component": "Folder",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed folder activity module 5729",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:58:59 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "18 Feb 2026, 2:59:00 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay – Writing an Effective Introduction",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5730",
+      "Origin": "ws",
+      "IP Address": "154.121.18.208"
+    },
+    {
+      "Date & Time": "23 Feb 2026, 2:08:36 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5868",
+      "Origin": "ws",
+      "IP Address": "41.97.63.129"
+    },
+    {
+      "Date & Time": "23 Feb 2026, 2:08:37 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5868",
+      "Origin": "ws",
+      "IP Address": "41.97.63.129"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 5:08:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5868",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 5:08:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5868",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:51:25 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:51:26 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:51:34 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:51:35 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:51:55 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Page: Structure of argumentative paragraphs",
+      "Component": "Page",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed page activity module 5970",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:52:31 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Page: Use this self-assessment rubric to evaluate your paragraph…",
+      "Component": "Page",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed page activity module 5971",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:52:40 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:52:41 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:57:44 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 9:57:45 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:11:58 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:11:59 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:16:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Online text submissions",
+      "Event Name": "An online text has been uploaded",
+      "Description": "User 9263 saved online text submission 6533 in module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:16:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Online text submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created online text submission 198 words in module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:16:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "File submissions",
+      "Event Name": "A file has been uploaded",
+      "Description": "User 9263 uploaded file to submission 6533 in module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:16:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "File submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created file submission uploaded 0 files in module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:16:51 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The user has accepted the statement of the submission",
+      "Description": "User 9263 accepted statement of submission 6533 for module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:16:51 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "A submission has been submitted",
+      "Description": "User 9263 submitted submission 6533 for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:17:12 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:17:13 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:17:32 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Page: Two model examples: with using AI or against it",
+      "Component": "Page",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed page activity module 5972",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:17:47 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Page: Two model examples: with using AI or against it",
+      "Component": "Page",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed page activity module 5972",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:23:45 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "6 Mar 2026, 10:23:46 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.97.45.19"
+    },
+    {
+      "Date & Time": "7 Mar 2026, 10:55:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.87.155"
+    },
+    {
+      "Date & Time": "7 Mar 2026, 10:55:33 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.87.155"
+    },
+    {
+      "Date & Time": "7 Mar 2026, 10:58:27 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Page: Common Transition Words for Essay Writing",
+      "Component": "Page",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed page activity module 5973",
+      "Origin": "ws",
+      "IP Address": "41.96.87.155"
+    },
+    {
+      "Date & Time": "7 Mar 2026, 10:59:15 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.87.155"
+    },
+    {
+      "Date & Time": "7 Mar 2026, 10:59:16 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.87.155"
+    },
+    {
+      "Date & Time": "7 Mar 2026, 11:02:38 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Submission comments",
+      "Event Name": "Comment created",
+      "Description": "User 9263 added comment id 562 to submission 6533 for module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.87.155"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 3:57:34 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Page: Two model examples: with using AI or against it",
+      "Component": "Page",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed page activity module 5972",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 3:58:00 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 3 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 3:58:09 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 3:58:10 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:29:32 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 3 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:29:37 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:29:45 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:29:46 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:53:15 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 3 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:53:19 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "10 Mar 2026, 11:53:20 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "11 Mar 2026, 1:39:53 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 3 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.92.33"
+    },
+    {
+      "Date & Time": "11 Mar 2026, 6:15:56 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 3 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.221.145"
+    },
+    {
+      "Date & Time": "11 Mar 2026, 6:16:00 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "User list viewed",
+      "Description": "User 9263 viewed user list in course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.221.145"
+    },
+    {
+      "Date & Time": "11 Mar 2026, 6:16:05 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.221.145"
+    },
+    {
+      "Date & Time": "11 Mar 2026, 6:16:06 PM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.221.145"
+    },
+    {
+      "Date & Time": "13 Mar 2026, 2:18:09 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Course: academic writing",
+      "Component": "System",
+      "Event Name": "Course viewed",
+      "Description": "User 9263 viewed section 3 of course 379",
+      "Origin": "ws",
+      "IP Address": "41.96.117.75"
+    },
+    {
+      "Date & Time": "13 Mar 2026, 2:18:16 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.117.75"
+    },
+    {
+      "Date & Time": "13 Mar 2026, 2:18:17 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Argumentative Essay: Second Body Paragraph",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 5969",
+      "Origin": "ws",
+      "IP Address": "41.96.117.75"
+    },
+    {
+      "Date & Time": "14 Mar 2026, 2:13:41 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Writing Progress Reflection",
+      "Component": "Assignment",
+      "Event Name": "Course module viewed",
+      "Description": "User 9263 viewed assign activity module 6000",
+      "Origin": "ws",
+      "IP Address": "41.96.15.242"
+    },
+    {
+      "Date & Time": "14 Mar 2026, 2:13:42 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Writing Progress Reflection",
+      "Component": "Assignment",
+      "Event Name": "The status of the submission has been viewed",
+      "Description": "User 9263 viewed submission status for assignment module 6000",
+      "Origin": "ws",
+      "IP Address": "41.96.15.242"
+    },
+    {
+      "Date & Time": "14 Mar 2026, 2:16:56 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Writing Progress Reflection",
+      "Component": "Online text submissions",
+      "Event Name": "An online text has been uploaded",
+      "Description": "User 9263 saved online text submission 6624 in module 6000",
+      "Origin": "ws",
+      "IP Address": "41.96.15.242"
+    },
+    {
+      "Date & Time": "14 Mar 2026, 2:16:56 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "lahmarabbou asmaa",
+      "Event Context": "Assignment: Writing Progress Reflection",
+      "Component": "Online text submissions",
+      "Event Name": "Submission created",
+      "Description": "User 9263 created online text submission 123 words in module 6000",
+      "Origin": "ws",
+      "IP Address": "41.96.15.242"
+    },
+    {
+      "Date & Time": "14 Mar 2026, 2:16:56 AM",
+      "User": "lahmarabbou asmaa",
+      "Affected User": "-",
+      "Event Context": "Assignment: Writing Progress Reflection",
+      "Component": "Assignment",
+      "Event Name": "A submission has been submitted",
+      "Description": "User 9263 submitted submission 6624 for assignment module 6000",
+      "Origin": "ws",
+      "IP Address": "41.96.15.242"
+    }
+  ],
+  "Chat Messages": [
+    {
+      "Date": "28 Jan 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Good evening dear student, Would you please mark your attendance and do the last assignment so we can start our second semester. Best regards.",
+      "Topic": "Attendance reminder / semester start"
+    },
+    {
+      "Date": "28 Jan 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Lahmar abbou asmaa hibat allah",
+      "Topic": "Name clarification"
+    },
+    {
+      "Date": "28 Jan 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "ok",
+      "Topic": "Acknowledgement"
+    },
+    {
+      "Date": "29 Jan 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Good evening dear students, check your Moodle and do the assignment with your peer assessment. Argumentative Essay – Writing an Effective Introduction.",
+      "Topic": "Assignment instruction"
+    },
+    {
+      "Date": "29 Jan 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Please dears send me your peer that you want to assess your writing",
+      "Topic": "Peer assessment instruction"
+    },
+    {
+      "Date": "29 Jan 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "My peer is Loukili Chahinez",
+      "Topic": "Peer nomination"
+    },
+    {
+      "Date": "29 Jan 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "I would like to ask whether my partner's evaluation for the group work will be done in class or on Moodle. I* would",
+      "Topic": "Question about evaluation location"
+    },
+    {
+      "Date": "29 Jan 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "on moodle, mine will be in the class",
+      "Topic": "Answer to evaluation location"
+    },
+    {
+      "Date": "29 Jan 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Okay thank you",
+      "Topic": "Thanks"
+    },
+    {
+      "Date": "1 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "I would like to inform you that there seems to be a mistake with my assigned partner (Loukili Chahinez) in Moodle. A new partner has been assigned, and I have already given them my feedback in the system few minutes ago. I kindly ask you to check and correct this if possible. Thank you",
+      "Topic": "Reporting partner assignment issue"
+    },
+    {
+      "Date": "1 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "ok",
+      "Topic": "Acknowledgement"
+    },
+    {
+      "Date": "1 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "yes tell why, coz she didn't submit her text, I can't find her",
+      "Topic": "Explaining why partner changed"
+    },
+    {
+      "Date": "1 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Ah okay thank you",
+      "Topic": "Acknowledgement"
+    },
+    {
+      "Date": "1 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "most welcome",
+      "Topic": "Politeness"
+    },
+    {
+      "Date": "7 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Hello miss. I noticed something confusing on Moodle. It shows that I evaluated two partners. I'm not sure if this is your mistake or a technical issue, because I had already submitted the evaluation before for the two persons. Could you please check it?",
+      "Topic": "Reporting Moodle double-evaluation issue"
+    },
+    {
+      "Date": "7 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "ok",
+      "Topic": "Acknowledgement"
+    },
+    {
+      "Date": "7 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Do your homework please so we correct it tomorrow onsite: Argumentative Essay – Writing an Effective Introduction. Check the provided resources: the lesson and the self-assessment rubric.",
+      "Topic": "Homework reminder"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "check the feedback I sent you and correct your introductions please",
+      "Topic": "Feedback correction request"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Excuse me, Miss, could you please tell me where I can find it? I seem to be unable to locate it",
+      "Topic": "Asking where feedback is"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "assignment, add comment – I have just showed Nourhene. I sent her pictures. Please submit your work to tomorrow's session.",
+      "Topic": "Feedback location clarification"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Where should I correct my mistakes, in the comments section?",
+      "Topic": "Clarification on correction method"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "ok, take the feedback I sent you and correct your introduction in the comment below",
+      "Topic": "Instruction: correct in comment below"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Ok thank you",
+      "Topic": "Acknowledgement"
+    },
+    {
+      "Date": "10 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "most welcome",
+      "Topic": "Politeness"
+    },
+    {
+      "Date": "14 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Miss can you show me my progress?",
+      "Topic": "Progress inquiry"
+    },
+    {
+      "Date": "14 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "ok one minute",
+      "Topic": "Acknowledgement"
+    },
+    {
+      "Date": "14 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "look come to my WhatsApp I couldn't send here",
+      "Topic": "Progress to be shared via WhatsApp"
+    },
+    {
+      "Date": "14 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "I don't have your number",
+      "Topic": "Doesn't have instructor number"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "ask Nourhene",
+      "Topic": "Directing to classmate for number"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Okay thank you have good day",
+      "Topic": "Thanks"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Reminder: please submit your introductions in the last task, I am going to close submissions",
+      "Topic": "Submission deadline reminder"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "The introduction mark is published on your accounts, please check. This is included in your test and exam mark.",
+      "Topic": "Grade published notification"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "HI students click on 'Mark as done' so I can receive your introductions and give your marks.",
+      "Topic": "Completion button instruction"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Hi guys check this and answer it. Forum check-up. Due: Saturday, 14 February 2026, 10:51 AM. Hi everyone, just a quick check-in! Can you tell me exactly what we're supposed to have ready for tomorrow? Correct answers earn +2 points. Wishing you all a productive day!",
+      "Topic": "Forum check-up announcement (+2 pts)"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "So, I asked a question through Moodle yet no one approached the right answer. So tomorrow bring your portfolios with a short presentation on how you improved your introductions in which you explain what difficulties you had and how you overcame it.",
+      "Topic": "Portfolio presentation instruction (after failed forum)"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "This message is for group 03: please submit your body paragraphs so we finish it on Wednesday. Group 02: no, don't do this task until we have the lesson explained.",
+      "Topic": "Group-specific task routing"
+    },
+    {
+      "Date": "15 Feb 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Hi dears group 03: I have sent you your body paragraph feedback. So, read it and check resources in the task then resubmit please to get your marks.",
+      "Topic": "Group 03 feedback notification"
+    },
+    {
+      "Date": "7 Mar 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Hello miss can you send to me my feedback? And also the questions you told us about when I gave you my portfolio",
+      "Topic": "Request for feedback + portfolio questions"
+    },
+    {
+      "Date": "8 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Dear students, Saha ftorkom. Check your Moodle please and do the assignment. ps: check the structure and rubric to avoid digression and wait for my feedback when you submit your first draft.",
+      "Topic": "Ramadan greeting + assignment instruction"
+    },
+    {
+      "Date": "10 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "my dears saha ftorkom, may Allah accept our fasting and prayers. I have posted the assignment, we are almost done with moodle. Follow instruction, rubric, and exemplar. Please do not use AI generated texts, you can use articles from the net. no AI this is your test.",
+      "Topic": "Anti-AI reminder + test notice"
+    },
+    {
+      "Date": "10 Mar 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Hello miss, saha ftourk. While writing the paragraph, I had some difficulty choosing the most appropriate academic vocabulary. For example, in the sentence where I explain that unfair AI use can create tension and reduce trust in the classroom, I hesitated between several words to express this idea accurately. I tried to solve this by checking synonyms and rewriting the sentence to make it clearer. However, I am still not sure if the vocabulary sounds formal enough for an academic paragraph. Could you please advise me if the wording in this part is appropriate?",
+      "Topic": "Asking for vocabulary advice"
+    },
+    {
+      "Date": "10 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Dear students saha ftorkom. I corrected your first paragraphs, now read the feedback, refine your first drafts and send me the second please.",
+      "Topic": "Second draft request after corrections"
+    },
+    {
+      "Date": "10 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "it is good don't worry",
+      "Topic": "Reassurance on vocabulary"
+    },
+    {
+      "Date": "10 Mar 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Okay thank you miss",
+      "Topic": "Thanks"
+    },
+    {
+      "Date": "10 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "",
+      "Topic": "Emoji response"
+    },
+    {
+      "Date": "11 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "Dears saha ftorkom, I have provided feedback to all your paragraphs so please submit your second draft so we correct tomorrow. Thank you",
+      "Topic": "Second draft deadline"
+    },
+    {
+      "Date": "11 Mar 2026",
+      "Sender": "lahmarabbou asmaa",
+      "Message (Full Text)": "Miss I didn't receive your second feedback can you check please if there is a problem?",
+      "Topic": "Missing second feedback report"
+    },
+    {
+      "Date": "11 Mar 2026",
+      "Sender": "Instructor",
+      "Message (Full Text)": "check u too",
+      "Topic": "Response – check yourself too"
+    },
+    {
+      "Date": "Colour Legend:",
+      "Sender": "Orange = Student message",
+      "Message (Full Text)": "Blue = Instructor message"
+    }
+  ],
+  "Feedback Report CSV": [
+    {
+      "Course": "A W",
+      "Assessment": "Argumentative essay Introduction",
+      "Type": "Assignment",
+      "Due Date": "Friday, 13 February 2026, 12:00 AM",
+      "Submission Date": "Thursday, 12 February 2026, 5:06 PM",
+      "Grade": "10",
+      "Grade Range": "0 – 100",
+      "Viewed": "12-02-2026 23:25"
+    },
+    {
+      "Course": "Instructor General Feedback (full text from CSV):"
+    },
+    {
+      "Course": "Artificial intelligence has rapidly become part of everyday university life. Many students now turn to AI tools to support their writing; organize their ideas; and conduct research more efficiently. Because these technologies are easily accessible and simple to use; their presence in academic work continues to expand. This growing use has sparked an ongoing debate within higher education. Some educators and students question whether relying on artificial intelligence weakens essential academic skills or encourages dishonest practices. Others argue that; when used responsibly; AI can serve as a valuable learning aid that supports understanding rather than replacing effort. To this end; artificial intelligence is neither inherently harmful nor automatically beneficial. Its educational value depends on how it is used. When approached critically and ethically; it can enhance learning; when misused; it risks undermining both intellectual development and academic integrity.\n\nInstructor note: 'this is mine more formal and academic my dear.'"
+    }
+  ]
+}
