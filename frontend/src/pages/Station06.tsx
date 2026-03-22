@@ -2,7 +2,8 @@ import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Responsive
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
-import { students, primaryStudent, getClusterCentroids, getStudentClusterName, getClusterNameFromLabel, getEngagementScore } from '../data/diagnostic';
+import { getClusterNameFromLabel, getEngagementScore } from '../data/diagnostic';
+import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 import type { ClusterName } from '../data/diagnostic';
 
 interface ScatterPoint {
@@ -45,42 +46,6 @@ const getClusterColor = (cluster: ClusterName) => {
   }
 };
 
-const centroids = getClusterCentroids();
-const student = primaryStudent;
-
-const scatterData: ScatterPoint[] = student
-  ? [
-      ...centroids.map((centroid) => ({
-        name: `${getClusterNameFromLabel(centroid.cluster_label)} Centroid`,
-        eng: Math.min(100, centroid.time_on_task / 3),
-        perf: centroid.total_score / 5,
-        cluster: getClusterNameFromLabel(centroid.cluster_label),
-        isCentroid: true,
-      })),
-      {
-        name: student.name,
-        eng: getEngagementScore(student),
-        perf: student.total_score / 5,
-        cluster: getStudentClusterName(student),
-        isCentroid: false,
-      },
-    ]
-  : [];
-
-const clusterCounts = students.reduce<Record<ClusterName, number>>(
-  (accumulator, entry) => {
-    const cluster = getStudentClusterName(entry);
-    accumulator[cluster] += 1;
-    return accumulator;
-  },
-  {
-    'Engaged-Developing': 0,
-    Efficient: 0,
-    Struggling: 0,
-    'At-Risk': 0,
-  }
-);
-
 const CustomTooltip = ({ active, payload }: ScatterTooltipProps) => {
   if (active && payload && payload.length > 0) {
     const data = payload[0].payload;
@@ -97,30 +62,85 @@ const CustomTooltip = ({ active, payload }: ScatterTooltipProps) => {
 };
 
 export function Station06() {
-  if (!student) {
-    return null;
-  }
+  const cases = useStudyScopeStore((state) => state.cases);
+  const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
+  const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
+  const clusteringAvailable = Boolean(selectedCase?.analytics?.clustering.available);
+  const student = selectedCase?.student;
+
+  const centroids = selectedCase?.metrics?.cluster_centroids ?? [];
+  const scatterData: ScatterPoint[] = student && clusteringAvailable
+    ? [
+        ...centroids.map((centroid) => ({
+          name: `${getClusterNameFromLabel(Number(centroid.cluster_label ?? 3))} Centroid`,
+          eng: Math.min(100, Number(centroid.time_on_task ?? 0) / 3),
+          perf: Number(centroid.total_score ?? 0) / 5,
+          cluster: getClusterNameFromLabel(Number(centroid.cluster_label ?? 3)),
+          isCentroid: true,
+        })),
+        {
+          name: student.name,
+          eng: getEngagementScore(student),
+          perf: student.total_score / 5,
+          cluster: getClusterNameFromLabel(student.cluster_label),
+          isCentroid: false,
+        },
+      ]
+    : [];
+
+  const clusterCounts = cases.reduce<Record<ClusterName, number>>(
+    (accumulator, entry) => {
+      if (entry.analytics?.clustering.available && entry.student.cluster_label >= 0) {
+        const cluster = getClusterNameFromLabel(entry.student.cluster_label);
+        accumulator[cluster] += 1;
+      }
+      return accumulator;
+    },
+    {
+      'Engaged-Developing': 0,
+      Efficient: 0,
+      Struggling: 0,
+      'At-Risk': 0,
+    }
+  );
+
+  const activeCluster = student ? getClusterNameFromLabel(student.cluster_label) : null;
 
   return (
     <PipelineLayout
+      verifiedEnabled={clusteringAvailable && Boolean(student)}
+      unavailableTitle="Verified Clustering Unavailable"
+      unavailableMessage={
+        selectedCase
+          ? selectedCase.analytics?.clustering.reason ?? 'This selected case does not currently have verified clustering output.'
+          : 'Select an imported workbook case first to open the verified clustering station.'
+      }
       rightPanel={
-        <PedagogicalInsightBadge
-          urgency="monitor"
-          label="Cluster Diagnostics"
-          observation="Asmaa aligns closest with the Engaged-Developing centroid: high engagement, visible revision effort, and remaining need in argument depth."
-          implication="This is not a disengaged case. Intervention should refine quality and structure rather than simply push for more raw activity."
-          action="Sustain drafting momentum and redirect support toward claim-evidence development."
-          citation="Gasevic et al. (2015) - Learning Analytics and Educational Data Mining"
-        />
+        activeCluster ? (
+          <PedagogicalInsightBadge
+            urgency="monitor"
+            label="Cluster Diagnostics"
+            observation={`${student?.name} aligns with the ${activeCluster} profile in the verified imported cohort.`}
+            implication="The clustering output groups the learner with similar engagement and writing traces, but the pedagogical meaning still needs teacher interpretation."
+            action="Use this profile as a comparative signal, then confirm the teaching response from the workbook evidence and rubric."
+            citation="Gasevic et al. (2015) - Learning Analytics and Educational Data Mining"
+          />
+        ) : undefined
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
         <StationHeader id={6} title="Archetypal Mapping" subtitle="Layer 7A: Learner Profiling (Clustering)" />
 
+        <GlassCard className="p-4 mb-6 bg-[var(--bg-raised)]/40 border-dashed border-[var(--border-bright)]">
+          <p className="font-body text-sm text-[var(--text-sec)] leading-relaxed">
+            This screen uses verified clustering output from the imported workbook cohort. It opens only when the backend has enough cases to calculate K-Means clusters without fallback values.
+          </p>
+        </GlassCard>
+
         <GlassCard elevation="high" className="p-6 md:p-8 mb-8 h-[500px] w-full relative" pedagogicalLabel="K-means centroids position the case against four reference profiles spanning engagement and performance.">
           <div className="absolute top-8 left-8">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)]">Behavioral Profile Positioning</h3>
-            <p className="font-body text-[var(--text-sec)] text-sm mb-6">Subject: {student.name} (ID: {student.student_id})</p>
+            <p className="font-body text-[var(--text-sec)] text-sm mb-6">Subject: {student?.name} (ID: {student?.student_id})</p>
           </div>
 
           <div className="w-full h-full pt-16">

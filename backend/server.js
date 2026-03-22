@@ -4,6 +4,7 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const { parseWorkbook } = require('./workbookParser');
+const { buildAnalyticsSummary } = require('./liveAnalytics');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -23,7 +24,8 @@ app.post('/api/upload-dataset', upload.any(), (req, res) => {
   }
 
   try {
-    const cases = files.map((file) => parseWorkbook(file.buffer, file.originalname));
+    const parsedCases = files.map((file) => parseWorkbook(file.buffer, file.originalname));
+    const { cases, analytics } = buildAnalyticsSummary(parsedCases);
     const firstCase = cases[0];
     const studentCount = cases.reduce((sum, result) => sum + result.data.length, 0);
 
@@ -31,6 +33,7 @@ app.post('/api/upload-dataset', upload.any(), (req, res) => {
       message: 'Processing complete',
       workbookCount: cases.length,
       studentCount,
+      analytics,
       cases,
       ...firstCase,
     });

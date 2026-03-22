@@ -70,6 +70,28 @@ export function StudyScopePanel({
   const selectedTaskId = getSelectedTaskId({ selectedCaseId, selectedTaskByCase });
   const selectedTask = getSelectedTask(selectedCase, selectedTaskId);
 
+  if (!selectedCase) {
+    return (
+      <GlassCard elevation="high" accent="lav" className="p-6 md:p-8">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-[var(--lav)] font-navigation text-xs uppercase tracking-widest">
+              <SlidersHorizontal size={14} />
+              Guided Selection
+            </div>
+            <h2 className="font-editorial text-2xl text-[var(--text-primary)] mt-2">{title}</h2>
+            <p className="font-body text-sm text-[var(--text-sec)] mt-2 max-w-3xl">
+              Import at least one workbook before choosing a student, task, sections, or indicators. Until then, the platform hides all unverified case values.
+            </p>
+          </div>
+          <Button variant="secondary" onClick={() => navigate('/import')}>
+            <Upload size={16} /> Import verified workbook
+          </Button>
+        </div>
+      </GlassCard>
+    );
+  }
+
   return (
     <GlassCard elevation="high" accent="lav" className="p-6 md:p-8 space-y-6">
       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
@@ -170,10 +192,6 @@ export function StudyScopePanel({
             </p>
           </div>
           <div className="mt-4 flex gap-2 flex-wrap">
-            <StatusChip variant="teal">{selectedCase.clusterName}</StatusChip>
-            <StatusChip variant={selectedCase.riskLevel === 'critical' ? 'red' : selectedCase.riskLevel === 'monitor' ? 'gold' : 'teal'}>
-              {selectedCase.riskLevel}
-            </StatusChip>
             <StatusChip variant="gold">{selectedStationIds.length} stations</StatusChip>
             <StatusChip variant="lav">{selectedVariableIds.length} variables</StatusChip>
           </div>

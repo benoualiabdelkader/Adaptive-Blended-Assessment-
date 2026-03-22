@@ -8,10 +8,14 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 import { StatusChip } from '../components/Atoms';
+import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 
 export interface PipelineLayoutProps {
   children: React.ReactNode;
   rightPanel?: React.ReactNode;
+  verifiedEnabled?: boolean;
+  unavailableTitle?: string;
+  unavailableMessage?: string;
 }
 
 const stations = [
@@ -29,8 +33,32 @@ const stations = [
   { id: 12, name: 'Revision Cycle', icon: RefreshCw, path: '/pipeline/12' },
 ];
 
-export function PipelineLayout({ children, rightPanel }: PipelineLayoutProps) {
+export function PipelineLayout({
+  children,
+  rightPanel,
+  verifiedEnabled = false,
+  unavailableTitle = 'Verified Pipeline Unavailable',
+  unavailableMessage = 'This station is hidden until the selected workbook case has verified live analytics for it.',
+}: PipelineLayoutProps) {
   const location = useLocation();
+  const cases = useStudyScopeStore((state) => state.cases);
+  const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
+  const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
+
+  const stationAvailability: Record<number, boolean> = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+    6: Boolean(selectedCase?.analytics?.clustering.available),
+    7: Boolean(selectedCase?.analytics?.prediction.available),
+    8: false,
+    9: false,
+    10: false,
+    11: false,
+    12: false,
+  };
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[var(--bg-deep)]">
@@ -51,6 +79,26 @@ export function PipelineLayout({ children, rightPanel }: PipelineLayoutProps) {
           {stations.map((station) => {
             const isActive = location.pathname.startsWith(station.path);
             const Icon = station.icon;
+            const isEnabled = stationAvailability[station.id] ?? false;
+
+            if (!isEnabled) {
+              return (
+                <div
+                  key={station.id}
+                  title={`Station ${String(station.id).padStart(2, '0')} - ${station.name} (unavailable)`}
+                  className="w-12 h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 text-[var(--text-muted)] opacity-45 cursor-not-allowed relative group"
+                >
+                  <Icon size={20} />
+                  <span className="font-navigation text-[9px] font-bold">
+                    {String(station.id).padStart(2, '0')}
+                  </span>
+
+                  <div className="absolute left-14 bg-[var(--bg-high)] border border-[var(--border)] text-[var(--text-primary)] px-3 py-1.5 rounded shadow-xl text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-navigation font-medium">
+                    <span className="text-[var(--red)] mr-2">S{String(station.id).padStart(2, '0')}</span> {station.name}
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <Link
@@ -91,7 +139,21 @@ export function PipelineLayout({ children, rightPanel }: PipelineLayoutProps) {
               transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
               className="h-full"
             >
-              {children}
+              {verifiedEnabled ? (
+                children
+              ) : (
+                <div className="max-w-5xl mx-auto p-6 md:p-8 pb-32">
+                  <div className="rounded-3xl border border-[var(--border-bright)] bg-[var(--bg-base)] p-8 md:p-10">
+                    <h1 className="font-editorial italic text-4xl text-[var(--text-primary)]">{unavailableTitle}</h1>
+                    <p className="mt-4 font-body text-sm text-[var(--text-sec)] max-w-3xl leading-relaxed">
+                      {unavailableMessage}
+                    </p>
+                    <p className="mt-3 font-body text-sm text-[var(--text-sec)] max-w-3xl leading-relaxed">
+                      Import enough verified workbook cases, then select a case with available clustering or prediction results to open the corresponding station.
+                    </p>
+                  </div>
+                </div>
+              )}
             </motion.div>
           </AnimatePresence>
         </main>
@@ -103,21 +165,21 @@ export function PipelineLayout({ children, rightPanel }: PipelineLayoutProps) {
               <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-primary)]">Pedagogical Interpretation</h3>
             </div>
 
-            {rightPanel ? (
+            {verifiedEnabled && rightPanel ? (
               <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
                 {rightPanel}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center py-20 text-center opacity-40">
                 <ActivitySquare size={48} className="mb-4 text-[var(--text-muted)]" />
-                <p className="font-body text-xs text-[var(--text-sec)]">Select an analytic view to see pedagogical insights.</p>
+                <p className="font-body text-xs text-[var(--text-sec)]">Verified pipeline interpretation will appear here when live analytics is connected.</p>
               </div>
             )}
 
             <div className="mt-8 p-4 rounded-lg bg-[var(--lav-glow)] border border-[var(--lav-border)]">
               <h4 className="font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)] mb-2">Dissertation Note</h4>
               <p className="font-body text-[11px] text-[var(--text-sec)] leading-relaxed">
-                These observations are automatically synthesised for the quantitative analysis workflow. Use the export controls to capture them by station.
+                The reference pipeline has been hidden to avoid presenting unverified analytics as real case evidence.
               </p>
             </div>
           </div>
@@ -153,7 +215,7 @@ export function StationHeader({ id, title, subtitle }: { id: number, title: stri
         </div>
         <StatusChip variant="teal" className="flex items-center gap-2 px-3 py-1 shadow-[0_0_10px_var(--teal-dim)]">
           <div className="w-1.5 h-1.5 rounded-full bg-[var(--teal)] animate-pulse shadow-[0_0_4px_var(--teal)]" />
-          LIVE ANALYSIS
+          VERIFIED MODE
         </StatusChip>
       </div>
     </div>
@@ -170,7 +232,7 @@ export function StationFooter({ prevPath, nextPath }: { prevPath?: string, nextP
           </Link>
         )}
       </div>
-      <button className="text-[var(--lav)] hover:border-[var(--lav-border)] hover:bg-[var(--lav-glow)] border border-transparent px-4 py-2 rounded-md transition-all font-navigation font-medium text-xs tracking-wider uppercase flex items-center gap-2">
+      <button disabled className="text-[var(--text-muted)] border border-transparent px-4 py-2 rounded-md transition-all font-navigation font-medium text-xs tracking-wider uppercase flex items-center gap-2 cursor-not-allowed opacity-60">
         <Sparkles size={14} /> Theoretical Framework
       </button>
       <div>

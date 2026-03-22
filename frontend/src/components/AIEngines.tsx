@@ -6,6 +6,30 @@ export function AIEngines() {
     <div className="space-y-8 animate-in fade-in duration-300">
       <GlassCard className="p-6 md:p-8">
         <h2 className="font-editorial text-2xl text-[var(--teal)] mb-6">Machine Learning & NLP Architecture</h2>
+        <div className="mb-6 rounded-lg border border-[var(--gold)]/25 bg-[var(--gold-dim)] px-4 py-3 font-body text-sm text-[var(--text-sec)]">
+          This screen documents the study methodology. In the current app build, workbook extraction is live, cohort clustering and prediction are verified only when enough imported cases are available, and Bayesian inference remains unavailable in the live upload flow.
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <GlassCard className="p-5 bg-[var(--bg-raised)] border-dashed border-[var(--border-bright)]">
+            <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--lav)] mb-3">AI Assistant Tool Role</h3>
+            <ul className="space-y-2 font-body text-sm text-[var(--text-sec)]">
+              <li>Calculate descriptive patterns from verified Moodle workbook evidence.</li>
+              <li>Store rubric rows, extract text indicators, and organise behavioural traces.</li>
+              <li>Detect learner groups and predictive factors only when the cohort is sufficient.</li>
+              <li>Surface diagnostic signals and possible feedback triggers for teacher review.</li>
+            </ul>
+          </GlassCard>
+          <GlassCard className="p-5 bg-[var(--bg-raised)] border-dashed border-[var(--border-bright)]">
+            <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--gold)] mb-3">Instructor Role</h3>
+            <ul className="space-y-2 font-body text-sm text-[var(--text-sec)]">
+              <li>Interpret what the patterns mean for engagement, writing behaviour, and learning.</li>
+              <li>Evaluate essays with academic writing criteria and validate the pedagogical reading.</li>
+              <li>Use predictions carefully to support instructional judgment rather than replace it.</li>
+              <li>Deliver the actual feedback, revision support, and onsite intervention.</li>
+            </ul>
+          </GlassCard>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
@@ -37,7 +61,7 @@ export function AIEngines() {
 
       <GlassCard accent="red" className="p-6 md:p-8">
         <h2 className="font-editorial text-2xl text-[var(--red)] mb-4">Part 3: Diagnostic Rule Engine</h2>
-        <p className="font-body text-sm text-[var(--text-sec)] mb-6">Rule families translate engagement and writing thresholds into actionable pedagogical signals.</p>
+        <p className="font-body text-sm text-[var(--text-sec)] mb-6">Rule families translate engagement and writing thresholds into review signals. They do not replace the teacher&apos;s pedagogical decision.</p>
 
         <div className="bg-[var(--bg-deep)] border border-[var(--border)] rounded-md p-4 font-forensic text-xs text-[var(--lav)] overflow-x-auto">
           <code>
@@ -63,11 +87,11 @@ export function AIEngines() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--border)] text-[var(--text-sec)]">
-                <tr><td className="py-3 px-2">TTR / Lexical</td><td className="py-3 px-2">Station 04 (Stylometric)</td><td className="py-3 px-2"><StatusChip variant="teal">Active</StatusChip></td></tr>
-                <tr><td className="py-3 px-2">K-Means</td><td className="py-3 px-2">Station 06 (Archetypal)</td><td className="py-3 px-2"><StatusChip variant="teal">Active</StatusChip></td></tr>
-                <tr><td className="py-3 px-2">Random Forest</td><td className="py-3 px-2">Station 07 (Predictive)</td><td className="py-3 px-2"><StatusChip variant="teal">Active</StatusChip></td></tr>
-                <tr><td className="py-3 px-2">Bayesian Prior/Post</td><td className="py-3 px-2">Station 08 (Synthesis)</td><td className="py-3 px-2"><StatusChip variant="teal">Active</StatusChip></td></tr>
-                <tr><td className="py-3 px-2">Text Diff LCS</td><td className="py-3 px-2">Station 12 (Revision)</td><td className="py-3 px-2"><StatusChip variant="teal">Active</StatusChip></td></tr>
+                <tr><td className="py-3 px-2">TTR / Lexical</td><td className="py-3 px-2">Station 04 (Stylometric)</td><td className="py-3 px-2"><StatusChip variant="teal">Workbook-derived</StatusChip></td></tr>
+                <tr><td className="py-3 px-2">K-Means</td><td className="py-3 px-2">Station 06 (Archetypal)</td><td className="py-3 px-2"><StatusChip variant="teal">Verified cohort-backed when available</StatusChip></td></tr>
+                <tr><td className="py-3 px-2">Random Forest</td><td className="py-3 px-2">Station 07 (Predictive)</td><td className="py-3 px-2"><StatusChip variant="teal">Verified cohort-backed when available</StatusChip></td></tr>
+                <tr><td className="py-3 px-2">Bayesian Prior/Post</td><td className="py-3 px-2">Station 08 (Synthesis)</td><td className="py-3 px-2"><StatusChip variant="red">Not connected in live build</StatusChip></td></tr>
+                <tr><td className="py-3 px-2">Text Diff LCS</td><td className="py-3 px-2">Station 12 (Revision)</td><td className="py-3 px-2"><StatusChip variant="teal">Workbook-derived</StatusChip></td></tr>
               </tbody>
             </table>
           </div>

@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from '../components/GlassCard';
 import { Button } from '../components/Atoms';
-import { BookOpen, Users, Activity, AlertTriangle, ArrowRight } from 'lucide-react';
-import { asmaaWorkspaceStudent, caseStudyMeta } from '../data/diagnostic';
+import { BookOpen, Users, Activity, ArrowRight } from 'lucide-react';
 
 type StatCardAccent = 'lav' | 'teal' | 'red' | 'gold';
 
@@ -61,10 +60,9 @@ export function Login() {
           </blockquote>
 
           <div className="grid grid-cols-2 gap-4 mt-4">
-            <StatCard icon={Users} label="Case File" value={caseStudyMeta.userId} delay="100ms" isLoaded={isLoaded} accent="lav" />
-            <StatCard icon={Activity} label="Log Entries" value={String(caseStudyMeta.activityLogEntries)} delay="180ms" isLoaded={isLoaded} accent="teal" />
-            <StatCard icon={AlertTriangle} label="Risk Status" value={asmaaWorkspaceStudent.risk.toUpperCase()} delay="260ms" isLoaded={isLoaded} accent="gold" />
-            <StatCard icon={BookOpen} label="Assignments" value={String(caseStudyMeta.totalAssignmentsSubmitted)} delay="340ms" isLoaded={isLoaded} accent="gold" />
+            <StatCard icon={Users} label="Verified Workbooks" value="Import-driven" delay="100ms" isLoaded={isLoaded} accent="lav" />
+            <StatCard icon={Activity} label="Evidence Mode" value="Workbook Only" delay="180ms" isLoaded={isLoaded} accent="teal" />
+            <StatCard icon={BookOpen} label="Reports" value="Evidence-based" delay="340ms" isLoaded={isLoaded} accent="gold" />
           </div>
         </div>
 

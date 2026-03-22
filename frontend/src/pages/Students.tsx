@@ -30,15 +30,34 @@ export function Students() {
   const selectedVariableIds = useStudyScopeStore((state) => state.selectedVariableIds);
   const selectCase = useStudyScopeStore((state) => state.selectCase);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
-  const selectedTask = getSelectedTask(
-    selectedCase,
-    getSelectedTaskId({ selectedCaseId, selectedTaskByCase })
-  );
+  const selectedTask = selectedCase
+    ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
+    : null;
 
   const activeVariables = useMemo(
     () => STUDY_VARIABLES.filter((variable) => selectedVariableIds.includes(variable.id)),
     [selectedVariableIds]
   );
+
+  if (!selectedCase) {
+    return (
+      <ResearchShell>
+        <div className="max-w-5xl mx-auto p-6 md:p-8 pb-32">
+          <GlassCard accent="lav" glow className="p-8 md:p-10">
+            <h1 className="font-editorial italic text-4xl text-[var(--text-primary)]">Student Cases</h1>
+            <p className="mt-3 font-body text-sm text-[var(--text-sec)] max-w-3xl">
+              No verified workbook is loaded. Import workbook data before opening the student registry.
+            </p>
+            <div className="mt-6">
+              <Button onClick={() => window.location.assign('/import')}>
+                <ArrowRight size={16} /> Import workbook
+              </Button>
+            </div>
+          </GlassCard>
+        </div>
+      </ResearchShell>
+    );
+  }
 
   return (
     <ResearchShell>
@@ -96,8 +115,7 @@ export function Students() {
                 <tr className="border-b border-[var(--border)] bg-[var(--bg-raised)]/50 text-[var(--text-sec)] font-navigation text-[9px] uppercase tracking-widest font-bold">
                   <th className="px-6 py-4">Student</th>
                   <th className="px-6 py-4">Course</th>
-                  <th className="px-6 py-4">Profile</th>
-                  <th className="px-6 py-4">Support Priority</th>
+                  <th className="px-6 py-4">Workbook</th>
                   <th className="px-6 py-4">Exercises</th>
                   <th className="px-6 py-4">Feedback Views</th>
                   <th className="px-6 py-4">Help Requests</th>
@@ -121,14 +139,7 @@ export function Students() {
                         </div>
                       </td>
                       <td className="px-6 py-5 font-body text-xs text-[var(--text-sec)]">{studyCase.meta.courseTitle}</td>
-                      <td className="px-6 py-5">
-                        <StatusChip variant="lav">{studyCase.clusterName}</StatusChip>
-                      </td>
-                      <td className="px-6 py-5">
-                        <StatusChip variant={studyCase.riskLevel === 'critical' ? 'red' : studyCase.riskLevel === 'monitor' ? 'gold' : 'teal'}>
-                          {studyCase.riskLevel}
-                        </StatusChip>
-                      </td>
+                      <td className="px-6 py-5 font-body text-xs text-[var(--text-sec)]">{studyCase.workbookName}</td>
                       <td className="px-6 py-5 font-forensic text-xs text-[var(--text-sec)]">{studyCase.writing.artifacts.length}</td>
                       <td className="px-6 py-5 font-forensic text-xs text-[var(--text-sec)]">{studyCase.student.feedback_views}</td>
                       <td className="px-6 py-5 font-forensic text-xs text-[var(--text-sec)]">{studyCase.student.help_seeking_messages}</td>
@@ -207,16 +218,20 @@ export function Students() {
         {activeTab === 'behaviour' && (
           <div className="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-6">
             <GlassCard className="p-6">
-              <h3 className="font-navigation text-xs uppercase tracking-[0.2em] text-[var(--text-muted)] border-b border-[var(--border)] pb-2 mb-5">Behaviour indicators</h3>
+              <h3 className="font-navigation text-xs uppercase tracking-[0.2em] text-[var(--text-muted)] border-b border-[var(--border)] pb-2 mb-5">Workbook activity evidence</h3>
               <div className="grid grid-cols-1 gap-5">
-                {(Object.entries(selectedCase.workspace.moodle) as Array<[string, number]>).map(([key, value]) => (
-                  <div key={key}>
-                    <div className="flex justify-between text-[10px] font-navigation uppercase text-[var(--text-sec)] mb-1.5">
-                      <span>{key.replace(/([A-Z])/g, ' $1')}</span>
-                      <span className="font-forensic">{(value * 100).toFixed(0)}%</span>
-                    </div>
-                    <div className="h-1.5 bg-[var(--bg-deep)] rounded-full overflow-hidden">
-                      <div className={`h-full ${value > 0.6 ? 'bg-[var(--teal)]' : value > 0.3 ? 'bg-[var(--lav)]' : 'bg-[var(--gold)]'}`} style={{ width: `${value * 100}%` }} />
+                {[
+                  ['Assignment views', String(selectedCase.student.assignment_views)],
+                  ['Resource views', String(selectedCase.student.resource_access_count)],
+                  ['Rubric views', String(selectedCase.student.rubric_views)],
+                  ['Feedback views', String(selectedCase.student.feedback_views)],
+                  ['Help requests', String(selectedCase.student.help_seeking_messages)],
+                  ['Word count', String(selectedCase.student.word_count)],
+                ].map(([label, value]) => (
+                  <div key={label} className="rounded-lg border border-[var(--border)] bg-[var(--bg-deep)] p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="font-navigation text-[11px] uppercase tracking-widest text-[var(--text-primary)]">{label}</p>
+                      <span className="font-forensic text-xs text-[var(--lav)]">{value}</span>
                     </div>
                   </div>
                 ))}

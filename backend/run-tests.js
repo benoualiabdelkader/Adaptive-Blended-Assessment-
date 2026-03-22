@@ -101,6 +101,10 @@ async function main() {
     assert.ok(Array.isArray(uploadBody.cases));
     assert.equal(uploadBody.cases.length, 2);
     assert.equal(uploadBody.cases[0].meta.studentName, 'Lahmarabbou Asmaa');
+    assert.equal(uploadBody.analytics.cohort_size, 2);
+    assert.equal(uploadBody.analytics.clustering.available, false);
+    assert.equal(uploadBody.analytics.prediction.available, false);
+    assert.equal(uploadBody.cases[0].data[0].predicted_score, null);
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }

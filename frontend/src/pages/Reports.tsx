@@ -83,10 +83,6 @@ const REPORT_DOCUMENT_CSS = `
   }
 `;
 
-function toSentenceCase(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
-
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, '&amp;')
@@ -105,10 +101,24 @@ export function Reports() {
   const selectedVariableIds = useStudyScopeStore((state) => state.selectedVariableIds);
   const selectedStationIds = useStudyScopeStore((state) => state.selectedStationIds);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
-  const selectedTask = getSelectedTask(
-    selectedCase,
-    getSelectedTaskId({ selectedCaseId, selectedTaskByCase })
-  );
+  const selectedTask = selectedCase
+    ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
+    : null;
+
+  if (!selectedCase) {
+    return (
+      <ResearchShell>
+        <div className="max-w-5xl mx-auto p-6 md:p-8 pb-32">
+          <GlassCard accent="lav" glow className="p-8 md:p-10">
+            <h1 className="font-editorial italic text-4xl text-[var(--text-primary)]">Verified Reports</h1>
+            <p className="mt-3 font-body text-sm text-[var(--text-sec)] max-w-3xl">
+              No verified workbook is loaded. Import a workbook first to generate a report based only on extracted evidence.
+            </p>
+          </GlassCard>
+        </div>
+      </ResearchShell>
+    );
+  }
 
   const reportRows = useMemo(() => {
     return STUDY_VARIABLES
@@ -123,7 +133,7 @@ export function Reports() {
   const executiveSummary = useMemo(() => {
     const taskLabel = selectedTask ? selectedTask.title : 'the full workbook-backed case';
     const stationCount = selectedStationIds.length;
-    return `${selectedCase.meta.studentName} is currently classified as ${selectedCase.clusterName} with a ${selectedCase.riskLevel} risk status. Across ${taskLabel}, this report synthesizes ${stationCount} selected station${stationCount > 1 ? 's' : ''}. The clearest strengths are sustained engagement, repeated feedback uptake, and visible revision effort. The main remaining instructional need is ${selectedCase.meta.dominantNeed}.`;
+    return `This report compiles verified workbook evidence for ${selectedCase.meta.studentName} across ${taskLabel}. It covers ${stationCount} selected station${stationCount > 1 ? 's' : ''}, ${selectedCase.writing.artifacts.length} writing sample${selectedCase.writing.artifacts.length !== 1 ? 's' : ''}, ${selectedCase.meta.activityLogEntries} activity log entries, and ${selectedCase.meta.chatMessages} teacher-student messages. The system organises evidence and calculated indicators; the instructor remains responsible for the final pedagogical interpretation, scoring judgment, and feedback delivery.`;
   }, [selectedCase, selectedTask, selectedStationIds]);
 
   const selectedStations = useMemo(
@@ -204,7 +214,7 @@ export function Reports() {
                 <div>
                   <div className="flex items-center gap-4 mb-2">
                     <h2 className="font-editorial text-2xl text-[var(--text-primary)]">Final report package</h2>
-                    <StatusChip variant="teal" className="text-[10px]">READY</StatusChip>
+                    <StatusChip variant="teal" className="text-[10px]">VERIFIED</StatusChip>
                   </div>
                   <p className="font-body text-[var(--text-sec)] text-sm max-w-3xl">
                     Student: {selectedCase.meta.studentName}. Task: {selectedTask ? selectedTask.title : 'Full case overview'}. Stations: {selectedStationIds.length} active. Variables: {selectedVariableIds.length} active.
@@ -238,10 +248,10 @@ export function Reports() {
               <GlassCard className="p-5">
                 <div className="flex items-center gap-2 text-[var(--gold)] mb-3">
                   <AlertCircle size={16} />
-                  <span className="font-navigation text-[10px] uppercase tracking-widest">Risk and cluster</span>
+                  <span className="font-navigation text-[10px] uppercase tracking-widest">Evidence totals</span>
                 </div>
-                <p className="font-editorial text-xl text-[var(--text-primary)]">{selectedCase.clusterName}</p>
-                <p className="font-body text-xs text-[var(--text-sec)] mt-2">Risk: {selectedCase.riskLevel}</p>
+                <p className="font-editorial text-xl text-[var(--text-primary)]">{selectedCase.meta.activityLogEntries} log entries</p>
+                <p className="font-body text-xs text-[var(--text-sec)] mt-2">{selectedCase.meta.chatMessages} teacher-student messages</p>
               </GlassCard>
             </div>
 
@@ -319,30 +329,35 @@ export function Reports() {
                           </span>
                         ))}
                       </div>
+                      <div className="report-card" style={{ marginTop: '18px' }}>
+                        <div className="report-card-label">Method Use In This Report</div>
+                        <div className="report-card-note"><strong>System role:</strong> extract workbook evidence, calculate indicators, and surface model outputs only when verified.</div>
+                        <div className="report-card-note"><strong>Instructor role:</strong> interpret the evidence, validate writing quality, and decide the actual feedback and classroom intervention.</div>
+                      </div>
                     </section>
 
-                    {includeSection([6, 7, 8, 9]) && (
+                    {includeSection([2, 3]) && (
                       <section className="report-section">
                       <div className="report-stat-grid">
                         <div className="report-card">
-                          <div className="report-card-label">Risk Status</div>
-                          <div className="report-card-value">{toSentenceCase(selectedCase.riskLevel)}</div>
-                          <div className="report-card-note">The current profile remains under monitoring because engagement is stronger than argument support.</div>
-                        </div>
-                        <div className="report-card">
-                          <div className="report-card-label">Cluster Profile</div>
-                          <div className="report-card-value">{selectedCase.clusterName}</div>
-                          <div className="report-card-note">This profile reflects a learner who revises, seeks clarification, and responds to feedback windows.</div>
-                        </div>
-                        <div className="report-card">
                           <div className="report-card-label">Assignments Submitted</div>
                           <div className="report-card-value">{selectedCase.meta.totalAssignmentsSubmitted}</div>
-                          <div className="report-card-note">Coverage across the observed semester trace documented in the workbook export.</div>
+                          <div className="report-card-note">Workbook-backed task count recorded in the imported file.</div>
+                        </div>
+                        <div className="report-card">
+                          <div className="report-card-label">Writing Samples</div>
+                          <div className="report-card-value">{selectedCase.writing.artifacts.length}</div>
+                          <div className="report-card-note">Writing artefacts extracted directly from the workbook sheets.</div>
+                        </div>
+                        <div className="report-card">
+                          <div className="report-card-label">Feedback Views</div>
+                          <div className="report-card-value">{selectedCase.student.feedback_views}</div>
+                          <div className="report-card-note">Feedback opening count detected in the workbook evidence.</div>
                         </div>
                         <div className="report-card">
                           <div className="report-card-label">Activity Log Entries</div>
                           <div className="report-card-value">{selectedCase.meta.activityLogEntries}</div>
-                          <div className="report-card-note">The report draws on timestamped Moodle interaction evidence and writing artefacts.</div>
+                          <div className="report-card-note">Timestamped Moodle interaction evidence extracted from the workbook export.</div>
                         </div>
                       </div>
                       </section>
@@ -350,28 +365,25 @@ export function Reports() {
 
                     {includeSection([1, 9, 10, 11]) && (
                       <section className="report-section report-dual-grid">
-                      <div className="report-card">
+                        <div className="report-card">
                         <div className="report-card-label">Case Profile</div>
                         <div className="report-card-note">
                           <strong>Task scope:</strong> {selectedTask ? `${selectedTask.title} (${selectedTask.date})` : `Full case overview (${selectedCase.meta.periodCovered})`}
                         </div>
                         <div className="report-card-note">
-                          <strong>Dominant instructional need:</strong> {selectedCase.meta.dominantNeed}
+                          <strong>Workbook:</strong> {selectedCase.workbookName}
                         </div>
                         <div className="report-card-note">
-                          <strong>Triggered rules:</strong> {selectedCase.workspace.ruleTriggered}
+                          <strong>Introduction grade field:</strong> {selectedCase.meta.introGrade}
                         </div>
                         <div className="report-card-note">
-                          <strong>Personalized feedback orientation:</strong> {selectedCase.student.feedback_types.replace(/;/g, ', ')}
-                        </div>
-                        <div className="report-card-note">
-                          <strong>Planned intervention logic:</strong> {selectedCase.student.onsite_interventions.replace(/;/g, ', ')}
+                          <strong>Feedback viewed at:</strong> {selectedCase.meta.feedbackViewedAt}
                         </div>
                       </div>
 
                       <div className="report-card">
                         <div className="report-card-label">Instructor Signal</div>
-                        <div className="report-card-note">{selectedCase.student.personalized_feedback}</div>
+                        <div className="report-card-note">Only direct teacher comments from the imported workbook are reported here.</div>
                         {selectedCase.communication.instructorComments[0] && (
                           <div className="report-card-note">
                             <strong>Most explicit teacher note:</strong> {selectedCase.communication.instructorComments[0].note ?? selectedCase.communication.instructorComments[0].comment}
@@ -506,7 +518,10 @@ export function Reports() {
                       </div>
 
                       <div className="report-card">
-                        <h2 className="report-section-title">Recommended Pedagogical Actions</h2>
+                        <h2 className="report-section-title">Teacher Action Planning Notes</h2>
+                        <div className="report-card-note">
+                          These items are planning prompts generated from verified evidence. They are not automatic feedback delivered to the student.
+                        </div>
                         <div className="report-pill-row">
                           <span className="report-pill">Preserve short feedback cycles</span>
                           <span className="report-pill">Expand claim-evidence reasoning</span>
@@ -528,7 +543,7 @@ export function Reports() {
                       <div className="report-card">
                         <h2 className="report-section-title">Concluding Judgment</h2>
                         <p className="report-text">
-                          The evidence does not point to a disengaged learner. It points to a developing writer who repeatedly returns to feedback, submits revisions, and asks for clarification when she cannot progress alone. The strongest next step is not more general encouragement, but tighter support for argument expansion, evidence explanation, and more formal academic phrasing.
+                          This concluding section is limited to verified workbook evidence. It shows a learner who submitted multiple drafts, returned to teacher feedback, and asked clarification questions during the writing cycle. Any higher-level pedagogical classification remains the instructor&apos;s responsibility, and any advanced modelling is shown only when the live app can verify it from imported data.
                         </p>
                       </div>
                       </section>

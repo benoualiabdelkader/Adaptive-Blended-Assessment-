@@ -1,21 +1,8 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import {
-  activitySnapshot,
-  asmaaWorkspaceStudent,
-  caseRecentActivity,
-  caseScoreJourney,
-  caseStudyMeta,
   getStudentClusterName,
   getStudentRiskLevel,
-  instructorComments,
-  paragraphComparison,
-  primaryStudent,
-  privateMessageAnalysis,
-  revisionSequence,
-  rubricCriteria,
-  teacherStudentDialogue,
-  writingArtifacts,
   type ActivityItem,
   type ComparisonMetric,
   type DialogueMessage,
@@ -157,6 +144,8 @@ export interface TeacherStudyCase {
   };
   recentActivity: ActivityItem[];
   scoreJourney: Array<{ name: string; score: number }>;
+  analytics?: ParsedWorkbookCaseResponse['analytics'];
+  metrics?: ParsedWorkbookCaseResponse['metrics'];
 }
 
 export interface ParsedWorkbookCaseResponse {
@@ -193,6 +182,27 @@ export interface ParsedWorkbookCaseResponse {
   };
   communication?: TeacherStudyCase['communication'];
   thresholds?: TeacherStudyCase['thresholds'];
+  metrics?: {
+    rf_metrics: { mae: number; r2: number } | null;
+    rf_importance: Array<{ feature: string; importance: number }>;
+    cluster_centroids: Array<Record<string, number>>;
+  };
+  analytics?: {
+    source: 'verified-cohort';
+    cohort_size: number;
+    clustering: {
+      available: boolean;
+      reason: string | null;
+    };
+    prediction: {
+      available: boolean;
+      reason: string | null;
+    };
+    bayesian: {
+      available: boolean;
+      reason: string | null;
+    };
+  };
 }
 
 export const STUDY_VARIABLES: StudyVariableOption[] = [
@@ -276,12 +286,12 @@ export const STUDY_STATIONS: StudyStationOption[] = [
   { id: 3, label: 'Submission Patterns', group: 'analytics', description: 'Temporal activity, sessions, and engagement traces.' },
   { id: 4, label: 'Stylometric Analysis', group: 'analytics', description: 'Writing quality and textual feature signals.' },
   { id: 5, label: 'Evidence Matrix', group: 'analytics', description: 'Alignment across behavioural and writing signals.' },
-  { id: 6, label: 'Cluster Mapping', group: 'analytics', description: 'Learner profile placement and comparative position.' },
-  { id: 7, label: 'Predictive Model', group: 'analytics', description: 'Performance prediction and influential factors.' },
-  { id: 8, label: 'Bayesian Synthesis', group: 'analytics', description: 'Posterior beliefs about competence development.' },
-  { id: 9, label: 'Diagnosis Engine', group: 'decision', description: 'Rule-based diagnosis and interpreted learning need.' },
-  { id: 10, label: 'Feedback Delivery', group: 'decision', description: 'Teacher response and adaptive feedback logic.' },
-  { id: 11, label: 'Intervention Tracking', group: 'action', description: 'Instructional action planning and monitoring.' },
+  { id: 6, label: 'Cluster Mapping', group: 'analytics', description: 'Learner profile grouping generated from the imported cohort.' },
+  { id: 7, label: 'Predictive Model', group: 'analytics', description: 'Prediction support showing influential factors when verified cohort modelling is available.' },
+  { id: 8, label: 'Bayesian Synthesis', group: 'analytics', description: 'Latent competence inference, shown only when a verified Bayesian service is connected.' },
+  { id: 9, label: 'Diagnostic Signals', group: 'decision', description: 'Rule-based signals for teacher interpretation rather than automatic pedagogical judgment.' },
+  { id: 10, label: 'Feedback Planning', group: 'decision', description: 'Feedback triggers and evidence organisation to support the teacher response.' },
+  { id: 11, label: 'Intervention Planning', group: 'action', description: 'Instructional action planning led by the teacher.' },
   { id: 12, label: 'Revision Cycle', group: 'action', description: 'Observed uptake and revision-based growth cycle.' },
 ];
 
@@ -384,56 +394,6 @@ function traceToRecentActivity(trace: TeacherStudyCase['activity']['trace']): Ac
   }));
 }
 
-function buildSeedCase(): TeacherStudyCase {
-  return {
-    id: `${caseStudyMeta.userId}:${caseStudyMeta.studentName}`,
-    workbookName: caseStudyMeta.workbookPath.split('\\').slice(-1)[0],
-    meta: {
-      studentName: caseStudyMeta.studentName,
-      userId: caseStudyMeta.userId,
-      courseTitle: caseStudyMeta.courseTitle,
-      courseId: caseStudyMeta.courseId,
-      institution: caseStudyMeta.institution,
-      instructor: caseStudyMeta.instructor,
-      reportGenerated: caseStudyMeta.reportGenerated,
-      periodCovered: caseStudyMeta.periodCovered,
-      totalAssignmentsSubmitted: caseStudyMeta.totalAssignmentsSubmitted,
-      gradedAssignments: caseStudyMeta.gradedAssignments,
-      ungradedAssignments: caseStudyMeta.ungradedAssignments,
-      forumPosts: caseStudyMeta.forumPosts,
-      activityLogEntries: caseStudyMeta.activityLogEntries,
-      chatMessages: caseStudyMeta.chatMessages,
-      feedbackViewedAt: caseStudyMeta.feedbackViewedAt,
-      introGrade: caseStudyMeta.introGrade,
-      finalWordCount: caseStudyMeta.finalWordCount,
-      dominantNeed: caseStudyMeta.dominantNeed,
-    },
-    student: primaryStudent,
-    workspace: asmaaWorkspaceStudent,
-    clusterName: getStudentClusterName(primaryStudent),
-    riskLevel: getStudentRiskLevel(primaryStudent),
-    rubric: {
-      totalMaxPoints: rubricCriteria.reduce((sum, criterion) => sum + criterion.maxPoints, 0),
-      criteria: rubricCriteria,
-    },
-    activity: activitySnapshot,
-    writing: {
-      artifacts: writingArtifacts,
-      comparison: paragraphComparison,
-      sequence: revisionSequence,
-    },
-    communication: {
-      dialogue: teacherStudentDialogue,
-      instructorComments,
-    },
-    thresholds: {
-      privateMessages: privateMessageAnalysis,
-    },
-    recentActivity: caseRecentActivity,
-    scoreJourney: caseScoreJourney,
-  };
-}
-
 export function mapParsedCaseToStudyCase(parsed: ParsedWorkbookCaseResponse): TeacherStudyCase {
   const student = parsed.data[0];
   const meta: TeacherStudyCase['meta'] = {
@@ -506,8 +466,10 @@ export function mapParsedCaseToStudyCase(parsed: ParsedWorkbookCaseResponse): Te
         thresholds: [],
       },
     },
-    recentActivity: fallbackActivity.trace.length > 0 ? traceToRecentActivity(fallbackActivity.trace) : caseRecentActivity,
+    recentActivity: fallbackActivity.trace.length > 0 ? traceToRecentActivity(fallbackActivity.trace) : [],
     scoreJourney,
+    analytics: parsed.analytics,
+    metrics: parsed.metrics,
   };
 }
 
@@ -594,16 +556,12 @@ interface StudyScopeState {
   setStationSelection: (stationIds: StudyStationId[]) => void;
 }
 
-const seedCase = buildSeedCase();
-
 export const useStudyScopeStore = create<StudyScopeState>()(
   persist(
     (set) => ({
-      cases: [seedCase],
-      selectedCaseId: seedCase.id,
-      selectedTaskByCase: {
-        [seedCase.id]: 'case-overview',
-      },
+      cases: [],
+      selectedCaseId: '',
+      selectedTaskByCase: {},
       selectedVariableIds: DEFAULT_VARIABLE_IDS,
       selectedStationIds: DEFAULT_STATION_IDS,
       importCases: (incomingCases) =>
@@ -692,8 +650,8 @@ export const useStudyScopeStore = create<StudyScopeState>()(
   )
 );
 
-export function getSelectedStudyCase(state: Pick<StudyScopeState, 'cases' | 'selectedCaseId'>): TeacherStudyCase {
-  return state.cases.find((studyCase) => studyCase.id === state.selectedCaseId) ?? state.cases[0] ?? seedCase;
+export function getSelectedStudyCase(state: Pick<StudyScopeState, 'cases' | 'selectedCaseId'>): TeacherStudyCase | null {
+  return state.cases.find((studyCase) => studyCase.id === state.selectedCaseId) ?? state.cases[0] ?? null;
 }
 
 export function getSelectedTaskId(state: Pick<StudyScopeState, 'selectedCaseId' | 'selectedTaskByCase'>): string {

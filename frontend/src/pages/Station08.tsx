@@ -54,6 +54,12 @@ export function Station08() {
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
         <StationHeader id={8} title="Bayesian Synthesis" subtitle="Layer 7C: Latent Competence Inference (BKT/Network)" />
 
+        <GlassCard className="p-4 mb-6 bg-[var(--bg-raised)]/40 border-dashed border-[var(--border-bright)]">
+          <p className="font-body text-sm text-[var(--text-sec)] leading-relaxed">
+            The prior and posterior values shown here are reference belief shifts derived from the current case metrics inside the frontend. They are not produced by a live Bayesian network service during this session.
+          </p>
+        </GlassCard>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
           <GlassCard elevation="high" className="lg:col-span-5 p-6 md:p-8 h-[450px] flex flex-col items-center" pedagogicalLabel="Bayesian updating models latent competence shifts across multiple evidence streams.">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-6 w-full">Current Case Belief Update</h3>

@@ -20,11 +20,11 @@ export function Settings() {
         <header className="flex justify-between items-end mb-8">
           <div>
             <h1 className="font-editorial text-4xl text-[var(--text-primary)] mb-2">Configuration Console</h1>
-            <p className="text-[var(--text-sec)] font-body">Manage case-study parameters, diagnostic thresholds, and intervention logic.</p>
+            <p className="text-[var(--text-sec)] font-body">Reference settings only. Editing is disabled until a verified persistence layer is connected.</p>
           </div>
           <div className="flex gap-3">
-            <Button variant="ghost"><RotateCcw size={16} /> Defaults</Button>
-            <Button variant="primary"><Save size={16} /> Save Changes</Button>
+            <Button variant="ghost" disabled><RotateCcw size={16} /> Defaults</Button>
+            <Button variant="primary" disabled><Save size={16} /> Save Changes</Button>
           </div>
         </header>
 

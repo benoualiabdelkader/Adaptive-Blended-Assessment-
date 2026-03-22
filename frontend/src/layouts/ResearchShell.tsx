@@ -14,10 +14,9 @@ function InterpretationPanel() {
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
-  const selectedTask = getSelectedTask(
-    selectedCase,
-    getSelectedTaskId({ selectedCaseId, selectedTaskByCase })
-  );
+  const selectedTask = selectedCase
+    ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
+    : null;
 
   return (
     <div className="w-[400px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] hidden xl:flex flex-col h-full sticky top-[60px] overflow-y-auto">
@@ -32,7 +31,9 @@ function InterpretationPanel() {
               <Lightbulb size={16} /> Quick Summary
             </div>
             <GlassCard className="p-4 text-sm leading-relaxed text-[var(--text-sec)]">
-              Current selection: {selectedCase.meta.studentName}. {selectedTask ? `Selected exercise: ${selectedTask.title}.` : 'Full case overview is active.'} Start with the highlighted scope, then move to the teacher report when you want a printable interpretation.
+              {selectedCase
+                ? `Current selection: ${selectedCase.meta.studentName}. ${selectedTask ? `Selected exercise: ${selectedTask.title}.` : 'Full case overview is active.'} Start with the highlighted scope, then move to the teacher report when you want a printable interpretation.`
+                : 'No verified workbook is loaded yet. Import a workbook first to unlock case-based reading, reporting, and notes.'}
             </GlassCard>
           </section>
 
@@ -44,11 +45,11 @@ function InterpretationPanel() {
               <ul className="space-y-3">
                 <li className="flex gap-2 items-start">
                   <span className="text-[var(--teal)] mt-0.5">*</span>
-                  Imported student cases in session: {cases.length}. Active course: {selectedCase.meta.courseTitle}.
+                  Imported student cases in session: {cases.length}. {selectedCase ? `Active course: ${selectedCase.meta.courseTitle}.` : 'No active course yet.'}
                 </li>
                 <li className="flex gap-2 items-start">
                   <span className="text-[var(--teal)] mt-0.5">*</span>
-                  Support priority: {selectedCase.riskLevel}. Learner profile: {selectedCase.clusterName}.
+                  Only workbook-derived evidence is treated as verified in the current interface state.
                 </li>
                 <li className="flex gap-2 items-start">
                   <span className="text-[var(--teal)] mt-0.5">*</span>
@@ -84,10 +85,9 @@ export function ResearchShell({ children }: ResearchShellProps) {
   const selectedStationIds = useStudyScopeStore((state) => state.selectedStationIds);
   const selectedVariableIds = useStudyScopeStore((state) => state.selectedVariableIds);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
-  const selectedTask = getSelectedTask(
-    selectedCase,
-    getSelectedTaskId({ selectedCaseId, selectedTaskByCase })
-  );
+  const selectedTask = selectedCase
+    ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
+    : null;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[var(--bg-deep)]">
@@ -129,10 +129,10 @@ export function ResearchShell({ children }: ResearchShellProps) {
             className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity ml-2 bg-transparent border-none p-0"
           >
             <div className="w-8 h-8 rounded-full bg-[var(--lav-glow)] border border-[var(--lav-border)] flex items-center justify-center text-[var(--lav)] relative font-editorial font-bold text-sm">
-              {selectedCase.meta.instructor.charAt(0)}
+              {selectedCase?.meta.instructor?.charAt(0) ?? '?'}
               <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[var(--teal)] border-2 border-[var(--bg-base)]" />
             </div>
-            <span className="text-sm font-medium text-[var(--text-primary)] hidden sm:inline">{selectedCase.meta.instructor}</span>
+            <span className="text-sm font-medium text-[var(--text-primary)] hidden sm:inline">{selectedCase?.meta.instructor ?? 'Instructor'}</span>
           </button>
         </div>
       </header>
@@ -142,9 +142,15 @@ export function ResearchShell({ children }: ResearchShellProps) {
           <div className="min-w-0">
             <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Current Teaching Scope</p>
             <p className="font-body text-sm text-[var(--text-primary)] mt-1">
-              <span className="font-medium">{selectedCase.meta.studentName}</span>
-              <span className="text-[var(--text-muted)]"> · </span>
-              <span>{selectedTask ? selectedTask.title : 'Full case overview'}</span>
+              {selectedCase ? (
+                <>
+                  <span className="font-medium">{selectedCase.meta.studentName}</span>
+                  <span className="text-[var(--text-muted)]"> · </span>
+                  <span>{selectedTask ? selectedTask.title : 'Full case overview'}</span>
+                </>
+              ) : (
+                <span>No verified workbook loaded</span>
+              )}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

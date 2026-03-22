@@ -771,7 +771,7 @@ function parseWorkbook(input, sourceName = 'uploaded.xlsx') {
   const studentRecord = {
     student_id: userId,
     name: studentName,
-    email: 'Not available in workbook export',
+    email: 'Unavailable in workbook export metadata',
     assignment_views: assignmentViews,
     resource_access_count: resourceAccessCount,
     rubric_views: rubricViews,

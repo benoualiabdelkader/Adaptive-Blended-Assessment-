@@ -45,6 +45,10 @@ test('upload endpoint accepts multiple workbook files', async () => {
     assert.ok(Array.isArray(body.cases));
     assert.equal(body.cases.length, 2);
     assert.equal(body.cases[0].meta.studentName, 'Lahmarabbou Asmaa');
+    assert.equal(body.analytics.cohort_size, 2);
+    assert.equal(body.analytics.clustering.available, false);
+    assert.equal(body.analytics.prediction.available, false);
+    assert.equal(body.cases[0].data[0].predicted_score, null);
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }

@@ -202,13 +202,13 @@ export function Station03() {
                     <div className="w-7 h-7 shrink-0 rounded-full border border-[var(--lav-border)] bg-[var(--bg-deep)] flex items-center justify-center font-forensic text-[10px] text-[var(--lav)]">
                       {index + 1}
                     </div>
-                    <div>
-                      <p className="font-navigation text-sm text-[var(--text-primary)]">{entry.event}</p>
-                      <p className="font-body text-xs text-[var(--text-sec)] mt-1 leading-relaxed">{entry.context}</p>
-                      <p className="font-body text-xs text-[var(--text-muted)] mt-2 leading-relaxed">{entry.detail}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-navigation text-sm text-[var(--text-primary)] truncate-none break-words">{entry.event}</p>
+                      <p className="font-body text-xs text-[var(--text-sec)] mt-1 leading-relaxed break-words">{entry.context}</p>
+                      <p className="font-body text-xs text-[var(--text-muted)] mt-2 leading-relaxed break-words">{entry.detail}</p>
                     </div>
                   </div>
-                  <span className="font-forensic text-[11px] text-[var(--gold)]">{entry.timestamp}</span>
+                  <span className="font-forensic text-[11px] text-[var(--gold)] shrink-0 whitespace-nowrap">{entry.timestamp}</span>
                 </div>
               </GlassCard>
             ))}

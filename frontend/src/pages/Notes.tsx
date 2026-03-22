@@ -15,8 +15,8 @@ export function Notes() {
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
   const selectedTaskId = getSelectedTaskId({ selectedCaseId, selectedTaskByCase });
-  const selectedTask = getSelectedTask(selectedCase, selectedTaskId);
-  const storageKey = useMemo(() => buildNoteKey(selectedCase.id, selectedTaskId), [selectedCase.id, selectedTaskId]);
+  const selectedTask = selectedCase ? getSelectedTask(selectedCase, selectedTaskId) : null;
+  const storageKey = useMemo(() => buildNoteKey(selectedCase?.id ?? 'no-case', selectedTaskId), [selectedCase?.id, selectedTaskId]);
 
   const [note, setNote] = useState('');
   const [savedAt, setSavedAt] = useState<string | null>(null);
@@ -41,6 +41,21 @@ export function Notes() {
     setNote('');
     setSavedAt(null);
   };
+
+  if (!selectedCase) {
+    return (
+      <ResearchShell>
+        <div className="max-w-5xl mx-auto p-6 md:p-8 pb-32">
+          <GlassCard accent="lav" glow className="p-8 md:p-10">
+            <h1 className="font-editorial italic text-4xl text-[var(--text-primary)]">Teaching Notes</h1>
+            <p className="mt-3 font-body text-sm text-[var(--text-sec)] max-w-3xl">
+              Notes are available only after a verified workbook is imported and selected.
+            </p>
+          </GlassCard>
+        </div>
+      </ResearchShell>
+    );
+  }
 
   return (
     <ResearchShell>
@@ -106,10 +121,7 @@ export function Notes() {
                   <p className="mt-1 font-body text-sm text-[var(--text-primary)]">{selectedTask ? selectedTask.title : 'Full case overview'}</p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-1">
-                  <StatusChip variant="lav">{selectedCase.clusterName}</StatusChip>
-                  <StatusChip variant={selectedCase.riskLevel === 'critical' ? 'red' : selectedCase.riskLevel === 'monitor' ? 'gold' : 'teal'}>
-                    {selectedCase.riskLevel}
-                  </StatusChip>
+                  <StatusChip variant="teal">{selectedCase.workbookName}</StatusChip>
                 </div>
               </div>
             </GlassCard>

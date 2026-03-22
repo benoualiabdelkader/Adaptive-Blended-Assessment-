@@ -22,9 +22,11 @@ function extractCases(payload: (UploadDatasetResponse & ParsedWorkbookCaseRespon
   throw new Error('The backend response did not include parsed workbook cases.');
 }
 
-async function uploadSingleWorkbook(file: File): Promise<ParsedWorkbookCaseResponse[]> {
+export async function uploadWorkbooks(files: File[]): Promise<ParsedWorkbookCaseResponse[]> {
   const formData = new FormData();
-  formData.append('file', file);
+  for (const file of files) {
+    formData.append('files', file);
+  }
 
   const response = await fetch(`${API_BASE}/api/upload-dataset`, {
     method: 'POST',
@@ -38,19 +40,4 @@ async function uploadSingleWorkbook(file: File): Promise<ParsedWorkbookCaseRespo
 
   const payload = (await response.json()) as UploadDatasetResponse & ParsedWorkbookCaseResponse;
   return extractCases(payload);
-}
-
-export async function uploadWorkbooks(files: File[]): Promise<ParsedWorkbookCaseResponse[]> {
-  const parsedCases: ParsedWorkbookCaseResponse[] = [];
-
-  for (const file of files) {
-    const cases = await uploadSingleWorkbook(file);
-    parsedCases.push(...cases);
-  }
-
-  if (parsedCases.length > 0) {
-    return parsedCases;
-  }
-
-  throw new Error('No workbook cases were returned by the backend.');
 }

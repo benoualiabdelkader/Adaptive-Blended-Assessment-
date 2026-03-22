@@ -34,6 +34,8 @@ export function Import() {
     );
   }, [parsedCases]);
 
+  const analyticsStatus = parsedCases[0]?.analytics ?? null;
+
   const handleUpload = async () => {
     if (selectedFiles.length === 0) {
       setErrorMessage('Select at least one workbook before starting the import.');
@@ -188,6 +190,14 @@ export function Import() {
                     <p className="font-body text-xs text-[var(--text-sec)] mt-2">
                       Review the detected students before adding them to the study workspace.
                     </p>
+                    <p className="font-body text-xs text-[var(--text-muted)] mt-2">
+                      Current import analytics are computed from the imported workbook cohort inside the backend service. If the cohort is too small, advanced models stay unavailable rather than returning fallback numbers. These analytics support teacher interpretation; they do not replace teacher scoring or feedback decisions.
+                    </p>
+                    {analyticsStatus && (
+                      <p className="font-body text-xs text-[var(--text-muted)] mt-2">
+                        Cohort size: {analyticsStatus.cohort_size}. Clustering: {analyticsStatus.clustering.available ? 'available' : analyticsStatus.clustering.reason}. Prediction: {analyticsStatus.prediction.available ? 'available' : analyticsStatus.prediction.reason}. Bayesian: {analyticsStatus.bayesian.available ? 'available' : analyticsStatus.bayesian.reason}
+                      </p>
+                    )}
                   </div>
                   <div className="flex gap-2 flex-wrap">
                     <StatusChip variant="teal">{totals.students} students</StatusChip>
@@ -203,7 +213,7 @@ export function Import() {
                         <th className="p-4 font-medium uppercase text-xs">Student</th>
                         <th className="p-4 font-medium uppercase text-xs">Course</th>
                         <th className="p-4 font-medium uppercase text-xs">Tasks</th>
-                        <th className="p-4 font-medium uppercase text-xs">Risk</th>
+                        <th className="p-4 font-medium uppercase text-xs">Workbook Period</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-[var(--border)]">
@@ -216,11 +226,7 @@ export function Import() {
                           </td>
                           <td className="p-4 text-[var(--text-sec)]">{studyCase.meta.courseTitle}</td>
                           <td className="p-4 text-[var(--text-sec)]">{studyCase.writing.artifacts.length}</td>
-                          <td className="p-4">
-                            <StatusChip variant={studyCase.riskLevel === 'critical' ? 'red' : studyCase.riskLevel === 'monitor' ? 'gold' : 'teal'}>
-                              {studyCase.riskLevel}
-                            </StatusChip>
-                          </td>
+                          <td className="p-4 text-[var(--text-sec)]">{studyCase.meta.periodCovered}</td>
                         </tr>
                       ))}
                     </tbody>

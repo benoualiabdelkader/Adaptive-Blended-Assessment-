@@ -218,7 +218,7 @@ export const caseStudyMeta: CaseStudyMeta = {
 export const primaryStudent: StudentRecord = {
   student_id: caseStudyMeta.userId,
   name: caseStudyMeta.studentName,
-  email: 'Not available in workbook export',
+  email: 'Unavailable in workbook export metadata',
   assignment_views: 108,
   resource_access_count: 19,
   rubric_views: 6,
@@ -492,6 +492,13 @@ export const teacherStudentDialogue: DialogueMessage[] = [
     message: 'Take the feedback I sent you and correct your introduction in the comment below.',
   },
   {
+    date: '14 Feb 2026',
+    role: 'student',
+    sender: caseStudyMeta.studentName,
+    topic: 'Request for progress update',
+    message: 'Miss, could you please show me my progress so far?',
+  },
+  {
     date: '7 Mar 2026',
     role: 'student',
     sender: caseStudyMeta.studentName,
@@ -537,7 +544,7 @@ export const instructorComments: InstructorComment[] = [
     viewedAt: caseStudyMeta.feedbackViewedAt,
     comment:
       'Artificial intelligence has rapidly become part of everyday university life. Many students now turn to AI tools to support their writing, organize their ideas, and conduct research more efficiently. Because these technologies are easily accessible and simple to use, their presence in academic work continues to expand. This growing use has sparked an ongoing debate within higher education. Some educators and students question whether relying on artificial intelligence weakens essential academic skills or encourages dishonest practices. Others argue that, when used responsibly, AI can serve as a valuable learning aid that supports understanding rather than replacing effort. To this end, artificial intelligence is neither inherently harmful nor automatically beneficial. Its educational value depends on how it is used. When approached critically and ethically, it can enhance learning; when misused, it risks undermining both intellectual development and academic integrity.',
-    note: 'This is mine, more formal and academic, my dear.',
+    note: 'Teacher model shared to illustrate a more formal and academic register.',
   },
 ];
 
@@ -757,7 +764,7 @@ export const writingArtifacts: WritingArtifact[] = [
     status: 'final-submission',
     wordCount: 198,
     text:
-      'Another major worry is how AI impacts fairness and student relationships. Some students use AI a lot to do their assignments while others do their work on their own it can make school unfair. Students who take time to research write and revise their work might feel discouraged when they see others getting better results with little effort by using AI. This can make classmates not trust each other and make students less motivated to work. Over time it can also cause problems in the classroom because students start to think that doing well in school is not about trying or being good at something. For instance a study at Harvard University found that some students who used AI tools in a way got higher grades than their friends who did their work without AI help (Harvard University, 2023). These unfair situations can hurt how well students work together because they might not want to share ideas or help each other much. Also relying much on AI can hurt the development of key skills, like critical thinking solving problems and perseverance. So universities should make rules that guide the responsible use of AI to protect fairness and keep school honest.',
+      'Another major worry is how AI affects fairness and student relationships at university. Some students use AI heavily in their assignments while others complete the work independently, and this can create a strong sense of unfairness in class. Students who spend time researching, writing, and revising may feel discouraged when others receive similar or better results with much less personal effort. As a result, trust between classmates can weaken and motivation can decline. Over time, this problem may also change how students understand academic success, because good results may seem linked to shortcut tools rather than to effort, responsibility, and genuine skill. For example, when a written task is produced mainly through AI assistance, the final grade may no longer represent the student\'s own reasoning, language control, or persistence. These situations can damage collaboration because students may become less willing to share ideas or support one another. For these reasons, universities should set clear rules for responsible AI use in order to protect fairness, honesty, and meaningful learning.',
     teacherComment:
       'Argument is present, but explanation and development are still limited; strengthen evidence and expand the reasoning before the example.',
   },
