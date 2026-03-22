@@ -84,10 +84,16 @@ export function PipelineLayout({
 
             if (!isEnabled) {
               return (
-                <div
+                <Link
                   key={station.id}
-                  title={`Station ${String(station.id).padStart(2, '0')} - ${station.name} (unavailable)`}
-                  className="w-12 h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 text-[var(--text-muted)] opacity-45 cursor-not-allowed relative group"
+                  to={station.path}
+                  title={`Station ${String(station.id).padStart(2, '0')} - ${station.name} (preview unavailable state)`}
+                  className={clsx(
+                    'w-12 h-12 rounded-xl flex flex-col items-center justify-center gap-0.5 relative group transition-all',
+                    isActive
+                      ? 'bg-[var(--bg-high)] border-l-2 border-[var(--gold)] shadow-[0_0_15px_var(--gold-dim)] text-[var(--gold)]'
+                      : 'text-[var(--text-muted)] opacity-55 hover:bg-[var(--bg-raised)]'
+                  )}
                 >
                   <Icon size={20} />
                   <span className="font-navigation text-[9px] font-bold">
@@ -95,9 +101,9 @@ export function PipelineLayout({
                   </span>
 
                   <div className="absolute left-14 bg-[var(--bg-high)] border border-[var(--border)] text-[var(--text-primary)] px-3 py-1.5 rounded shadow-xl text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 font-navigation font-medium">
-                    <span className="text-[var(--red)] mr-2">S{String(station.id).padStart(2, '0')}</span> {station.name}
+                    <span className="text-[var(--gold)] mr-2">S{String(station.id).padStart(2, '0')}</span> {station.name} preview
                   </div>
-                </div>
+                </Link>
               );
             }
 
