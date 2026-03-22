@@ -72,10 +72,14 @@ export function Dashboard() {
   const selectedTask = selectedCase
     ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
     : null;
+  const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
+  const visibleStationIds = uniqueLearnerCount <= 1
+    ? selectedStationIds.filter((stationId) => ![6, 7, 8].includes(stationId))
+    : selectedStationIds;
   const highlightedVariables = selectedCase
     ? STUDY_VARIABLES.filter((variable) => selectedVariableIds.includes(variable.id)).slice(0, 4)
     : [];
-  const selectedStations = STUDY_STATIONS.filter((station) => selectedStationIds.includes(station.id));
+  const selectedStations = STUDY_STATIONS.filter((station) => visibleStationIds.includes(station.id));
 
   if (!selectedCase) {
     return (
@@ -170,7 +174,7 @@ export function Dashboard() {
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 <span className="rounded-full border border-[var(--border)] bg-[var(--bg-deep)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)]">
-                  {selectedStationIds.length} active sections
+                  {visibleStationIds.length} active sections
                 </span>
                 <span className="rounded-full border border-[var(--border)] bg-[var(--bg-deep)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--teal)]">
                   {selectedVariableIds.length} active indicators
@@ -213,7 +217,7 @@ export function Dashboard() {
               <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-deep)] px-4 py-3">
                 <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)]">What changes when you edit the scope</p>
                 <p className="mt-2 font-body text-xs text-[var(--text-sec)] leading-relaxed">
-                  The selected student, exercise, sections, and indicators are reused in the student registry, the analysis pages, and the final teacher report.
+                  The selected student, exercise, sections, and indicators are reused in the student registry, the stations, and the final teacher report.
                 </p>
               </div>
               <Button onClick={() => navigate('/reports')} className="w-full mt-2 py-2 text-xs">Open teacher report <ArrowRight size={14} /></Button>
@@ -315,7 +319,7 @@ export function Dashboard() {
                     ? `The current task selection is ${selectedTask.title}.`
                     : `The current overview covers ${selectedCase.writing.artifacts.length} writing samples extracted from the workbook.`}
                   implication="Only workbook-derived counts and texts are displayed in this view."
-                  action="Use reports and notes for interpretation. Open Station 06 or Station 07 only after importing enough verified workbooks for clustering or prediction."
+                  action="Use reports and notes for interpretation. In a single-student study, focus on S01-S05 and S09-S12. Open Station 06 or Station 07 only after importing enough verified workbooks for clustering or prediction."
                   citation="Vygotsky (1978) - Guided support and gradual control"
                 />
               </div>

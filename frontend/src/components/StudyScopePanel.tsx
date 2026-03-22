@@ -30,7 +30,7 @@ const QUICK_PRESETS: Array<{
   {
     id: 'classroom',
     label: 'Classroom view',
-    helper: 'Fast reading of behaviour, diagnosis, feedback, and revision.',
+    helper: 'Fast reading of behaviour, diagnostic signals, feedback planning, and revision.',
     stations: [2, 3, 9, 10, 12],
     variables: ['assignment_views', 'feedback_views', 'help_seeking_messages', 'argumentation', 'grammar_accuracy'],
   },

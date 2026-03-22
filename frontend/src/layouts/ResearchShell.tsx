@@ -53,7 +53,7 @@ function InterpretationPanel() {
                 </li>
                 <li className="flex gap-2 items-start">
                   <span className="text-[var(--teal)] mt-0.5">*</span>
-                  Use the top scope bar to confirm the active student, exercise, sections, and indicators before reading any chart.
+                  Use the top scope bar to confirm the active student, exercise, sections, and indicators before reading any chart or station.
                 </li>
               </ul>
             </GlassCard>
@@ -78,7 +78,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  
+
   const cases = useStudyScopeStore((state) => state.cases);
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
@@ -88,6 +88,10 @@ export function ResearchShell({ children }: ResearchShellProps) {
   const selectedTask = selectedCase
     ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
     : null;
+  const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
+  const visibleStationCount = uniqueLearnerCount <= 1
+    ? selectedStationIds.filter((stationId) => ![6, 7, 8].includes(stationId)).length
+    : selectedStationIds.length;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-[var(--bg-deep)]">
@@ -118,7 +122,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
             <Workflow size={16} />
             <span className="hidden sm:inline">Open Pipeline</span>
           </button>
-          <button 
+          <button
             className="text-[var(--text-sec)] hover:text-[var(--lav)] transition-colors flex items-center gap-2 text-sm font-navigation"
             onClick={() => navigate('/notes')}
           >
@@ -131,7 +135,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
             <SettingsIcon size={18} />
           </Link>
 
-          <button 
+          <button
             onClick={() => navigate('/settings')}
             className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity ml-2 bg-transparent border-none p-0"
           >
@@ -162,7 +166,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
           </div>
           <div className="flex flex-wrap gap-2">
             <span className="rounded-full border border-[var(--border)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--teal)] bg-[var(--teal-dim)]">
-              {selectedStationIds.length} sections
+              {visibleStationCount} sections
             </span>
             <span className="rounded-full border border-[var(--border)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)] bg-[var(--lav-glow)]">
               {selectedVariableIds.length} indicators

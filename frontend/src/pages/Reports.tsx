@@ -94,7 +94,7 @@ function escapeHtml(value: string) {
 
 export function Reports() {
   const [activeTab, setActiveTab] = useState('Overview');
-  const tabs = ['Overview', 'AI Architecture', 'Final Report'];
+  const tabs = ['Overview', 'Assessment Architecture', 'Final Report'];
   const cases = useStudyScopeStore((state) => state.cases);
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
@@ -104,6 +104,10 @@ export function Reports() {
   const selectedTask = selectedCase
     ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
     : null;
+  const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
+  const visibleStationIds = uniqueLearnerCount <= 1
+    ? selectedStationIds.filter((stationId) => ![6, 7, 8].includes(stationId))
+    : selectedStationIds;
 
   if (!selectedCase) {
     return (
@@ -132,13 +136,13 @@ export function Reports() {
 
   const executiveSummary = useMemo(() => {
     const taskLabel = selectedTask ? selectedTask.title : 'the full workbook-backed case';
-    const stationCount = selectedStationIds.length;
+    const stationCount = visibleStationIds.length;
     return `This report compiles verified workbook evidence for ${selectedCase.meta.studentName} across ${taskLabel}. It covers ${stationCount} selected station${stationCount > 1 ? 's' : ''}, ${selectedCase.writing.artifacts.length} writing sample${selectedCase.writing.artifacts.length !== 1 ? 's' : ''}, ${selectedCase.meta.activityLogEntries} activity log entries, and ${selectedCase.meta.chatMessages} teacher-student messages. The system organises evidence and calculated indicators; the instructor remains responsible for the final pedagogical interpretation, scoring judgment, and feedback delivery.`;
-  }, [selectedCase, selectedTask, selectedStationIds]);
+  }, [selectedCase, selectedTask, visibleStationIds]);
 
   const selectedStations = useMemo(
-    () => STUDY_STATIONS.filter((station) => selectedStationIds.includes(station.id)),
-    [selectedStationIds]
+    () => STUDY_STATIONS.filter((station) => visibleStationIds.includes(station.id)),
+    [visibleStationIds]
   );
   const stationAvailability = useMemo(() => {
     return new Map<number, { available: boolean; note?: string }>([
@@ -157,7 +161,7 @@ export function Reports() {
     ]);
   }, [selectedCase]);
 
-  const includeSection = (stationIds: number[]) => stationIds.some((stationId) => selectedStationIds.includes(stationId as typeof selectedStationIds[number]));
+  const includeSection = (stationIds: number[]) => stationIds.some((stationId) => visibleStationIds.includes(stationId as typeof visibleStationIds[number]));
 
   const downloadHtmlReport = () => {
     const reportNode = document.getElementById('final-report');
@@ -233,7 +237,7 @@ export function Reports() {
                     <StatusChip variant="teal" className="text-[10px]">VERIFIED</StatusChip>
                   </div>
                   <p className="font-body text-[var(--text-sec)] text-sm max-w-3xl">
-                    Student: {selectedCase.meta.studentName}. Task: {selectedTask ? selectedTask.title : 'Full case overview'}. Stations: {selectedStationIds.length} active. Variables: {selectedVariableIds.length} active.
+                    Student: {selectedCase.meta.studentName}. Task: {selectedTask ? selectedTask.title : 'Full case overview'}. Stations: {visibleStationIds.length} active. Variables: {selectedVariableIds.length} active.
                   </p>
                 </div>
                 <div className="flex justify-end gap-3 w-full md:w-auto mt-4 md:mt-0 flex-wrap">
@@ -292,7 +296,7 @@ export function Reports() {
           </div>
         )}
 
-        {activeTab === 'AI Architecture' && <AIEngines />}
+        {activeTab === 'Assessment Architecture' && <AIEngines />}
 
         {activeTab === 'Final Report' && (
           <div className="space-y-6">
