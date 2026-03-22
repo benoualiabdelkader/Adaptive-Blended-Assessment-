@@ -313,7 +313,7 @@ export function Dashboard() {
                     ? `The current task selection is ${selectedTask.title}.`
                     : `The current overview covers ${selectedCase.writing.artifacts.length} writing samples extracted from the workbook.`}
                   implication="Only workbook-derived counts and texts are displayed in this view."
-                  action="Use reports and notes for interpretation, and avoid the disabled pipeline until verified analytics integration is added."
+                  action="Use reports and notes for interpretation. Open Station 06 or Station 07 only after importing enough verified workbooks for clustering or prediction."
                   citation="Vygotsky (1978) - Guided support and gradual control"
                 />
               </div>

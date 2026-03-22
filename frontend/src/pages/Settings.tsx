@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { ResearchShell } from '../layouts/ResearchShell';
 import { GlassCard } from '../components/GlassCard';
-import { Button } from '../components/Atoms';
-import { Save, RotateCcw, ShieldCheck, Database, Settings2, Sliders } from 'lucide-react';
+import { ShieldCheck, Database, Settings2, Sliders } from 'lucide-react';
 import { caseStudyMeta } from '../data/diagnostic';
 
 export function Settings() {
@@ -20,11 +19,7 @@ export function Settings() {
         <header className="flex justify-between items-end mb-8">
           <div>
             <h1 className="font-editorial text-4xl text-[var(--text-primary)] mb-2">Configuration Console</h1>
-            <p className="text-[var(--text-sec)] font-body">Reference settings only. Editing is disabled until a verified persistence layer is connected.</p>
-          </div>
-          <div className="flex gap-3">
-            <Button variant="ghost" disabled><RotateCcw size={16} /> Defaults</Button>
-            <Button variant="primary" disabled><Save size={16} /> Save Changes</Button>
+            <p className="text-[var(--text-sec)] font-body">Read-only research reference. These values are shown for documentation and are not editable in the current verified build.</p>
           </div>
         </header>
 
@@ -80,22 +75,24 @@ export function Settings() {
                 <section className="space-y-4">
                   <h3 className="font-navigation text-sm text-[var(--lav)]">Primary Credentials</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
+                    <div className="space-y-2 rounded-lg border border-[var(--border)] bg-[var(--bg-deep)] px-4 py-3">
                       <label className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Institution</label>
-                      <input className="w-full bg-[var(--bg-deep)] border border-[var(--border)] rounded-md px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--lav)]" defaultValue={caseStudyMeta.institution} />
+                      <div className="text-sm text-[var(--text-primary)]">{caseStudyMeta.institution}</div>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 rounded-lg border border-[var(--border)] bg-[var(--bg-deep)] px-4 py-3">
                       <label className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Instructor / Reviewer</label>
-                      <input className="w-full bg-[var(--bg-deep)] border border-[var(--border)] rounded-md px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--lav)]" defaultValue={caseStudyMeta.instructor} />
+                      <div className="text-sm text-[var(--text-primary)]">{caseStudyMeta.instructor}</div>
                     </div>
                   </div>
                 </section>
                 
                 <section className="space-y-4">
                   <h3 className="font-navigation text-sm text-[var(--lav)]">Research Topic</h3>
-                  <div className="space-y-2">
+                  <div className="space-y-2 rounded-lg border border-[var(--border)] bg-[var(--bg-deep)] px-4 py-3">
                     <label className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Case Title</label>
-                    <textarea className="w-full bg-[var(--bg-deep)] border border-[var(--border)] rounded-md px-4 py-3 text-[var(--text-primary)] focus:outline-none focus:border-[var(--lav)] min-h-[100px]" defaultValue={`Single-student analytical verification for ${caseStudyMeta.studentName} in ${caseStudyMeta.courseTitle}.`} />
+                    <div className="text-sm text-[var(--text-primary)] leading-relaxed">
+                      {`Single-student analytical verification for ${caseStudyMeta.studentName} in ${caseStudyMeta.courseTitle}.`}
+                    </div>
                   </div>
                 </section>
               </GlassCard>
@@ -110,12 +107,8 @@ export function Settings() {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-editorial text-[var(--text-primary)] mb-1">Advanced Data Controls</h3>
-                      <p className="text-sm text-[var(--text-sec)] mb-6">Administrative actions for clearing the current case cache.</p>
-                      
-                      <div className="flex gap-4">
-                        <Button className="!bg-[var(--red-dim)] !text-[var(--red)] border border-[var(--border-bright)] hover:!bg-[var(--lav-glow)]">Clear Case Cache</Button>
-                        <Button className="!bg-[var(--bg-high)] border border-[var(--border)]">Reset Thresholds</Button>
-                      </div>
+                      <p className="text-sm text-[var(--text-sec)] mb-2">Administrative actions are intentionally disabled in the verified build.</p>
+                      <p className="text-xs text-[var(--text-muted)]">This page documents threshold and metadata assumptions only. It does not clear cache, reset data, or save settings.</p>
                     </div>
                   </div>
                 </GlassCard>
@@ -130,11 +123,11 @@ export function Settings() {
 
 function ThresholdField({ label, value, unit, description }: { label: string, value: string, unit: string, description: string }) {
   return (
-    <div className="space-y-2 group">
+    <div className="space-y-2 group rounded-lg border border-[var(--border)] bg-[var(--bg-deep)] p-4">
       <div className="flex justify-between items-center">
         <label className="text-sm font-navigation text-[var(--text-primary)]">{label}</label>
         <div className="flex items-center gap-2">
-          <input className="w-20 bg-[var(--bg-deep)] border border-[var(--border)] rounded px-2 py-1 text-right text-[var(--lav)] font-mono text-sm focus:outline-none focus:border-[var(--lav)]" defaultValue={value} />
+          <span className="w-20 rounded px-2 py-1 text-right text-[var(--lav)] font-mono text-sm bg-[var(--bg-base)] border border-[var(--border)]">{value}</span>
           <span className="text-[var(--text-muted)] text-[10px] uppercase font-navigation">{unit}</span>
         </div>
       </div>

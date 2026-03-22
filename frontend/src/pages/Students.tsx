@@ -38,6 +38,18 @@ export function Students() {
     () => STUDY_VARIABLES.filter((variable) => selectedVariableIds.includes(variable.id)),
     [selectedVariableIds]
   );
+  const visibleCases = useMemo(() => {
+    const seen = new Set<string>();
+
+    return cases.filter((studyCase) => {
+      const dedupeKey = `${studyCase.meta.userId}::${studyCase.meta.courseId}::${studyCase.workbookName}`;
+      if (seen.has(dedupeKey)) {
+        return false;
+      }
+      seen.add(dedupeKey);
+      return true;
+    });
+  }, [cases]);
 
   if (!selectedCase) {
     return (
@@ -106,7 +118,7 @@ export function Students() {
               Click any row to make it the active student case. The highlighted row is the one currently used by reports and analysis pages.
             </p>
             <span className="font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)]">
-              {cases.length} cases loaded
+              {visibleCases.length} cases loaded
             </span>
           </div>
           <div className="overflow-x-auto w-full">
@@ -123,7 +135,7 @@ export function Students() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--border)]">
-                {cases.map((studyCase) => {
+                {visibleCases.map((studyCase) => {
                   const isActive = studyCase.id === selectedCase.id;
 
                   return (

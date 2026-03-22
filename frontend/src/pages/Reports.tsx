@@ -140,6 +140,22 @@ export function Reports() {
     () => STUDY_STATIONS.filter((station) => selectedStationIds.includes(station.id)),
     [selectedStationIds]
   );
+  const stationAvailability = useMemo(() => {
+    return new Map<number, { available: boolean; note?: string }>([
+      [6, {
+        available: Boolean(selectedCase.analytics?.clustering.available),
+        note: selectedCase.analytics?.clustering.available ? undefined : selectedCase.analytics?.clustering.reason ?? 'Not available for the current imported cohort.',
+      }],
+      [7, {
+        available: Boolean(selectedCase.analytics?.prediction.available),
+        note: selectedCase.analytics?.prediction.available ? undefined : selectedCase.analytics?.prediction.reason ?? 'Not available for the current imported cohort.',
+      }],
+      [8, {
+        available: Boolean(selectedCase.analytics?.bayesian.available),
+        note: selectedCase.analytics?.bayesian.available ? undefined : selectedCase.analytics?.bayesian.reason ?? 'Not connected in the current live build.',
+      }],
+    ]);
+  }, [selectedCase]);
 
   const includeSection = (stationIds: number[]) => stationIds.some((stationId) => selectedStationIds.includes(stationId as typeof selectedStationIds[number]));
 
@@ -260,9 +276,16 @@ export function Reports() {
               <p className="font-body text-[var(--text-sec)] leading-7">{executiveSummary}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {selectedStations.map((station) => (
-                  <StatusChip key={station.id} variant="teal">
-                    S{String(station.id).padStart(2, '0')} {station.label}
-                  </StatusChip>
+                  <div key={station.id} className="flex flex-col gap-1">
+                    <StatusChip variant={(stationAvailability.get(station.id)?.available ?? true) ? 'teal' : 'gold'}>
+                      S{String(station.id).padStart(2, '0')} {station.label}
+                    </StatusChip>
+                    {stationAvailability.get(station.id)?.available === false && (
+                      <span className="font-body text-[10px] text-[var(--text-muted)] max-w-[220px]">
+                        {stationAvailability.get(station.id)?.note}
+                      </span>
+                    )}
+                  </div>
                 ))}
               </div>
             </GlassCard>
