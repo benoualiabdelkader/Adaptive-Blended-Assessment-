@@ -16,6 +16,7 @@ export interface PipelineLayoutProps {
   verifiedEnabled?: boolean;
   unavailableTitle?: string;
   unavailableMessage?: string;
+  unavailableContent?: React.ReactNode;
 }
 
 const stations = [
@@ -39,6 +40,7 @@ export function PipelineLayout({
   verifiedEnabled = true,
   unavailableTitle = 'Verified Pipeline Unavailable',
   unavailableMessage = 'This station is hidden until the selected workbook case has verified live analytics for it.',
+  unavailableContent,
 }: PipelineLayoutProps) {
   const location = useLocation();
   const cases = useStudyScopeStore((state) => state.cases);
@@ -161,6 +163,11 @@ export function PipelineLayout({
                         : 'Import enough verified workbook cases, then select a case with available clustering or prediction results to open the corresponding station.'}
                     </p>
                   </div>
+                  {unavailableContent ? (
+                    <div className="mt-6">
+                      {unavailableContent}
+                    </div>
+                  ) : null}
                 </div>
               )}
             </motion.div>

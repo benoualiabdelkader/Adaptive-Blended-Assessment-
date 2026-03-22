@@ -136,7 +136,7 @@ export function Station03() {
           />
         </div>
 
-        <GlassCard elevation="high" className="p-6 mb-8 w-full h-[400px]" pedagogicalLabel="Longitudinal tracking identifies reactive versus strategic regulation across the case timeline.">
+        <GlassCard elevation="high" className="p-6 mb-8 w-full min-h-[340px] md:min-h-[400px]" pedagogicalLabel="Longitudinal tracking identifies reactive versus strategic regulation across the case timeline.">
           <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-6">Longitudinal Engagement Trajectory</h3>
           <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={260}>
             <AreaChart data={timelineData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -177,7 +177,7 @@ export function Station03() {
               return (
                 <div
                   key={index}
-                  className={`w-6 h-6 rounded-sm snap-start shrink-0 ${colorClass}`}
+                  className={`w-5 h-5 md:w-6 md:h-6 rounded-sm snap-start shrink-0 ${colorClass}`}
                   title={`Day ${index + 1}: ${Math.floor(intensity * 100)} relative activity units`}
                 />
               );
@@ -212,7 +212,7 @@ export function Station03() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Estimated Sessions</h3>
-              <span className="font-forensic text-xs text-[var(--gold)]">{selectedCase?.activity.sessionGapRule ?? 'No session rule available'}</span>
+            <span className="font-forensic text-xs text-[var(--gold)] break-words text-right">{selectedCase?.activity.sessionGapRule ?? 'No session rule available'}</span>
             </div>
             {selectedCase?.activity.highlightedSessions.map((session) => (
               <GlassCard key={`${session.start}-${session.end}`} className="p-4">
@@ -251,7 +251,7 @@ export function Station03() {
                       <p className="font-body text-xs text-[var(--text-muted)] mt-2 leading-relaxed break-words">{entry.detail}</p>
                     </div>
                   </div>
-                  <span className="font-forensic text-[11px] text-[var(--gold)] shrink-0 whitespace-nowrap">{entry.timestamp}</span>
+                  <span className="font-forensic text-[11px] text-[var(--gold)] md:shrink-0 break-words">{entry.timestamp}</span>
                 </div>
               </GlassCard>
             ))}

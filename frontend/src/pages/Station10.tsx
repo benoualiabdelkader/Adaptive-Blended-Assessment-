@@ -114,7 +114,7 @@ export function Station10() {
           {swimlaneData.length === 0 ? (
             <p className="font-body text-sm text-[var(--text-sec)]">The current workbook does not contain a parseable feedback-response loop for this visual.</p>
           ) : (
-            <div className="min-w-[600px] border border-[var(--border)] rounded-lg bg-[var(--bg-deep)] p-4 relative">
+            <div className="min-w-[520px] md:min-w-[600px] border border-[var(--border)] rounded-lg bg-[var(--bg-deep)] p-4 relative">
               <div className="flex justify-between border-b border-[var(--border)] pb-2 mb-4 font-navigation text-[10px] text-[var(--text-primary)] font-bold">
                 <span>Day 0 (sent)</span>
                 <span>Day 2</span>
@@ -146,7 +146,7 @@ export function Station10() {
                 ))}
               </div>
 
-              <div className="flex justify-center gap-6 mt-6 pt-4 border-t border-[var(--border)] font-navigation text-xs text-[var(--text-sec)]">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-6 pt-4 border-t border-[var(--border)] font-navigation text-xs text-[var(--text-sec)]">
                 <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[var(--text-muted)]"></div> Sent</div>
                 <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full border-2 border-[var(--lav)]"></div> Viewed</div>
                 <div className="flex items-center gap-2"><div className="w-2 h-2 bg-[var(--teal)]"></div> Revised</div>
@@ -183,7 +183,7 @@ export function Station10() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <GlassCard className="p-6 h-[300px]" pedagogicalLabel="Response latency is a practical indicator of feedback uptake and task re-entry.">
+          <GlassCard className="p-6 min-h-[280px] md:min-h-[300px]" pedagogicalLabel="Response latency is a practical indicator of feedback uptake and task re-entry.">
             <h4 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)] mb-4">Observed Response Latency</h4>
             {histogramData.length === 0 ? (
               <p className="font-body text-sm text-[var(--text-sec)]">No verified response-latency distribution could be derived from the current workbook.</p>

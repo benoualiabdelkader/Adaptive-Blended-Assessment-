@@ -153,7 +153,7 @@ function RuleCard({ rule }: { rule: DiagnosticRule }) {
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[var(--border)]">
-        <div className="font-body text-[10px] text-[var(--text-sec)] max-w-[220px] leading-tight">
+        <div className="font-body text-[10px] text-[var(--text-sec)] leading-tight break-words min-w-0">
           <span className="uppercase tracking-wide text-[var(--text-muted)] block mb-1">Theoretical Basis</span>
           {rule.basis}
         </div>

@@ -80,19 +80,19 @@ export function Station07() {
           </p>
         </GlassCard>
 
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex gap-6">
-            <div className="flex items-center gap-3">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 rounded-full bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-center text-[var(--teal)]"><TrendingUp size={20} /></div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-forensic text-[var(--teal)] text-lg">MAE: {metrics?.mae.toFixed(2)}</p>
                 <p className="font-body text-[10px] text-[var(--text-sec)]">Model-wide prediction error</p>
               </div>
             </div>
-            <div className="w-px h-10 bg-[var(--border)]"></div>
-            <div className="flex items-center gap-3">
+            <div className="hidden sm:block w-px h-10 bg-[var(--border)]"></div>
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 rounded-full bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-center text-[var(--lav)]"><CheckCircle2 size={20} /></div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-forensic text-[var(--lav)] text-lg">R2: {metrics?.r2.toFixed(2)}</p>
                 <p className="font-body text-[10px] text-[var(--text-sec)]">Variance explained in cohort evaluation</p>
               </div>
@@ -119,7 +119,7 @@ export function Station07() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <GlassCard elevation="high" className="p-6 md:p-8 h-[450px]" pedagogicalLabel="Random Forest feature importance identifies the strongest variables in the selected learner's cohort-backed score estimate.">
+          <GlassCard elevation="high" className="p-6 md:p-8 min-h-[380px] md:min-h-[450px]" pedagogicalLabel="Random Forest feature importance identifies the strongest variables in the selected learner's cohort-backed score estimate.">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-2">Predictive Feature Importance</h3>
             <p className="font-body text-[var(--text-sec)] text-xs mb-6">Variables most influential in the selected learner's score estimate within the imported cohort.</p>
 
@@ -127,7 +127,7 @@ export function Station07() {
               <BarChart data={featureData} layout="vertical" margin={{ top: 0, right: 30, left: 20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal vertical={false} stroke="var(--border)" />
                 <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-primary)', fontSize: 11, fontFamily: 'var(--font-navigation)' }} width={100} />
+                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-primary)', fontSize: 11, fontFamily: 'var(--font-navigation)' }} width={128} />
                 <RechartsTooltip cursor={{ fill: 'var(--bg-raised)' }} contentStyle={{ backgroundColor: 'var(--bg-high)', border: 'none', borderRadius: '4px' }} />
                 <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
                   {featureData.map((entry, index) => (
@@ -138,7 +138,7 @@ export function Station07() {
             </ResponsiveContainer>
           </GlassCard>
 
-          <GlassCard elevation="high" className="p-6 md:p-8 h-[450px]" pedagogicalLabel="The single point represents the selected learner's current alignment between predicted and observed achievement.">
+          <GlassCard elevation="high" className="p-6 md:p-8 min-h-[380px] md:min-h-[450px]" pedagogicalLabel="The single point represents the selected learner's current alignment between predicted and observed achievement.">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-2">Prediction vs Actual (Case Study)</h3>
             <p className="font-body text-[var(--text-sec)] text-xs mb-6">Mapping the selected student's predicted and observed result on the same 25-point scale.</p>
 

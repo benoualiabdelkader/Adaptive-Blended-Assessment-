@@ -25,18 +25,18 @@ export function MetricCard({
   className,
 }: MetricCardProps) {
   return (
-    <GlassCard accent={accent} className={twMerge(clsx('flex flex-col gap-2', className))}>
-      <div className="flex items-center gap-2 text-[var(--text-sec)] font-body text-sm font-medium">
+    <GlassCard accent={accent} className={twMerge(clsx('flex flex-col gap-2 min-w-0', className))}>
+      <div className="flex items-center gap-2 text-[var(--text-sec)] font-body text-sm font-medium min-w-0">
         {Icon && <Icon size={16} />}
-        <span>{label}</span>
+        <span className="break-words">{label}</span>
       </div>
-      <div className="flex items-baseline gap-3">
-        <span className="font-forensic text-3xl font-medium text-[var(--text-primary)]">
+      <div className="flex flex-wrap items-baseline gap-3 min-w-0">
+        <span className="font-forensic text-3xl font-medium text-[var(--text-primary)] break-words">
           {value}
         </span>
         {trend && (
           <span
-            className={clsx('text-xs font-mono font-medium', {
+            className={clsx('text-xs font-mono font-medium break-words', {
               'text-[var(--teal)]': trendDirection === 'up',
               'text-[var(--red)]': trendDirection === 'down',
               'text-[var(--gold)]': trendDirection === 'neutral',
@@ -46,7 +46,7 @@ export function MetricCard({
           </span>
         )}
       </div>
-      <div className="mt-1 pt-2 border-t border-[var(--border)] text-[var(--text-sec)] text-xs leading-relaxed">
+      <div className="mt-1 pt-2 border-t border-[var(--border)] text-[var(--text-sec)] text-xs leading-relaxed break-words">
         {interpretation}
       </div>
     </GlassCard>

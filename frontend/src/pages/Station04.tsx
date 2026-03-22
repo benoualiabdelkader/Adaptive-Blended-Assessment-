@@ -53,13 +53,13 @@ export function Station04() {
         <StationHeader id={4} title="Stylometric Fingerprint" subtitle="Layer 5: Systematic Analytics (Thresholds & Indices)" />
 
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-8">
-          <GlassCard elevation="high" className="xl:col-span-8 p-6 md:p-8 flex flex-col h-[500px]" pedagogicalLabel="This radar charts six key writing indices against the target band for a successful argumentative paragraph.">
-            <div className="flex justify-between items-start mb-6">
+          <GlassCard elevation="high" className="xl:col-span-8 p-6 md:p-8 flex flex-col min-h-[420px] md:min-h-[500px]" pedagogicalLabel="This radar charts six key writing indices against the target band for a successful argumentative paragraph.">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-3 mb-6">
               <div>
                 <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)]">Individual Competence Profile</h3>
                 <p className="font-body text-[var(--text-sec)] text-sm">Case Study: {selectedCase?.meta.studentName}</p>
               </div>
-              <div className="bg-[var(--bg-deep)] border border-[var(--border)] text-[var(--text-primary)] rounded px-4 py-1.5 font-forensic text-xs">
+              <div className="bg-[var(--bg-deep)] border border-[var(--border)] text-[var(--text-primary)] rounded px-4 py-1.5 font-forensic text-xs break-words">
                 ID: {student?.student_id}
               </div>
             </div>
@@ -135,11 +135,11 @@ function Telemetry({ label, color, value, scale, display }: { label: string; col
   const filled = Math.max(0, Math.min(scale, Math.round(value * scale)));
   return (
     <div>
-      <div className="flex justify-between items-center text-[var(--text-primary)] mb-2 gap-4">
-        <span className="shrink-0">{label}</span>
-        <span className="flex items-center gap-2">
-          <span style={{ color }} className="tracking-tighter">{'#'.repeat(filled) + '-'.repeat(scale - filled)}</span>
-          <span className="w-12 text-right">{display}</span>
+      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center text-[var(--text-primary)] mb-2">
+        <span className="break-words">{label}</span>
+        <span className="flex items-center gap-2 flex-wrap sm:justify-end">
+          <span style={{ color }} className="tracking-tighter break-all">{'#'.repeat(filled) + '-'.repeat(scale - filled)}</span>
+          <span className="w-12 text-right shrink-0">{display}</span>
         </span>
       </div>
     </div>

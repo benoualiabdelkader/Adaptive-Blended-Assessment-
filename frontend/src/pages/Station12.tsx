@@ -80,22 +80,26 @@ export function Station12() {
           <GlassCard className="p-6 mb-8 border-l-4 border-l-[var(--teal)] animate-in slide-in-from-top-4 duration-300">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)] mb-4">Draft Comparison Snapshot</h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-body text-sm leading-relaxed">
-              <div className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)]">
+              <div className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)] min-w-0">
                 <div className="flex items-center justify-between gap-3 mb-2 border-b border-[var(--border)] pb-2">
                   <span className="text-xs font-navigation text-[var(--text-muted)] block">{beforeArtifact.title}</span>
                   <StatusChip variant="gold">{beforeArtifact.status}</StatusChip>
                 </div>
-                <p className="text-[var(--text-sec)] whitespace-pre-line">{beforeArtifact.text}</p>
+                <div className="max-h-[280px] overflow-y-auto pr-1">
+                  <p className="text-[var(--text-sec)] whitespace-pre-line break-words">{beforeArtifact.text}</p>
+                </div>
                 {beforeArtifact.teacherComment && (
                   <p className="mt-3 text-xs text-[var(--gold)] leading-relaxed">Teacher focus: {beforeArtifact.teacherComment}</p>
                 )}
               </div>
-              <div className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)]">
+              <div className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)] min-w-0">
                 <div className="flex items-center justify-between gap-3 mb-2 border-b border-[var(--border)] pb-2">
                   <span className="text-xs font-navigation text-[var(--text-muted)] block">{afterArtifact.title}</span>
                   <StatusChip variant="teal">{afterArtifact.status}</StatusChip>
                 </div>
-                <p className="text-[var(--text-primary)] whitespace-pre-line">{afterArtifact.text}</p>
+                <div className="max-h-[280px] overflow-y-auto pr-1">
+                  <p className="text-[var(--text-primary)] whitespace-pre-line break-words">{afterArtifact.text}</p>
+                </div>
                 {afterArtifact.teacherComment && (
                   <p className="mt-3 text-xs text-[var(--teal)] leading-relaxed">Teacher focus: {afterArtifact.teacherComment}</p>
                 )}
@@ -113,7 +117,9 @@ export function Station12() {
               </div>
               <p className="font-navigation text-base text-[var(--text-primary)]">{beforeArtifact.title}</p>
               <p className="mt-2 font-forensic text-xs text-[var(--text-muted)]">{beforeArtifact.wordCount} words</p>
-              <p className="mt-4 font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line">{beforeArtifact.text}</p>
+              <div className="mt-4 max-h-[320px] overflow-y-auto pr-1">
+                <p className="font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line break-words">{beforeArtifact.text}</p>
+              </div>
             </GlassCard>
 
             <GlassCard className="p-5">
@@ -123,7 +129,9 @@ export function Station12() {
               </div>
               <p className="font-navigation text-base text-[var(--text-primary)]">{afterArtifact.title}</p>
               <p className="mt-2 font-forensic text-xs text-[var(--text-muted)]">{afterArtifact.wordCount} words</p>
-              <p className="mt-4 font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line">{afterArtifact.text}</p>
+              <div className="mt-4 max-h-[320px] overflow-y-auto pr-1">
+                <p className="font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line break-words">{afterArtifact.text}</p>
+              </div>
             </GlassCard>
           </div>
         )}
@@ -177,15 +185,15 @@ export function Station12() {
                     <div className="w-8 h-8 shrink-0 rounded-full border border-[var(--border)] bg-[var(--bg-deep)] flex items-center justify-center font-forensic text-[10px] text-[var(--text-primary)]">
                       {index + 1}
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="font-navigation text-sm text-[var(--text-primary)]">{step.phase}</p>
+                        <p className="font-navigation text-sm text-[var(--text-primary)] break-words">{step.phase}</p>
                         <StatusChip variant={kindTone[step.kind]}>{step.kind}</StatusChip>
                       </div>
-                      <p className="mt-2 font-body text-sm text-[var(--text-sec)] leading-relaxed">{step.detail}</p>
+                      <p className="mt-2 font-body text-sm text-[var(--text-sec)] leading-relaxed break-words">{step.detail}</p>
                     </div>
                   </div>
-                  <span className="font-forensic text-[11px] text-[var(--text-muted)]">{step.timestamp}</span>
+                  <span className="font-forensic text-[11px] text-[var(--text-muted)] break-words md:text-right">{step.timestamp}</span>
                 </div>
               </GlassCard>
             ))}
