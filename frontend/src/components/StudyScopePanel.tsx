@@ -74,10 +74,9 @@ export function StudyScopePanel({
   const selectedTask = getSelectedTask(selectedCase, selectedTaskId);
   const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
   const isSingleStudentMode = uniqueLearnerCount <= 1;
-  const availableStations = isSingleStudentMode
-    ? STUDY_STATIONS.filter((station) => !COHORT_ONLY_STATIONS.includes(station.id))
-    : STUDY_STATIONS;
-  const availableStationIds = availableStations.map((station) => station.id);
+  const availableStationIds = isSingleStudentMode
+    ? STUDY_STATIONS.filter((station) => !COHORT_ONLY_STATIONS.includes(station.id)).map((station) => station.id)
+    : STUDY_STATIONS.map((station) => station.id);
   const visibleSelectedStationIds = selectedStationIds.filter((stationId) => availableStationIds.includes(stationId));
 
   useEffect(() => {
@@ -140,7 +139,7 @@ export function StudyScopePanel({
         </div>
         {isSingleStudentMode && (
           <div className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold-dim)] px-4 py-3 font-body text-xs text-[var(--text-sec)]">
-            Single-student study mode is active. Available stations: S01-S05 and S09-S12. Cohort-only stations S06-S08 stay hidden because the current workspace contains one learner case.
+            Single-student study mode is active. Available stations: S01-S05 and S09-S12. Cohort-only stations S06-S08 are shown below as locked previews so the teacher can still see the full station architecture.
           </div>
         )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -240,23 +239,41 @@ export function StudyScopePanel({
           <p className="font-body text-xs text-[var(--text-muted)]">Choose one section or a group of sections to include in the current reading and report.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {availableStations.map((station) => {
+          {STUDY_STATIONS.map((station) => {
             const isSelected = selectedStationIds.includes(station.id);
+            const isLockedPreview = isSingleStudentMode && COHORT_ONLY_STATIONS.includes(station.id);
 
             return (
               <button
                 key={station.id}
                 type="button"
-                onClick={() => toggleStation(station.id)}
+                onClick={() => {
+                  if (isLockedPreview) {
+                    return;
+                  }
+                  toggleStation(station.id);
+                }}
+                disabled={isLockedPreview}
                 className={`rounded-full border px-3 py-2 text-left transition-colors ${
-                  isSelected
+                  isLockedPreview
+                    ? 'border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-muted)] opacity-55 cursor-not-allowed'
+                    : isSelected
                     ? 'border-[var(--teal)] bg-[var(--teal-dim)] text-[var(--teal)]'
                     : 'border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-sec)] hover:text-[var(--text-primary)]'
                 }`}
-                title={station.description}
+                title={
+                  isLockedPreview
+                    ? `${station.description} Locked in single-student mode because it requires cohort analytics or a live Bayesian service.`
+                    : station.description
+                }
               >
                 <span className="block font-navigation text-[10px] uppercase tracking-widest">{station.group}</span>
                 <span className="block font-body text-xs mt-1">S{String(station.id).padStart(2, '0')} - {station.label}</span>
+                {isLockedPreview ? (
+                  <span className="block font-navigation text-[10px] uppercase tracking-widest mt-2 text-[var(--gold)]">
+                    locked preview
+                  </span>
+                ) : null}
               </button>
             );
           })}
