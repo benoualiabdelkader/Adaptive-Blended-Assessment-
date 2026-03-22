@@ -36,7 +36,7 @@ const stations = [
 export function PipelineLayout({
   children,
   rightPanel,
-  verifiedEnabled = false,
+  verifiedEnabled = true,
   unavailableTitle = 'Verified Pipeline Unavailable',
   unavailableMessage = 'This station is hidden until the selected workbook case has verified live analytics for it.',
 }: PipelineLayoutProps) {
@@ -44,20 +44,21 @@ export function PipelineLayout({
   const cases = useStudyScopeStore((state) => state.cases);
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
+  const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
 
   const stationAvailability: Record<number, boolean> = {
-    1: false,
-    2: false,
-    3: false,
-    4: false,
-    5: false,
-    6: Boolean(selectedCase?.analytics?.clustering.available),
-    7: Boolean(selectedCase?.analytics?.prediction.available),
+    1: Boolean(selectedCase),
+    2: Boolean(selectedCase),
+    3: Boolean(selectedCase),
+    4: Boolean(selectedCase),
+    5: Boolean(selectedCase),
+    6: Boolean(selectedCase?.analytics?.clustering.available) && uniqueLearnerCount >= 4,
+    7: Boolean(selectedCase?.analytics?.prediction.available) && uniqueLearnerCount >= 5,
     8: false,
-    9: false,
-    10: false,
-    11: false,
-    12: false,
+    9: Boolean(selectedCase),
+    10: Boolean(selectedCase),
+    11: Boolean(selectedCase),
+    12: Boolean(selectedCase),
   };
 
   return (
@@ -149,7 +150,9 @@ export function PipelineLayout({
                       {unavailableMessage}
                     </p>
                     <p className="mt-3 font-body text-sm text-[var(--text-sec)] max-w-3xl leading-relaxed">
-                      Import enough verified workbook cases, then select a case with available clustering or prediction results to open the corresponding station.
+                      {uniqueLearnerCount <= 1
+                        ? 'The current workspace is in single-student study mode. Writing-task, evidence, diagnosis, feedback planning, intervention planning, and revision stations remain available, while cohort-only stations stay hidden.'
+                        : 'Import enough verified workbook cases, then select a case with available clustering or prediction results to open the corresponding station.'}
                     </p>
                   </div>
                 </div>
@@ -172,7 +175,11 @@ export function PipelineLayout({
             ) : (
               <div className="flex flex-col items-center justify-center py-20 text-center opacity-40">
                 <ActivitySquare size={48} className="mb-4 text-[var(--text-muted)]" />
-                <p className="font-body text-xs text-[var(--text-sec)]">Verified pipeline interpretation will appear here when live analytics is connected.</p>
+                <p className="font-body text-xs text-[var(--text-sec)]">
+                  {uniqueLearnerCount <= 1
+                    ? 'Teacher interpretation is available for single-case evidence stations. Cohort-only stations remain hidden.'
+                    : 'Verified pipeline interpretation will appear here when live analytics is connected.'}
+                </p>
               </div>
             )}
 

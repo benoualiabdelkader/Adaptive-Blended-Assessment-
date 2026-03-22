@@ -69,6 +69,7 @@ export function StudyScopePanel({
   const taskOptions = getTaskOptions(selectedCase);
   const selectedTaskId = getSelectedTaskId({ selectedCaseId, selectedTaskByCase });
   const selectedTask = getSelectedTask(selectedCase, selectedTaskId);
+  const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
 
   if (!selectedCase) {
     return (
@@ -115,6 +116,11 @@ export function StudyScopePanel({
           </p>
           <p className="font-body text-xs text-[var(--text-muted)]">Use one of these ready-made combinations when you want a faster setup.</p>
         </div>
+        {uniqueLearnerCount <= 1 && (
+          <div className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold-dim)] px-4 py-3 font-body text-xs text-[var(--text-sec)]">
+            Single-student study mode is active. Cohort-only stations such as clustering and prediction stay hidden because the current workspace contains one learner case.
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {QUICK_PRESETS.map((preset) => (
             <button
