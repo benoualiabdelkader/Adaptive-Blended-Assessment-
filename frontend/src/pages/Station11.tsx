@@ -85,6 +85,24 @@ export function Station11() {
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
         <StationHeader id={11} title="Intervention Planning" subtitle="Layer 10: Teacher-Led Instructional Action" />
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <GlassCard className="p-4">
+            <div className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-sec)] mb-1">Immediate Actions</div>
+            <div className="font-forensic text-lg text-[var(--red)]">{immediateActions.length}</div>
+            <div className="font-body text-xs text-[var(--text-sec)] mt-1">High-priority teacher moves that should shape the next revision or feedback cycle.</div>
+          </GlassCard>
+          <GlassCard className="p-4">
+            <div className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-sec)] mb-1">Planned Actions</div>
+            <div className="font-forensic text-lg text-[var(--gold)]">{plannedActions.length}</div>
+            <div className="font-body text-xs text-[var(--text-sec)] mt-1">Follow-up steps to schedule across the current module and the next writing tasks.</div>
+          </GlassCard>
+          <GlassCard className="p-4">
+            <div className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-sec)] mb-1">Teacher Role</div>
+            <div className="font-forensic text-lg text-[var(--lav)]">Planning</div>
+            <div className="font-body text-xs text-[var(--text-sec)] mt-1">These cards organize possible classroom moves. The final intervention choice still belongs to the teacher.</div>
+          </GlassCard>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <div className="space-y-4">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--red)] mb-4 flex items-center gap-2">
@@ -131,24 +149,26 @@ function InterventionCard({ data }: { data: Intervention }) {
   const progressPct = data.total === 0 ? 0 : (data.completed / data.total) * 100;
 
   return (
-    <GlassCard className="p-5 border-l-2" style={{ borderLeftColor: data.priority === 'Immediate' ? 'var(--red)' : 'var(--gold)' }} pedagogicalLabel="Teacher action planning summarizes workbook evidence into a follow-up plan.">
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <h4 className="font-navigation text-lg font-medium text-[var(--text-primary)] flex items-center gap-2">
-            {data.student}
-            <span className="text-[10px] uppercase font-body bg-[var(--bg-deep)] px-2 py-0.5 rounded text-[var(--text-sec)]">
+    <GlassCard className="p-4 md:p-5 border-l-2" style={{ borderLeftColor: data.priority === 'Immediate' ? 'var(--red)' : 'var(--gold)' }} pedagogicalLabel="Teacher action planning summarizes workbook evidence into a follow-up plan.">
+      <div className="flex justify-between items-start gap-3 mb-4">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-2">
+            <h4 className="font-navigation text-lg font-medium text-[var(--text-primary)] break-words">
+              {data.student}
+            </h4>
+            <span className="text-[10px] uppercase font-body bg-[var(--bg-deep)] px-2 py-1 rounded text-[var(--text-sec)] w-fit break-words">
               {data.archetype}
             </span>
-          </h4>
-          <p className="font-body text-xs text-[var(--lav)] mt-1">{data.type}</p>
+          </div>
+          <p className="font-body text-sm text-[var(--lav)] mt-2 leading-relaxed break-words">{data.type}</p>
         </div>
-        <div className={`font-navigation text-[10px] uppercase ${data.priority === 'Immediate' ? 'text-[var(--red)]' : 'text-[var(--gold)]'}`}>
+        <div className={`font-navigation text-[10px] uppercase shrink-0 ${data.priority === 'Immediate' ? 'text-[var(--red)]' : 'text-[var(--gold)]'}`}>
           {data.priority}
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs font-body text-[var(--text-sec)] mb-2">
-        <span>Timeline: {data.timeline}</span>
+      <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between text-xs font-body text-[var(--text-sec)] mb-3">
+        <span className="break-words">Timeline: {data.timeline}</span>
         <span>Milestones: {data.completed}/{data.total}</span>
       </div>
 
