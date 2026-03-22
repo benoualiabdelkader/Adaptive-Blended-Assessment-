@@ -1,8 +1,9 @@
-import { SlidersHorizontal, Upload, UserRoundSearch, BookMarked } from 'lucide-react';
+import { SlidersHorizontal, Upload, UserRoundSearch, BookMarked, Waypoints } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from './GlassCard';
 import { Button, StatusChip } from './Atoms';
 import {
+  STUDY_STATIONS,
   STUDY_VARIABLES,
   getSelectedStudyCase,
   getSelectedTask,
@@ -25,9 +26,11 @@ export function StudyScopePanel({
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
   const selectedVariableIds = useStudyScopeStore((state) => state.selectedVariableIds);
+  const selectedStationIds = useStudyScopeStore((state) => state.selectedStationIds);
   const selectCase = useStudyScopeStore((state) => state.selectCase);
   const selectTask = useStudyScopeStore((state) => state.selectTask);
   const toggleVariable = useStudyScopeStore((state) => state.toggleVariable);
+  const toggleStation = useStudyScopeStore((state) => state.toggleStation);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
   const taskOptions = getTaskOptions(selectedCase);
   const selectedTaskId = getSelectedTaskId({ selectedCaseId, selectedTaskByCase });
@@ -107,8 +110,41 @@ export function StudyScopePanel({
             <StatusChip variant={selectedCase.riskLevel === 'critical' ? 'red' : selectedCase.riskLevel === 'monitor' ? 'gold' : 'teal'}>
               {selectedCase.riskLevel}
             </StatusChip>
+            <StatusChip variant="gold">{selectedStationIds.length} stations</StatusChip>
             <StatusChip variant="lav">{selectedVariableIds.length} variables</StatusChip>
           </div>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between gap-4">
+          <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
+            <Waypoints size={13} />
+            Stations to include
+          </p>
+          <p className="font-body text-xs text-[var(--text-muted)]">Choose one station or a group of stations for the current analytical scope.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {STUDY_STATIONS.map((station) => {
+            const isSelected = selectedStationIds.includes(station.id);
+
+            return (
+              <button
+                key={station.id}
+                type="button"
+                onClick={() => toggleStation(station.id)}
+                className={`rounded-full border px-3 py-2 text-left transition-colors ${
+                  isSelected
+                    ? 'border-[var(--teal)] bg-[var(--teal-dim)] text-[var(--teal)]'
+                    : 'border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-sec)] hover:text-[var(--text-primary)]'
+                }`}
+                title={station.description}
+              >
+                <span className="block font-navigation text-[10px] uppercase tracking-widest">{station.group}</span>
+                <span className="block font-body text-xs mt-1">S{String(station.id).padStart(2, '0')} - {station.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

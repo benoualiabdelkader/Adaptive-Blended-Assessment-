@@ -6,6 +6,7 @@ import { FileText, Download, TrendingUp, AlertCircle, LayoutGrid, Filter, Printe
 import { AIEngines } from '../components/AIEngines';
 import { StudyScopePanel } from '../components/StudyScopePanel';
 import {
+  STUDY_STATIONS,
   STUDY_VARIABLES,
   getSelectedStudyCase,
   getSelectedTask,
@@ -102,6 +103,7 @@ export function Reports() {
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
   const selectedVariableIds = useStudyScopeStore((state) => state.selectedVariableIds);
+  const selectedStationIds = useStudyScopeStore((state) => state.selectedStationIds);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
   const selectedTask = getSelectedTask(
     selectedCase,
@@ -120,8 +122,16 @@ export function Reports() {
 
   const executiveSummary = useMemo(() => {
     const taskLabel = selectedTask ? selectedTask.title : 'the full workbook-backed case';
-    return `${selectedCase.meta.studentName} is currently classified as ${selectedCase.clusterName} with a ${selectedCase.riskLevel} risk status. Across ${taskLabel}, the clearest strengths are sustained engagement, repeated feedback uptake, and visible revision effort. The main remaining instructional need is ${selectedCase.meta.dominantNeed}.`;
-  }, [selectedCase, selectedTask]);
+    const stationCount = selectedStationIds.length;
+    return `${selectedCase.meta.studentName} is currently classified as ${selectedCase.clusterName} with a ${selectedCase.riskLevel} risk status. Across ${taskLabel}, this report synthesizes ${stationCount} selected station${stationCount > 1 ? 's' : ''}. The clearest strengths are sustained engagement, repeated feedback uptake, and visible revision effort. The main remaining instructional need is ${selectedCase.meta.dominantNeed}.`;
+  }, [selectedCase, selectedTask, selectedStationIds]);
+
+  const selectedStations = useMemo(
+    () => STUDY_STATIONS.filter((station) => selectedStationIds.includes(station.id)),
+    [selectedStationIds]
+  );
+
+  const includeSection = (stationIds: number[]) => stationIds.some((stationId) => selectedStationIds.includes(stationId as typeof selectedStationIds[number]));
 
   const downloadHtmlReport = () => {
     const reportNode = document.getElementById('final-report');
@@ -197,7 +207,7 @@ export function Reports() {
                     <StatusChip variant="teal" className="text-[10px]">READY</StatusChip>
                   </div>
                   <p className="font-body text-[var(--text-sec)] text-sm max-w-3xl">
-                    Student: {selectedCase.meta.studentName}. Task: {selectedTask ? selectedTask.title : 'Full case overview'}. Variables: {selectedVariableIds.length} active.
+                    Student: {selectedCase.meta.studentName}. Task: {selectedTask ? selectedTask.title : 'Full case overview'}. Stations: {selectedStationIds.length} active. Variables: {selectedVariableIds.length} active.
                   </p>
                 </div>
                 <div className="flex justify-end gap-3 w-full md:w-auto mt-4 md:mt-0 flex-wrap">
@@ -238,6 +248,13 @@ export function Reports() {
             <GlassCard className="p-6 md:p-8">
               <h3 className="font-editorial text-2xl text-[var(--text-primary)] mb-3">Executive preview</h3>
               <p className="font-body text-[var(--text-sec)] leading-7">{executiveSummary}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {selectedStations.map((station) => (
+                  <StatusChip key={station.id} variant="teal">
+                    S{String(station.id).padStart(2, '0')} {station.label}
+                  </StatusChip>
+                ))}
+              </div>
             </GlassCard>
           </div>
         )}
@@ -295,9 +312,17 @@ export function Reports() {
                     <section className="report-section">
                       <h2 className="report-section-title">Executive Summary</h2>
                       <p className="report-text">{executiveSummary}</p>
+                      <div className="report-pill-row" style={{ marginTop: '16px' }}>
+                        {selectedStations.map((station) => (
+                          <span key={station.id} className="report-pill">
+                            S{String(station.id).padStart(2, '0')} {station.label}
+                          </span>
+                        ))}
+                      </div>
                     </section>
 
-                    <section className="report-section">
+                    {includeSection([6, 7, 8, 9]) && (
+                      <section className="report-section">
                       <div className="report-stat-grid">
                         <div className="report-card">
                           <div className="report-card-label">Risk Status</div>
@@ -320,9 +345,11 @@ export function Reports() {
                           <div className="report-card-note">The report draws on timestamped Moodle interaction evidence and writing artefacts.</div>
                         </div>
                       </div>
-                    </section>
+                      </section>
+                    )}
 
-                    <section className="report-section report-dual-grid">
+                    {includeSection([1, 9, 10, 11]) && (
+                      <section className="report-section report-dual-grid">
                       <div className="report-card">
                         <div className="report-card-label">Case Profile</div>
                         <div className="report-card-note">
@@ -351,9 +378,11 @@ export function Reports() {
                           </div>
                         )}
                       </div>
-                    </section>
+                      </section>
+                    )}
 
-                    <section className="report-section">
+                    {selectedVariableIds.length > 0 && (
+                      <section className="report-section">
                       <h2 className="report-section-title">Scoped Analytical Table</h2>
                       <div className="report-table-wrap">
                         <table className="report-table">
@@ -375,13 +404,15 @@ export function Reports() {
                           </tbody>
                         </table>
                       </div>
-                    </section>
+                      </section>
+                    )}
                   </div>
                 </section>
 
                 <section className="report-page report-print-page">
                   <div className="report-body">
-                    <section className="report-section report-dual-grid">
+                    {includeSection([2, 3]) && (
+                      <section className="report-section report-dual-grid">
                       <div className="report-card">
                         <h2 className="report-section-title">Evidence Timeline</h2>
                         <div className="report-timeline">
@@ -408,9 +439,11 @@ export function Reports() {
                           ))}
                         </div>
                       </div>
-                    </section>
+                      </section>
+                    )}
 
-                    <section className="report-section report-dual-grid">
+                    {includeSection([4, 5, 12]) && (
+                      <section className="report-section report-dual-grid">
                       <div className="report-card">
                         <h2 className="report-section-title">Writing Development Evidence</h2>
                         <div className="report-table-wrap">
@@ -445,13 +478,15 @@ export function Reports() {
                           ))}
                         </ul>
                       </div>
-                    </section>
+                      </section>
+                    )}
                   </div>
                 </section>
 
                 <section className="report-page report-print-page">
                   <div className="report-body">
-                    <section className="report-section report-dual-grid">
+                    {includeSection([2, 9, 10]) && (
+                      <section className="report-section report-dual-grid">
                       <div className="report-card">
                         <h2 className="report-section-title">Help-Seeking and Threshold Evidence</h2>
                         <div className="report-card-note">
@@ -485,19 +520,22 @@ export function Reports() {
                           <li>Use the existing help-seeking tendency productively by linking each question to a concrete revision task.</li>
                         </ul>
                       </div>
-                    </section>
+                      </section>
+                    )}
 
-                    <section className="report-section">
+                    {includeSection([9, 10, 11, 12]) && (
+                      <section className="report-section">
                       <div className="report-card">
                         <h2 className="report-section-title">Concluding Judgment</h2>
                         <p className="report-text">
                           The evidence does not point to a disengaged learner. It points to a developing writer who repeatedly returns to feedback, submits revisions, and asks for clarification when she cannot progress alone. The strongest next step is not more general encouragement, but tighter support for argument expansion, evidence explanation, and more formal academic phrasing.
                         </p>
                       </div>
-                    </section>
+                      </section>
+                    )}
 
                     <footer className="report-footer">
-                      Prepared from the verified workbook case for {selectedCase.meta.studentName}. This HTML report is formatted for direct browser printing and PDF export.
+                      Prepared from the verified workbook case for {selectedCase.meta.studentName}. Selected scope: {selectedStations.map((station) => `S${String(station.id).padStart(2, '0')}`).join(', ')}. This HTML report is formatted for direct browser printing and PDF export.
                     </footer>
                   </div>
                 </section>

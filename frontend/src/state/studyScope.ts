@@ -57,6 +57,27 @@ export interface StudyTaskOption {
   wordCount: number;
 }
 
+export type StudyStationId =
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12;
+
+export interface StudyStationOption {
+  id: StudyStationId;
+  label: string;
+  group: 'input' | 'analytics' | 'decision' | 'action';
+  description: string;
+}
+
 export interface TeacherStudyCase {
   id: string;
   workbookName: string;
@@ -249,6 +270,21 @@ export const STUDY_VARIABLES: StudyVariableOption[] = [
   },
 ];
 
+export const STUDY_STATIONS: StudyStationOption[] = [
+  { id: 1, label: 'Writing Task', group: 'input', description: 'Task framing and initial writing artefacts.' },
+  { id: 2, label: 'Data Integration', group: 'input', description: 'Workbook evidence, logs, and communication traces.' },
+  { id: 3, label: 'Submission Patterns', group: 'analytics', description: 'Temporal activity, sessions, and engagement traces.' },
+  { id: 4, label: 'Stylometric Analysis', group: 'analytics', description: 'Writing quality and textual feature signals.' },
+  { id: 5, label: 'Evidence Matrix', group: 'analytics', description: 'Alignment across behavioural and writing signals.' },
+  { id: 6, label: 'Cluster Mapping', group: 'analytics', description: 'Learner profile placement and comparative position.' },
+  { id: 7, label: 'Predictive Model', group: 'analytics', description: 'Performance prediction and influential factors.' },
+  { id: 8, label: 'Bayesian Synthesis', group: 'analytics', description: 'Posterior beliefs about competence development.' },
+  { id: 9, label: 'Diagnosis Engine', group: 'decision', description: 'Rule-based diagnosis and interpreted learning need.' },
+  { id: 10, label: 'Feedback Delivery', group: 'decision', description: 'Teacher response and adaptive feedback logic.' },
+  { id: 11, label: 'Intervention Tracking', group: 'action', description: 'Instructional action planning and monitoring.' },
+  { id: 12, label: 'Revision Cycle', group: 'action', description: 'Observed uptake and revision-based growth cycle.' },
+];
+
 const DEFAULT_VARIABLE_IDS: StudyVariableId[] = [
   'assignment_views',
   'revision_frequency',
@@ -257,6 +293,8 @@ const DEFAULT_VARIABLE_IDS: StudyVariableId[] = [
   'word_count',
   'argumentation',
 ];
+
+const DEFAULT_STATION_IDS: StudyStationId[] = STUDY_STATIONS.map((station) => station.id);
 
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 
@@ -546,11 +584,14 @@ interface StudyScopeState {
   selectedCaseId: string;
   selectedTaskByCase: Record<string, string>;
   selectedVariableIds: StudyVariableId[];
+  selectedStationIds: StudyStationId[];
   importCases: (cases: TeacherStudyCase[]) => void;
   selectCase: (caseId: string) => void;
   selectTask: (taskId: string) => void;
   toggleVariable: (variableId: StudyVariableId) => void;
   setVariableSelection: (variableIds: StudyVariableId[]) => void;
+  toggleStation: (stationId: StudyStationId) => void;
+  setStationSelection: (stationIds: StudyStationId[]) => void;
 }
 
 const seedCase = buildSeedCase();
@@ -564,6 +605,7 @@ export const useStudyScopeStore = create<StudyScopeState>()(
         [seedCase.id]: 'case-overview',
       },
       selectedVariableIds: DEFAULT_VARIABLE_IDS,
+      selectedStationIds: DEFAULT_STATION_IDS,
       importCases: (incomingCases) =>
         set((state) => {
           const mergedMap = new Map(state.cases.map((studyCase) => [studyCase.id, studyCase]));
@@ -617,6 +659,24 @@ export const useStudyScopeStore = create<StudyScopeState>()(
         set({
           selectedVariableIds: variableIds.length > 0 ? variableIds : DEFAULT_VARIABLE_IDS,
         }),
+      toggleStation: (stationId) =>
+        set((state) => {
+          const exists = state.selectedStationIds.includes(stationId);
+
+          if (exists && state.selectedStationIds.length === 1) {
+            return state;
+          }
+
+          return {
+            selectedStationIds: exists
+              ? state.selectedStationIds.filter((id) => id !== stationId)
+              : [...state.selectedStationIds, stationId].sort((a, b) => a - b),
+          };
+        }),
+      setStationSelection: (stationIds) =>
+        set({
+          selectedStationIds: stationIds.length > 0 ? [...stationIds].sort((a, b) => a - b) : DEFAULT_STATION_IDS,
+        }),
     }),
     {
       name: 'writelens-study-scope',
@@ -626,6 +686,7 @@ export const useStudyScopeStore = create<StudyScopeState>()(
         selectedCaseId: state.selectedCaseId,
         selectedTaskByCase: state.selectedTaskByCase,
         selectedVariableIds: state.selectedVariableIds,
+        selectedStationIds: state.selectedStationIds,
       }),
     }
   )
