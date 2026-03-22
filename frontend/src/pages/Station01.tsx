@@ -40,8 +40,8 @@ export function Station01() {
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
         <StationHeader id={1} title="Writing Task Context" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 mb-8">
+          <div className="space-y-4 xl:col-span-5 min-w-0">
             <div className="flex items-center justify-between">
               <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Rubric Criteria</h3>
               <StatusChip variant="gold">{selectedCase?.rubric.totalMaxPoints ?? 0} POINTS MAX</StatusChip>
@@ -52,15 +52,15 @@ export function Station01() {
               return (
                 <GlassCard
                   key={criterion.criterion}
-                  className="p-4 space-y-3 border-l-2 hover:bg-[var(--bg-raised)] transition-colors"
+                  className="p-4 space-y-3 border-l-2 hover:bg-[var(--bg-raised)] transition-colors min-w-0"
                   style={{ borderLeftColor: accentColors[accent] }}
                   pedagogicalLabel={`Rubric criterion from the Moodle grading sheet. Maximum ${criterion.maxPoints} points.`}
                 >
                   <div className="flex justify-between items-center gap-4">
-                    <span className="font-navigation font-medium text-[var(--text-primary)]">{criterion.criterion}</span>
-                    <span className="font-forensic text-xs" style={{ color: accentColors[accent] }}>{criterion.maxPoints} pts</span>
+                    <span className="font-navigation font-medium text-[var(--text-primary)] break-words min-w-0">{criterion.criterion}</span>
+                    <span className="font-forensic text-xs shrink-0" style={{ color: accentColors[accent] }}>{criterion.maxPoints} pts</span>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-[11px]">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
                     <div className="rounded border border-[var(--border)] bg-[var(--bg-deep)] p-2">
                       <span className="font-navigation text-[9px] uppercase tracking-widest text-[var(--text-muted)]">0</span>
                       <p className="font-body text-[var(--text-sec)] mt-1 leading-relaxed">{criterion.fail}</p>
@@ -79,13 +79,13 @@ export function Station01() {
             })}
           </div>
 
-          <GlassCard elevation="high" accent="lav" className="p-8 flex flex-col justify-center">
+          <GlassCard elevation="high" accent="lav" className="p-6 md:p-7 flex flex-col xl:col-span-4 min-w-0 overflow-hidden">
             <div className="flex items-center gap-2 mb-6">
               <FileText className="text-[var(--lav)]" size={20} />
               <h3 className="font-navigation font-medium text-[var(--text-primary)]">Latest Verified Writing Evidence</h3>
             </div>
-            <blockquote className="border-l-4 border-[var(--border-bright)] pl-6 py-2 mb-6">
-              <p className="font-editorial text-lg text-[var(--text-primary)] leading-relaxed italic">
+            <blockquote className="border-l-4 border-[var(--border-bright)] pl-5 py-2 mb-6 max-h-[460px] overflow-y-auto pr-2">
+              <p className="font-editorial text-base md:text-lg text-[var(--text-primary)] leading-relaxed italic break-words">
                 &quot;{latestArtifact?.text ?? selectedCase?.student.sample_text ?? 'No writing sample is available in the imported workbook.'}&quot;
               </p>
             </blockquote>
@@ -95,7 +95,7 @@ export function Station01() {
             </div>
           </GlassCard>
 
-          <div className="space-y-6">
+          <div className="space-y-6 xl:col-span-3 min-w-0">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Key Metrics</h3>
 
             <GlassCard className="p-5 flex items-center justify-between group hover:border-[var(--teal)] transition-colors">
@@ -112,17 +112,17 @@ export function Station01() {
                 <Users size={16} className="text-[var(--gold)]" />
               </div>
               <div className="space-y-2">
-                <div className="flex justify-between text-[10px] font-forensic">
+                <div className="flex justify-between gap-3 text-[10px] font-forensic">
                   <span className="text-[var(--text-sec)]">First Access Delay</span>
-                  <span className="text-[var(--teal)]">{selectedCase?.student.first_access_delay_minutes ?? 0}m</span>
+                  <span className="text-[var(--teal)] shrink-0">{selectedCase?.student.first_access_delay_minutes ?? 0}m</span>
                 </div>
-                <div className="flex justify-between text-[10px] font-forensic">
+                <div className="flex justify-between gap-3 text-[10px] font-forensic">
                   <span className="text-[var(--text-sec)]">Rubric Views</span>
-                  <span className="text-[var(--teal)]">{selectedCase?.student.rubric_views ?? 0} consultations</span>
+                  <span className="text-[var(--teal)] shrink-0">{selectedCase?.student.rubric_views ?? 0} consultations</span>
                 </div>
-                <div className="flex justify-between text-[10px] font-forensic">
+                <div className="flex justify-between gap-3 text-[10px] font-forensic">
                   <span className="text-[var(--text-sec)]">Rubric Structure</span>
-                  <span className="text-[var(--teal)]">{rubricCriteria.length} criteria / {selectedCase?.rubric.totalMaxPoints ?? 0} points</span>
+                  <span className="text-[var(--teal)] shrink-0">{rubricCriteria.length} criteria / {selectedCase?.rubric.totalMaxPoints ?? 0} points</span>
                 </div>
               </div>
             </GlassCard>
@@ -136,8 +136,8 @@ export function Station01() {
                 <div className="w-12 h-12 rounded-full bg-[var(--lav-dim)] border border-[var(--lav-border)] flex items-center justify-center font-navigation text-sm text-[var(--lav)]">
                   {(selectedCase?.meta.studentName ?? 'NA').split(' ').map((part) => part[0]).slice(0, 2).join('')}
                 </div>
-                <div>
-                  <p className="font-navigation text-sm text-[var(--text-primary)]">{selectedCase?.meta.studentName}</p>
+                <div className="min-w-0">
+                  <p className="font-navigation text-sm text-[var(--text-primary)] break-words">{selectedCase?.meta.studentName}</p>
                   <p className="font-body text-xs text-[var(--text-sec)]">User ID {selectedCase?.meta.userId}</p>
                 </div>
               </div>
