@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
@@ -25,27 +26,32 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/notes" element={<Notes />} />
-        <Route path="/import" element={<Import />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/pipeline/1" element={<Station01 />} />
-        <Route path="/pipeline/2" element={<Station02 />} />
-        <Route path="/pipeline/3" element={<Station03 />} />
-        <Route path="/pipeline/4" element={<Station04 />} />
-        <Route path="/pipeline/5" element={<Station05 />} />
-        <Route path="/pipeline/6" element={<Station06 />} />
-        <Route path="/pipeline/7" element={<Station07 />} />
-        <Route path="/pipeline/8" element={<Station08 />} />
-        <Route path="/pipeline/9" element={<Station09 />} />
-        <Route path="/pipeline/10" element={<Station10 />} />
-        <Route path="/pipeline/11" element={<Station11 />} />
-        <Route path="/pipeline/12" element={<Station12 />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/students" element={<ProtectedRoute><Students /></ProtectedRoute>} />
+        <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
+        <Route path="/notes" element={<ProtectedRoute><Notes /></ProtectedRoute>} />
+        <Route path="/import" element={<ProtectedRoute><Import /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+        <Route path="/pipeline/1" element={<ProtectedRoute><Station01 /></ProtectedRoute>} />
+        <Route path="/pipeline/2" element={<ProtectedRoute><Station02 /></ProtectedRoute>} />
+        <Route path="/pipeline/3" element={<ProtectedRoute><Station03 /></ProtectedRoute>} />
+        <Route path="/pipeline/4" element={<ProtectedRoute><Station04 /></ProtectedRoute>} />
+        <Route path="/pipeline/5" element={<ProtectedRoute><Station05 /></ProtectedRoute>} />
+        <Route path="/pipeline/6" element={<ProtectedRoute><Station06 /></ProtectedRoute>} />
+        <Route path="/pipeline/7" element={<ProtectedRoute><Station07 /></ProtectedRoute>} />
+        <Route path="/pipeline/8" element={<ProtectedRoute><Station08 /></ProtectedRoute>} />
+        <Route path="/pipeline/9" element={<ProtectedRoute><Station09 /></ProtectedRoute>} />
+        <Route path="/pipeline/10" element={<ProtectedRoute><Station10 /></ProtectedRoute>} />
+        <Route path="/pipeline/11" element={<ProtectedRoute><Station11 /></ProtectedRoute>} />
+        <Route path="/pipeline/12" element={<ProtectedRoute><Station12 /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
+}
+
+function ProtectedRoute({ children }: { children: ReactNode }) {
+  const hasResearchAccess = typeof window !== 'undefined' && sessionStorage.getItem('writelens-research-access') === 'granted';
+  return hasResearchAccess ? children : <Navigate to="/login" replace />;
 }
 
 export default App;

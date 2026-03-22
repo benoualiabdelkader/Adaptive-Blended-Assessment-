@@ -23,6 +23,7 @@ export function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    sessionStorage.setItem('writelens-research-access', 'granted');
     navigate('/dashboard');
   };
 

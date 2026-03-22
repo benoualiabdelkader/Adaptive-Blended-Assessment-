@@ -186,7 +186,7 @@ export function PipelineLayout({
             <div className="mt-8 p-4 rounded-lg bg-[var(--lav-glow)] border border-[var(--lav-border)]">
               <h4 className="font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)] mb-2">Dissertation Note</h4>
               <p className="font-body text-[11px] text-[var(--text-sec)] leading-relaxed">
-                The reference pipeline has been hidden to avoid presenting unverified analytics as real case evidence.
+                The pipeline shows only verified workbook evidence and explicitly gated analytics so that teacher interpretation remains grounded in real case data.
               </p>
             </div>
           </div>

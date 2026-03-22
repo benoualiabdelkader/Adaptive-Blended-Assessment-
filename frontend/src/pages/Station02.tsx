@@ -1,32 +1,42 @@
 import type { ElementType } from 'react';
 import { ArrowRight, Database, FileSpreadsheet, GraduationCap, FileText, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
 import { StatusChip, Button } from '../components/Atoms';
-import { caseStudyMeta } from '../data/diagnostic';
+import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 
 interface SourceNodeProps {
   icon: ElementType;
   name: string;
   count: string;
   status: string;
-  isPending?: boolean;
-  pedagogicalLabel?: string;
+  pedagogicalLabel: string;
 }
 
 export function Station02() {
+  const navigate = useNavigate();
+  const cases = useStudyScopeStore((state) => state.cases);
+  const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
+  const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
+
   return (
     <PipelineLayout
+      verifiedEnabled={Boolean(selectedCase)}
+      unavailableTitle="Verified Case Unavailable"
+      unavailableMessage="Import a verified workbook case before opening the data-integration station."
       rightPanel={
-        <PedagogicalInsightBadge
-          urgency="positive"
-          label="Data Triangulation Status"
-          observation="All four workbook streams are integrated for the same learner identity: summary data, Moodle logs, writing samples, and communication evidence."
-          implication="The case is internally consistent across user ID 9263, course 379, and the full semester trace, so downstream analysis can proceed without merge conflict risk."
-          action="Proceed to pattern analysis; no unresolved joins remain."
-          citation="Siemens (2013) - Learning Analytics: The Emergence of a Discipline"
-        />
+        selectedCase ? (
+          <PedagogicalInsightBadge
+            urgency="positive"
+            label="Data Triangulation Status"
+            observation={`The active case for ${selectedCase.meta.studentName} joins workbook metadata, Moodle logs, writing samples, and communication evidence under one learner identity.`}
+            implication={`The current workbook is internally aligned across user ID ${selectedCase.meta.userId}, course ${selectedCase.meta.courseId}, and the imported activity period.`}
+            action="Proceed to the submission-pattern station once these four evidence streams look complete."
+            citation="Siemens (2013) - Learning Analytics: The Emergence of a Discipline"
+          />
+        ) : undefined
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
@@ -52,7 +62,9 @@ export function Station02() {
               <Database size={40} className="text-[var(--lav)]" />
             </div>
             <h3 className="font-editorial text-xl text-[var(--text-primary)] font-medium">Case Evidence Hub</h3>
-            <p className="font-forensic text-xs text-[var(--teal)] mt-1">1 VALIDATED STUDENT CASE</p>
+            <p className="font-forensic text-xs text-[var(--teal)] mt-1">
+              {selectedCase ? '1 VALIDATED STUDENT CASE' : 'NO VERIFIED CASE'}
+            </p>
           </div>
 
           <div className="w-full h-full flex flex-col justify-between z-10">
@@ -60,15 +72,15 @@ export function Station02() {
               <SourceNode
                 icon={FileSpreadsheet}
                 name="Workbook Metadata"
-                count={`1 file / ${caseStudyMeta.totalAssignmentsSubmitted} submissions`}
-                status="SYNCED"
-                pedagogicalLabel="Summary and assignment sheets anchor the verified learner identity, course metadata, and grading status."
+                count={selectedCase ? `1 file / ${selectedCase.meta.totalAssignmentsSubmitted} submissions` : 'No imported file'}
+                status={selectedCase ? 'SYNCED' : 'WAITING'}
+                pedagogicalLabel="Summary and assignment sheets anchor the learner identity, course metadata, and grading status."
               />
               <SourceNode
                 icon={GraduationCap}
                 name="Moodle Logs"
-                count={`${caseStudyMeta.activityLogEntries} entries`}
-                status="SYNCED"
+                count={selectedCase ? `${selectedCase.meta.activityLogEntries} entries` : 'No log entries'}
+                status={selectedCase ? 'SYNCED' : 'WAITING'}
                 pedagogicalLabel="Behavioral indicators from Moodle activity logs trace access, submission, and viewing behaviour over time."
               />
             </div>
@@ -77,22 +89,22 @@ export function Station02() {
               <SourceNode
                 icon={FileText}
                 name="Writing Samples"
-                count="13 archived texts"
-                status="SYNCED"
-                pedagogicalLabel="Drafts, revised comments, forum posts, and final paragraph evidence are available for linguistic analysis."
+                count={selectedCase ? `${selectedCase.writing.artifacts.length} archived texts` : 'No writing texts'}
+                status={selectedCase ? 'SYNCED' : 'WAITING'}
+                pedagogicalLabel="Drafts, revised comments, and final submissions are available for writing analysis."
               />
               <SourceNode
                 icon={MessageCircle}
                 name="Chat + Feedback"
-                count={`${caseStudyMeta.chatMessages} messages`}
-                status="SYNCED"
-                pedagogicalLabel="Chat messages and exported instructor feedback capture help-seeking and response latency."
+                count={selectedCase ? `${selectedCase.meta.chatMessages} messages` : 'No messages'}
+                status={selectedCase ? 'SYNCED' : 'WAITING'}
+                pedagogicalLabel="Teacher-student exchanges and instructor comments capture help-seeking and feedback timing."
               />
             </div>
           </div>
         </GlassCard>
 
-        <Button className="w-full py-6 text-lg justify-center shadow-[0_0_30px_var(--lav-glow)] mb-8" onClick={() => { window.location.href = '/pipeline/3'; }}>
+        <Button className="w-full py-6 text-lg justify-center shadow-[0_0_30px_var(--lav-glow)] mb-8" onClick={() => navigate('/pipeline/3')}>
           Proceed to Analytics <ArrowRight className="ml-2" />
         </Button>
 
@@ -102,7 +114,9 @@ export function Station02() {
   );
 }
 
-function SourceNode({ icon: Icon, name, count, status, isPending = false, pedagogicalLabel }: SourceNodeProps) {
+function SourceNode({ icon: Icon, name, count, status, pedagogicalLabel }: SourceNodeProps) {
+  const isPending = status !== 'SYNCED';
+
   return (
     <div className={`flex flex-col items-center p-4 bg-[var(--bg-card)] border ${isPending ? 'border-[var(--gold-dim)]' : 'border-[var(--border)]'} rounded-xl w-48 text-center group cursor-help relative`}>
       <Icon size={24} className={`mb-3 ${isPending ? 'text-[var(--gold)]' : 'text-[var(--text-primary)]'}`} />
@@ -111,9 +125,9 @@ function SourceNode({ icon: Icon, name, count, status, isPending = false, pedago
       <StatusChip variant={isPending ? 'gold' : 'teal'}>{status}</StatusChip>
 
       <div className="absolute top-full mt-2 w-48 p-2 bg-[var(--bg-high)] border border-[var(--border)] rounded text-xs font-body text-[var(--text-sec)] opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none">
-        {pedagogicalLabel && <div className="mb-2 text-[var(--lav)] italic border-b border-[var(--border)] pb-2">{pedagogicalLabel}</div>}
-        <div>Deduplication: {isPending ? 'Pending' : '100%'}</div>
-        <div>Last sync: verified workbook import</div>
+        <div className="mb-2 text-[var(--lav)] italic border-b border-[var(--border)] pb-2">{pedagogicalLabel}</div>
+        <div>Deduplication: {isPending ? 'Waiting for import' : '100%'}</div>
+        <div>Last sync: {isPending ? 'No verified workbook imported yet' : 'verified workbook import'}</div>
       </div>
     </div>
   );

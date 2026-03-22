@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Activity,
   BarChart3,
@@ -23,6 +24,7 @@ import {
 } from '../state/studyScope';
 
 export function Students() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'behaviour' | 'writing' | 'communication'>('behaviour');
   const cases = useStudyScopeStore((state) => state.cases);
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
@@ -61,7 +63,7 @@ export function Students() {
               No verified workbook is loaded. Import workbook data before opening the student registry.
             </p>
             <div className="mt-6">
-              <Button onClick={() => window.location.assign('/import')}>
+              <Button onClick={() => navigate('/import')}>
                 <ArrowRight size={16} /> Import workbook
               </Button>
             </div>

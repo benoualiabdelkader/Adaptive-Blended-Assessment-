@@ -1,41 +1,11 @@
-import { useState } from 'react';
-import { XAxis, YAxis, CartesianGrid, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { useMemo, useState } from 'react';
 import { Columns, Info } from 'lucide-react';
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
 import { StatusChip } from '../components/Atoms';
-import { paragraphComparison, primaryStudent, getLongitudinalData, revisionSequence, writingArtifacts } from '../data/diagnostic';
+import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 
-interface TrendDatum {
-  draft: string;
-  cohesion: number;
-  lexical: number;
-  grammar: number;
-  arg: number;
-}
-
-interface MiniTrendChartProps {
-  title: string;
-  dataKey: keyof Omit<TrendDatum, 'draft'>;
-  data: TrendDatum[];
-  trend: string;
-  color: string;
-}
-
-const student = primaryStudent;
-const longitudinalData: TrendDatum[] = student
-  ? getLongitudinalData(student).map((point) => ({
-      draft: `Draft ${point.cycle}`,
-      cohesion: point.cohesion,
-      lexical: point.ttr * 5,
-      grammar: point.score / 20,
-      arg: point.score / 25,
-    }))
-  : [];
-
-const beforeArtifact = writingArtifacts.find((artifact) => artifact.id === paragraphComparison.beforeId) ?? writingArtifacts[0];
-const afterArtifact = writingArtifacts.find((artifact) => artifact.id === paragraphComparison.afterId) ?? writingArtifacts[writingArtifacts.length - 1];
 const kindTone = {
   draft: 'gold',
   feedback: 'red',
@@ -46,22 +16,40 @@ const kindTone = {
 
 export function Station12() {
   const [showDiff, setShowDiff] = useState(false);
+  const cases = useStudyScopeStore((state) => state.cases);
+  const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
+  const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
 
-  if (!student) {
-    return null;
-  }
+  const beforeArtifact = useMemo(() => {
+    if (!selectedCase) return null;
+    return selectedCase.writing.artifacts.find((artifact) => artifact.id === selectedCase.writing.comparison.beforeId)
+      ?? selectedCase.writing.artifacts[0]
+      ?? null;
+  }, [selectedCase]);
+
+  const afterArtifact = useMemo(() => {
+    if (!selectedCase) return null;
+    return selectedCase.writing.artifacts.find((artifact) => artifact.id === selectedCase.writing.comparison.afterId)
+      ?? selectedCase.writing.artifacts[selectedCase.writing.artifacts.length - 1]
+      ?? null;
+  }, [selectedCase]);
 
   return (
     <PipelineLayout
+      verifiedEnabled={Boolean(selectedCase && beforeArtifact && afterArtifact)}
+      unavailableTitle="Verified Revision Evidence Unavailable"
+      unavailableMessage="Import a verified workbook case with at least two writing artifacts before opening the revision-cycle station."
       rightPanel={
-        <PedagogicalInsightBadge
-          urgency="positive"
-          label="Teacher Review Note"
-          observation="The revision sequence shows clearer improvement in cohesion, evidence use, and persistence across the writing cycle."
-          implication="The clearest gains are visible in the compared texts and the revision timeline, while vocabulary precision and argument control still need deliberate support."
-          action="Use this revision evidence to plan the next teacher response around stronger claim-evidence explanation and tighter academic phrasing."
-          citation="Zimmerman (2002) - Self-Regulated Learning & Writing Development"
-        />
+        selectedCase ? (
+          <PedagogicalInsightBadge
+            urgency="positive"
+            label="Teacher Review Note"
+            observation={`The revision sequence for ${selectedCase.meta.studentName} shows visible change across drafts, feedback, and re-entry into the task.`}
+            implication="The clearest gains are visible in the compared texts and the revision timeline, while vocabulary precision and argument control still need deliberate support."
+            action="Use this revision evidence to plan the next teacher response around stronger claim-evidence explanation and tighter academic phrasing."
+            citation="Zimmerman (2002) - Self-Regulated Learning & Writing Development"
+          />
+        ) : undefined
       }
     >
       <div className="max-w-7xl mx-auto p-6 md:p-8 pb-32">
@@ -70,12 +58,12 @@ export function Station12() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
             <div className="flex items-center gap-4 mb-2">
-              <h2 className="font-navigation text-xl text-[var(--text-primary)]">Longitudinal Trace: {student.name}</h2>
+              <h2 className="font-navigation text-xl text-[var(--text-primary)]">Longitudinal Trace: {selectedCase?.meta.studentName}</h2>
             </div>
             <div className="flex items-center gap-3 font-forensic text-sm text-[var(--text-sec)]">
-              <span>Paragraph 1: {beforeArtifact.wordCount} words</span>
+              <span>{beforeArtifact?.title ?? 'Earlier text'}: {beforeArtifact?.wordCount ?? 0} words</span>
               <span className="text-[var(--border-bright)]">to</span>
-              <span>Paragraph 2 Final: {afterArtifact.wordCount} words</span>
+              <span>{afterArtifact?.title ?? 'Later text'}: {afterArtifact?.wordCount ?? 0} words</span>
             </div>
           </div>
           <div className="flex gap-3">
@@ -88,11 +76,9 @@ export function Station12() {
           </div>
         </div>
 
-        {showDiff && (
+        {showDiff && beforeArtifact && afterArtifact && (
           <GlassCard className="p-6 mb-8 border-l-4 border-l-[var(--teal)] animate-in slide-in-from-top-4 duration-300">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Draft Comparison Snapshot</h3>
-            </div>
+            <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)] mb-4">Draft Comparison Snapshot</h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-body text-sm leading-relaxed">
               <div className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)]">
                 <div className="flex items-center justify-between gap-3 mb-2 border-b border-[var(--border)] pb-2">
@@ -101,9 +87,7 @@ export function Station12() {
                 </div>
                 <p className="text-[var(--text-sec)] whitespace-pre-line">{beforeArtifact.text}</p>
                 {beforeArtifact.teacherComment && (
-                  <p className="mt-3 text-xs text-[var(--gold)] leading-relaxed">
-                    Teacher focus: {beforeArtifact.teacherComment}
-                  </p>
+                  <p className="mt-3 text-xs text-[var(--gold)] leading-relaxed">Teacher focus: {beforeArtifact.teacherComment}</p>
                 )}
               </div>
               <div className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)]">
@@ -113,44 +97,44 @@ export function Station12() {
                 </div>
                 <p className="text-[var(--text-primary)] whitespace-pre-line">{afterArtifact.text}</p>
                 {afterArtifact.teacherComment && (
-                  <p className="mt-3 text-xs text-[var(--teal)] leading-relaxed">
-                    Teacher focus: {afterArtifact.teacherComment}
-                  </p>
+                  <p className="mt-3 text-xs text-[var(--teal)] leading-relaxed">Teacher focus: {afterArtifact.teacherComment}</p>
                 )}
               </div>
             </div>
           </GlassCard>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <GlassCard className="p-5">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Paragraph Baseline</h3>
-              <StatusChip variant="gold">{beforeArtifact.date}</StatusChip>
-            </div>
-            <p className="font-navigation text-base text-[var(--text-primary)]">{beforeArtifact.title}</p>
-            <p className="mt-2 font-forensic text-xs text-[var(--text-muted)]">{beforeArtifact.wordCount} words</p>
-            <p className="mt-4 font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line">{beforeArtifact.text}</p>
-          </GlassCard>
+        {beforeArtifact && afterArtifact && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <GlassCard className="p-5">
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Earlier Evidence</h3>
+                <StatusChip variant="gold">{beforeArtifact.date}</StatusChip>
+              </div>
+              <p className="font-navigation text-base text-[var(--text-primary)]">{beforeArtifact.title}</p>
+              <p className="mt-2 font-forensic text-xs text-[var(--text-muted)]">{beforeArtifact.wordCount} words</p>
+              <p className="mt-4 font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line">{beforeArtifact.text}</p>
+            </GlassCard>
 
-          <GlassCard className="p-5">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Paragraph After Revision</h3>
-              <StatusChip variant="teal">{afterArtifact.date}</StatusChip>
-            </div>
-            <p className="font-navigation text-base text-[var(--text-primary)]">{afterArtifact.title}</p>
-            <p className="mt-2 font-forensic text-xs text-[var(--text-muted)]">{afterArtifact.wordCount} words</p>
-            <p className="mt-4 font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line">{afterArtifact.text}</p>
-          </GlassCard>
-        </div>
+            <GlassCard className="p-5">
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Later Evidence</h3>
+                <StatusChip variant="teal">{afterArtifact.date}</StatusChip>
+              </div>
+              <p className="font-navigation text-base text-[var(--text-primary)]">{afterArtifact.title}</p>
+              <p className="mt-2 font-forensic text-xs text-[var(--text-muted)]">{afterArtifact.wordCount} words</p>
+              <p className="mt-4 font-body text-sm text-[var(--text-sec)] leading-relaxed whitespace-pre-line">{afterArtifact.text}</p>
+            </GlassCard>
+          </div>
+        )}
 
         <div className="mb-8">
           <div className="flex items-center justify-between gap-4 mb-4">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Analytical Comparison</h3>
-            <span className="font-forensic text-xs text-[var(--lav)]">Paragraph 1 {'->'} Paragraph 2 final</span>
+            <span className="font-forensic text-xs text-[var(--lav)]">Workbook-derived before/after signals</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4 mb-4">
-            {paragraphComparison.metrics.map((metric) => (
+            {selectedCase?.writing.comparison.metrics.map((metric) => (
               <GlassCard key={metric.label} className="p-4">
                 <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{metric.label}</p>
                 <div className="flex items-end justify-between gap-3 mt-3">
@@ -173,29 +157,20 @@ export function Station12() {
           <GlassCard className="p-5">
             <h4 className="font-navigation text-xs uppercase tracking-widest text-[var(--text-muted)] mb-3">Interpretive Notes</h4>
             <div className="space-y-2">
-              {paragraphComparison.commentary.map((note) => (
-                <p key={note} className="font-body text-sm text-[var(--text-sec)] leading-relaxed">
-                  {note}
-                </p>
+              {selectedCase?.writing.comparison.commentary.map((note) => (
+                <p key={note} className="font-body text-sm text-[var(--text-sec)] leading-relaxed">{note}</p>
               ))}
             </div>
           </GlassCard>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <MiniTrendChart title="Cohesion" dataKey="cohesion" data={longitudinalData} trend="+ Improving" color="var(--teal)" />
-          <MiniTrendChart title="Lexical Variety" dataKey="lexical" data={longitudinalData} trend="+ Improving" color="var(--lav)" />
-          <MiniTrendChart title="Grammar Accuracy" dataKey="grammar" data={longitudinalData} trend="+ Improving" color="var(--red)" />
-          <MiniTrendChart title="Argument Structure" dataKey="arg" data={longitudinalData} trend="+ Improving" color="var(--gold)" />
-        </div>
-
         <div className="space-y-4 mb-8">
           <div className="flex items-center justify-between gap-4">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Revision Sequence</h3>
-            <span className="font-forensic text-xs text-[var(--gold)]">{revisionSequence.length} tracked steps</span>
+            <span className="font-forensic text-xs text-[var(--gold)]">{selectedCase?.writing.sequence.length ?? 0} tracked steps</span>
           </div>
           <div className="space-y-3">
-            {revisionSequence.map((step, index) => (
+            {selectedCase?.writing.sequence.map((step, index) => (
               <GlassCard key={`${step.timestamp}-${step.phase}`} className="p-4">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
                   <div className="flex gap-3">
@@ -220,32 +195,5 @@ export function Station12() {
         <StationFooter prevPath="/pipeline/11" nextPath="/dashboard" />
       </div>
     </PipelineLayout>
-  );
-}
-
-function MiniTrendChart({ title, dataKey, data, trend, color }: MiniTrendChartProps) {
-  return (
-    <GlassCard className="p-5 h-[240px] flex flex-col">
-      <div className="flex justify-between items-start mb-4">
-        <h4 className="font-navigation text-base font-medium text-[var(--text-primary)]">{title}</h4>
-        <span className="font-navigation text-xs text-[var(--teal)] bg-[var(--teal-dim)] px-2 py-0.5 rounded">{trend}</span>
-      </div>
-      <div className="flex-1 w-full relative">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={180}>
-          <AreaChart data={data} margin={{ top: 10, right: 35, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-            <XAxis dataKey="draft" tick={{ fill: 'var(--text-sec)', fontSize: 10, fontFamily: 'var(--font-navigation)' }} axisLine={false} tickLine={false} padding={{ right: 20 }} />
-            <YAxis domain={[0, 5]} tick={{ fill: 'var(--text-sec)', fontSize: 10, fontFamily: 'var(--font-forensic)' }} axisLine={false} tickLine={false} />
-            <defs>
-              <linearGradient id={`color-${dataKey}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={color} stopOpacity={0.2} />
-                <stop offset="95%" stopColor={color} stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <Area type="monotone" dataKey={dataKey} stroke={color} strokeWidth={2} fillOpacity={1} fill={`url(#color-${dataKey})`} />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-    </GlassCard>
   );
 }

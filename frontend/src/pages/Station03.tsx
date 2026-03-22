@@ -1,36 +1,78 @@
+import { useMemo } from 'react';
 import { Activity, AlertCircle, BarChart3, Users } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
 import { MetricCard } from '../components/MetricCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
-import { activitySnapshot, caseStudyMeta, primaryStudent, getStudentClusterName, getStudentRiskLevel } from '../data/diagnostic';
+import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 
-const timelineData = [
-  { date: '27 Jan', access: 1.0, feedback: 0.0, revision: 0.0 },
-  { date: '03 Feb', access: 2.0, feedback: 0.0, revision: 0.5 },
-  { date: '10 Feb', access: 2.8, feedback: 1.4, revision: 1.2 },
-  { date: '12 Feb', access: 3.2, feedback: 2.0, revision: 1.4 },
-  { date: '16 Feb', access: 3.8, feedback: 3.0, revision: 2.4 },
-  { date: '24 Feb', access: 4.4, feedback: 4.0, revision: 3.2 },
-  { date: '07 Mar', access: 4.7, feedback: 4.5, revision: 4.2 },
-  { date: '14 Mar', access: 5.0, feedback: 5.0, revision: 5.0 },
-];
+function shortDate(timestamp: string) {
+  const parsed = Date.parse(timestamp);
+  if (Number.isNaN(parsed)) {
+    return timestamp.slice(0, 6);
+  }
+  return new Date(parsed).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).replace(' ', ' ');
+}
 
-const heatmapIntensities = [
-  0.05, 0.08, 0.15, 0.12, 0.18, 0.22, 0.1, 0.14, 0.18, 0.26,
-  0.3, 0.34, 0.42, 0.61, 0.78, 0.32, 0.2, 0.12, 0.18, 0.36,
-  0.44, 0.58, 0.7, 0.86, 0.46, 0.24, 0.18, 0.34, 0.5, 0.74,
-];
+function buildTimeline(trace: NonNullable<ReturnType<typeof getSelectedStudyCase>>['activity']['trace']) {
+  const daily = new Map<string, { access: number; feedback: number; revision: number }>();
+
+  trace.forEach((entry) => {
+    const label = shortDate(entry.timestamp);
+    const current = daily.get(label) ?? { access: 0, feedback: 0, revision: 0 };
+    const text = `${entry.event} ${entry.context} ${entry.detail}`.toLowerCase();
+
+    if (/viewed|opened|reopened|access|submission/.test(text)) current.access += 1;
+    if (/feedback|graded/.test(text)) current.feedback += 1;
+    if (/revision|comment|uploaded|submitted/.test(text)) current.revision += 1;
+
+    daily.set(label, current);
+  });
+
+  let access = 0;
+  let feedback = 0;
+  let revision = 0;
+
+  return Array.from(daily.entries()).slice(-8).map(([date, counts]) => {
+    access += counts.access;
+    feedback += counts.feedback;
+    revision += counts.revision;
+    return { date, access, feedback, revision };
+  });
+}
+
+function buildHeatmap(trace: NonNullable<ReturnType<typeof getSelectedStudyCase>>['activity']['trace']) {
+  const datedCounts = new Map<string, number>();
+
+  trace.forEach((entry) => {
+    const parsed = Date.parse(entry.timestamp);
+    if (Number.isNaN(parsed)) {
+      return;
+    }
+    const key = new Date(parsed).toISOString().slice(0, 10);
+    datedCounts.set(key, (datedCounts.get(key) ?? 0) + 1);
+  });
+
+  const lastDate = trace.length > 0 ? Date.parse(trace[trace.length - 1].timestamp) : Date.now();
+  const days = Array.from({ length: 30 }, (_, index) => {
+    const day = new Date(lastDate - (29 - index) * 86400000).toISOString().slice(0, 10);
+    return datedCounts.get(day) ?? 0;
+  });
+  const max = Math.max(1, ...days);
+  return days.map((count) => count / max);
+}
 
 export function Station03() {
-  if (!primaryStudent) {
-    return null;
-  }
+  const cases = useStudyScopeStore((state) => state.cases);
+  const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
+  const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
 
-  const student = primaryStudent;
-  const clusterName = getStudentClusterName(student);
-  const risk = getStudentRiskLevel(student).toUpperCase();
+  const timelineData = useMemo(() => (selectedCase ? buildTimeline(selectedCase.activity.trace) : []), [selectedCase]);
+  const heatmapIntensities = useMemo(() => (selectedCase ? buildHeatmap(selectedCase.activity.trace) : []), [selectedCase]);
+  const maxTimelineValue = Math.max(1, ...timelineData.flatMap((point) => [point.access, point.feedback, point.revision]));
+  const clusterName = selectedCase?.clusterName ?? 'Unclassified';
+  const risk = (selectedCase?.riskLevel ?? 'monitor').toUpperCase();
   const accentColors = {
     lav: 'var(--lav)',
     teal: 'var(--teal)',
@@ -40,15 +82,20 @@ export function Station03() {
 
   return (
     <PipelineLayout
+      verifiedEnabled={Boolean(selectedCase)}
+      unavailableTitle="Verified Submission Patterns Unavailable"
+      unavailableMessage="Import a verified workbook case before opening the submission-pattern station."
       rightPanel={
-        <PedagogicalInsightBadge
-          urgency="monitor"
-          label="Pattern Analysis"
-          observation="Activity intensifies immediately after instructor feedback windows, especially around 10 February and 7 March."
-          implication="This case responds to feedback in short cycles. The pattern points to productive revision behaviour rather than last-minute panic."
-          action="Preserve the short feedback cadence and attach one structural target to each revision round."
-          citation="Hyland (2005) - Metadiscourse: Exploring Interaction in Writing"
-        />
+        selectedCase ? (
+          <PedagogicalInsightBadge
+            urgency="monitor"
+            label="Pattern Analysis"
+            observation={`Activity in ${selectedCase.meta.studentName}'s workbook intensifies around feedback and revision events across the imported period.`}
+            implication="This case responds to feedback in short cycles. The pattern points to productive revision behaviour rather than last-minute panic."
+            action="Preserve the short feedback cadence and attach one structural target to each revision round."
+            citation="Hyland (2005) - Metadiscourse: Exploring Interaction in Writing"
+          />
+        ) : undefined
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
@@ -58,33 +105,33 @@ export function Station03() {
           <MetricCard
             value="1 Case"
             label="Case Study Focus"
-            interpretation="Analysis is restricted to Lahmarabbou Asmaa and her verified workbook trace."
+            interpretation={`Analysis is restricted to ${selectedCase?.meta.studentName ?? 'the active learner'} and the verified workbook trace.`}
             accent="lav"
             icon={Users}
           />
           <MetricCard
-            value={activitySnapshot.estimatedActiveMinutes}
+            value={selectedCase?.activity.estimatedActiveMinutes ?? 0}
             label="Estimated Active Time (min)"
             interpretation="Estimated from gaps between logged Moodle events rather than a single platform timer."
             accent="teal"
             icon={Activity}
-            trend={`${activitySnapshot.activeSessions} sessions`}
+            trend={`${selectedCase?.activity.activeSessions ?? 0} sessions`}
             trendDirection="up"
           />
           <MetricCard
-            value={caseStudyMeta.introGrade}
+            value={selectedCase?.meta.introGrade ?? 'N/A'}
             label="Intro Draft Score"
-            interpretation="Only one task is formally graded in the workbook, so it remains the main anchor for current performance."
+            interpretation="Only the graded task shown in the workbook is used as the current scoring anchor here."
             accent="gold"
             icon={BarChart3}
           />
           <MetricCard
             value={risk}
-            label="Diagnostic Risk"
-            interpretation={`Current cluster is ${clusterName}; risk stays monitored because engagement is stronger than argument quality.`}
+            label="Current Review Priority"
+            interpretation={`Current profile is ${clusterName}; review priority remains tied to workbook evidence rather than a standalone engine judgment.`}
             accent="red"
             icon={AlertCircle}
-            trend="B2 and D1"
+            trend={selectedCase?.student.triggered_rule_ids || 'No matched rules'}
             trendDirection="neutral"
           />
         </div>
@@ -109,15 +156,12 @@ export function Station03() {
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
               <XAxis dataKey="date" tickLine={false} axisLine={false} stroke="var(--text-sec)" fontSize={12} fontFamily="var(--font-forensic)" />
-              <YAxis tickLine={false} axisLine={false} stroke="var(--text-sec)" fontSize={12} fontFamily="var(--font-forensic)" domain={[0, 5]} />
+              <YAxis tickLine={false} axisLine={false} stroke="var(--text-sec)" fontSize={12} fontFamily="var(--font-forensic)" domain={[0, maxTimelineValue]} />
               <Tooltip
                 contentStyle={{ backgroundColor: 'var(--bg-high)', border: '1px solid var(--border)', borderRadius: '8px', fontFamily: 'var(--font-body)' }}
                 itemStyle={{ color: 'var(--text-primary)' }}
                 labelStyle={{ fontFamily: 'var(--font-navigation)', color: 'var(--text-sec)', marginBottom: '8px' }}
               />
-              <ReferenceLine x="10 Feb" stroke="var(--lav)" strokeDasharray="3 3" />
-              <ReferenceLine x="24 Feb" stroke="var(--teal)" strokeDasharray="3 3" />
-              <ReferenceLine x="14 Mar" stroke="var(--gold)" strokeDasharray="3 3" />
               <Area type="monotone" dataKey="access" stroke="var(--lav)" fillOpacity={1} fill="url(#colorD1)" name="Platform Access" />
               <Area type="monotone" dataKey="feedback" stroke="var(--teal)" fillOpacity={1} fill="url(#colorD2)" name="Feedback Loop" />
               <Area type="monotone" dataKey="revision" stroke="var(--gold)" fillOpacity={1} fill="url(#colorD3)" name="Revision Depth" />
@@ -130,7 +174,6 @@ export function Station03() {
           <GlassCard className="flex gap-1 overflow-x-auto pb-2 border-b border-[var(--border)] snap-x p-2" pedagogicalLabel="Intensity of engagement traces cognitive investment and effort persistence over the closing month of the course.">
             {heatmapIntensities.map((intensity, index) => {
               const colorClass = intensity > 0.8 ? 'bg-[var(--teal)]' : intensity > 0.5 ? 'bg-[var(--lav-dim)]' : intensity > 0.2 ? 'bg-[var(--bg-high)]' : 'bg-[var(--bg-raised)]';
-
               return (
                 <div
                   key={index}
@@ -146,10 +189,10 @@ export function Station03() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Clicks and Participation</h3>
-              <span className="font-forensic text-xs text-[var(--lav)]">{activitySnapshot.totalEvents} total logged events</span>
+              <span className="font-forensic text-xs text-[var(--lav)]">{selectedCase?.activity.totalEvents ?? 0} total logged events</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {activitySnapshot.clickSignals.map((signal) => (
+              {selectedCase?.activity.clickSignals.map((signal) => (
                 <GlassCard
                   key={signal.label}
                   className="p-4 border-l-2"
@@ -169,9 +212,9 @@ export function Station03() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Estimated Sessions</h3>
-              <span className="font-forensic text-xs text-[var(--gold)]">{activitySnapshot.sessionGapRule}</span>
+              <span className="font-forensic text-xs text-[var(--gold)]">{selectedCase?.activity.sessionGapRule ?? 'No session rule available'}</span>
             </div>
-            {activitySnapshot.highlightedSessions.map((session) => (
+            {selectedCase?.activity.highlightedSessions.map((session) => (
               <GlassCard key={`${session.start}-${session.end}`} className="p-4">
                 <div className="flex items-center justify-between gap-4">
                   <div>
@@ -192,10 +235,10 @@ export function Station03() {
         <div className="space-y-4 mb-8">
           <div className="flex items-center justify-between">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)]">Chronological Trace</h3>
-            <span className="font-forensic text-xs text-[var(--teal)]">Open {'->'} feedback {'->'} revision {'->'} final submission</span>
+            <span className="font-forensic text-xs text-[var(--teal)]">Open → feedback → revision → final submission</span>
           </div>
           <div className="space-y-3">
-            {activitySnapshot.trace.map((entry, index) => (
+            {selectedCase?.activity.trace.map((entry, index) => (
               <GlassCard key={`${entry.timestamp}-${entry.event}`} className="p-4">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
                   <div className="flex gap-3">
@@ -203,7 +246,7 @@ export function Station03() {
                       {index + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-navigation text-sm text-[var(--text-primary)] truncate-none break-words">{entry.event}</p>
+                      <p className="font-navigation text-sm text-[var(--text-primary)] break-words">{entry.event}</p>
                       <p className="font-body text-xs text-[var(--text-sec)] mt-1 leading-relaxed break-words">{entry.context}</p>
                       <p className="font-body text-xs text-[var(--text-muted)] mt-2 leading-relaxed break-words">{entry.detail}</p>
                     </div>

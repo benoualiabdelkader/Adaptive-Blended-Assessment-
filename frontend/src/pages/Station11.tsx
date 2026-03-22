@@ -2,7 +2,7 @@ import { Activity, ShieldAlert } from 'lucide-react';
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
-import { primaryStudent, getStudentClusterName } from '../data/diagnostic';
+import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 
 interface Intervention {
   student: string;
@@ -14,41 +14,72 @@ interface Intervention {
   total: number;
 }
 
-interface InterventionCardProps {
-  data: Intervention;
+function buildInterventions(studyCase: NonNullable<ReturnType<typeof getSelectedStudyCase>>): Intervention[] {
+  const interventions: Intervention[] = [];
+
+  if (studyCase.student.argumentation < 3.5) {
+    interventions.push({
+      student: studyCase.meta.studentName,
+      archetype: studyCase.clusterName,
+      priority: 'Immediate',
+      type: 'Model claim-evidence-explanation with one guided revision example',
+      timeline: 'Next feedback cycle',
+      completed: 0,
+      total: 2,
+    });
+  }
+
+  if (studyCase.student.cohesion < 3.6 || studyCase.student.grammar_accuracy < 3.4) {
+    interventions.push({
+      student: studyCase.meta.studentName,
+      archetype: studyCase.clusterName,
+      priority: 'Planned',
+      type: 'Use a short scaffold for transitions, sentence control, and academic phrasing',
+      timeline: 'Next 1-2 writing tasks',
+      completed: Math.min(1, studyCase.student.revision_frequency),
+      total: 2,
+    });
+  }
+
+  if (studyCase.student.help_seeking_messages >= 4) {
+    interventions.push({
+      student: studyCase.meta.studentName,
+      archetype: studyCase.clusterName,
+      priority: 'Planned',
+      type: 'Keep a brief clarification channel open to support adaptive help-seeking',
+      timeline: 'Current module',
+      completed: 1,
+      total: 2,
+    });
+  }
+
+  return interventions;
 }
 
-const student = primaryStudent;
-
-const interventions: Intervention[] = student
-  ? [
-      {
-        student: student.name,
-        archetype: getStudentClusterName(student),
-        priority: 'Planned',
-        type: 'Directed scaffolding for cohesion and argumentation',
-        timeline: 'Weeks 4-10',
-        completed: 2,
-        total: 3,
-      },
-    ]
-  : [];
-
 export function Station11() {
+  const cases = useStudyScopeStore((state) => state.cases);
+  const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
+  const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
+  const interventions = selectedCase ? buildInterventions(selectedCase) : [];
   const immediateActions = interventions.filter((intervention) => intervention.priority === 'Immediate');
   const plannedActions = interventions.filter((intervention) => intervention.priority === 'Planned');
 
   return (
     <PipelineLayout
+      verifiedEnabled={Boolean(selectedCase)}
+      unavailableTitle="Verified Intervention Planning Unavailable"
+      unavailableMessage="Import a verified workbook case before opening the intervention-planning station."
       rightPanel={
-        <PedagogicalInsightBadge
-          urgency="monitor"
-          label="Teacher Action Planning"
-          observation="The workbook evidence points to a learner who is engaged, responsive to feedback, and still in need of directed support for cohesion and argumentation."
-          implication="This station organizes possible instructional actions for the teacher. It does not calculate a live retention probability or assign a final intervention tier."
-          action="Use the planning cards below to decide the next classroom action, follow-up point, and review window."
-          citation="Tinto (1987) - Leaving College & Student Mortality"
-        />
+        selectedCase ? (
+          <PedagogicalInsightBadge
+            urgency="monitor"
+            label="Teacher Action Planning"
+            observation={`The workbook evidence for ${selectedCase.meta.studentName} points to an engaged learner who still needs directed support in writing quality.`}
+            implication="This station organizes possible instructional actions for the teacher. It does not calculate a live retention probability or assign a final intervention tier."
+            action="Use the planning cards below to decide the next classroom action, follow-up point, and review window."
+            citation="Tinto (1987) - Leaving College & Student Mortality"
+          />
+        ) : undefined
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
@@ -60,8 +91,8 @@ export function Station11() {
               <ShieldAlert size={16} /> Immediate Attention
             </h3>
             {immediateActions.length > 0 ? (
-              immediateActions.map((intervention, index) => (
-                <InterventionCard key={index} data={intervention} />
+              immediateActions.map((intervention) => (
+                <InterventionCard key={`${intervention.priority}-${intervention.type}`} data={intervention} />
               ))
             ) : (
               <EmptyTier message="No immediate high-priority action is required at the current checkpoint." />
@@ -73,8 +104,8 @@ export function Station11() {
               <Activity size={16} /> Planned Follow-Up
             </h3>
             {plannedActions.length > 0 ? (
-              plannedActions.map((intervention, index) => (
-                <InterventionCard key={index} data={intervention} />
+              plannedActions.map((intervention) => (
+                <InterventionCard key={`${intervention.priority}-${intervention.type}`} data={intervention} />
               ))
             ) : (
               <EmptyTier message="No planned follow-up action is active." />
@@ -96,8 +127,8 @@ function EmptyTier({ message }: { message: string }) {
   );
 }
 
-function InterventionCard({ data }: InterventionCardProps) {
-  const progressPct = (data.completed / data.total) * 100;
+function InterventionCard({ data }: { data: Intervention }) {
+  const progressPct = data.total === 0 ? 0 : (data.completed / data.total) * 100;
 
   return (
     <GlassCard className="p-5 border-l-2" style={{ borderLeftColor: data.priority === 'Immediate' ? 'var(--red)' : 'var(--gold)' }} pedagogicalLabel="Teacher action planning summarizes workbook evidence into a follow-up plan.">
@@ -111,10 +142,8 @@ function InterventionCard({ data }: InterventionCardProps) {
           </h4>
           <p className="font-body text-xs text-[var(--lav)] mt-1">{data.type}</p>
         </div>
-        <div className="text-right">
-          <div className={`font-navigation text-[10px] uppercase ${data.priority === 'Immediate' ? 'text-[var(--red)]' : 'text-[var(--gold)]'}`}>
-            {data.priority}
-          </div>
+        <div className={`font-navigation text-[10px] uppercase ${data.priority === 'Immediate' ? 'text-[var(--red)]' : 'text-[var(--gold)]'}`}>
+          {data.priority}
         </div>
       </div>
 

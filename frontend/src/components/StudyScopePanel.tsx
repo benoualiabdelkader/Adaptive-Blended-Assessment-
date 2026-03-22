@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { SlidersHorizontal, Upload, UserRoundSearch, BookMarked, Waypoints } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from './GlassCard';
@@ -49,6 +50,8 @@ const QUICK_PRESETS: Array<{
   },
 ];
 
+const COHORT_ONLY_STATIONS: StudyStationId[] = [6, 7, 8];
+
 export function StudyScopePanel({
   title = 'Build Your Teaching View',
   subtitle = 'Follow these steps to choose the student, the exercise, the stations, and the indicators you want to read.',
@@ -70,6 +73,25 @@ export function StudyScopePanel({
   const selectedTaskId = getSelectedTaskId({ selectedCaseId, selectedTaskByCase });
   const selectedTask = getSelectedTask(selectedCase, selectedTaskId);
   const uniqueLearnerCount = new Set(cases.map((studyCase) => studyCase.meta.userId)).size;
+  const isSingleStudentMode = uniqueLearnerCount <= 1;
+  const availableStations = isSingleStudentMode
+    ? STUDY_STATIONS.filter((station) => !COHORT_ONLY_STATIONS.includes(station.id))
+    : STUDY_STATIONS;
+  const availableStationIds = availableStations.map((station) => station.id);
+  const visibleSelectedStationIds = selectedStationIds.filter((stationId) => availableStationIds.includes(stationId));
+
+  useEffect(() => {
+    if (!isSingleStudentMode) {
+      return;
+    }
+
+    if (selectedStationIds.every((stationId) => availableStationIds.includes(stationId))) {
+      return;
+    }
+
+    const filtered = selectedStationIds.filter((stationId) => availableStationIds.includes(stationId));
+    setStationSelection(filtered.length > 0 ? filtered : availableStationIds);
+  }, [availableStationIds, isSingleStudentMode, selectedStationIds, setStationSelection]);
 
   if (!selectedCase) {
     return (
@@ -116,29 +138,33 @@ export function StudyScopePanel({
           </p>
           <p className="font-body text-xs text-[var(--text-muted)]">Use one of these ready-made combinations when you want a faster setup.</p>
         </div>
-        {uniqueLearnerCount <= 1 && (
+        {isSingleStudentMode && (
           <div className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold-dim)] px-4 py-3 font-body text-xs text-[var(--text-sec)]">
             Single-student study mode is active. Available stations: S01-S05 and S09-S12. Cohort-only stations S06-S08 stay hidden because the current workspace contains one learner case.
           </div>
         )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {QUICK_PRESETS.map((preset) => (
-            <button
-              key={preset.id}
-              type="button"
-              onClick={() => {
-                setStationSelection(preset.stations);
-                setVariableSelection(preset.variables);
-              }}
-              className="rounded-xl border border-[var(--border)] bg-[var(--bg-deep)] p-4 text-left hover:border-[var(--border-bright)] hover:bg-[var(--bg-card)] transition-colors"
-            >
-              <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)]">{preset.label}</p>
-              <p className="mt-2 font-body text-xs text-[var(--text-sec)] leading-relaxed">{preset.helper}</p>
-              <p className="mt-3 font-forensic text-[10px] text-[var(--text-muted)]">
-                {preset.stations.length} stations · {preset.variables.length} indicators
-              </p>
-            </button>
-          ))}
+          {QUICK_PRESETS.map((preset) => {
+            const visiblePresetStations = preset.stations.filter((stationId) => availableStationIds.includes(stationId));
+
+            return (
+              <button
+                key={preset.id}
+                type="button"
+                onClick={() => {
+                  setStationSelection(visiblePresetStations);
+                  setVariableSelection(preset.variables);
+                }}
+                className="rounded-xl border border-[var(--border)] bg-[var(--bg-deep)] p-4 text-left hover:border-[var(--border-bright)] hover:bg-[var(--bg-card)] transition-colors"
+              >
+                <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)]">{preset.label}</p>
+                <p className="mt-2 font-body text-xs text-[var(--text-sec)] leading-relaxed">{preset.helper}</p>
+                <p className="mt-3 font-forensic text-[10px] text-[var(--text-muted)]">
+                  {visiblePresetStations.length} stations · {preset.variables.length} indicators
+                </p>
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -198,7 +224,7 @@ export function StudyScopePanel({
             </p>
           </div>
           <div className="mt-4 flex gap-2 flex-wrap">
-            <StatusChip variant="gold">{selectedStationIds.length} stations</StatusChip>
+            <StatusChip variant="gold">{visibleSelectedStationIds.length} stations</StatusChip>
             <StatusChip variant="lav">{selectedVariableIds.length} variables</StatusChip>
           </div>
         </div>
@@ -214,7 +240,7 @@ export function StudyScopePanel({
           <p className="font-body text-xs text-[var(--text-muted)]">Choose one section or a group of sections to include in the current reading and report.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {STUDY_STATIONS.map((station) => {
+          {availableStations.map((station) => {
             const isSelected = selectedStationIds.includes(station.id);
 
             return (
