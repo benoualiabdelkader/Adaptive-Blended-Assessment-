@@ -49,6 +49,14 @@ if (fs.existsSync(frontendIndexPath)) {
   app.get(/^(?!\/api(?:\/|$)).*/, (req, res) => {
     res.sendFile(frontendIndexPath);
   });
+} else {
+  app.get('/', (req, res) => {
+    res.status(503).json({
+      status: 'frontend_missing',
+      message: 'Backend is running, but the frontend production build was not found.',
+      expectedPath: frontendIndexPath,
+    });
+  });
 }
 
 const PORT = Number(process.env.PORT || 3001);
@@ -56,6 +64,11 @@ const PORT = Number(process.env.PORT || 3001);
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Backend server running on http://localhost:${PORT}`);
+    console.log(
+      fs.existsSync(frontendIndexPath)
+        ? `Frontend build detected at ${frontendIndexPath}`
+        : `Frontend build missing at ${frontendIndexPath}`
+    );
   });
 }
 
