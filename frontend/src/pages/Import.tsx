@@ -35,6 +35,7 @@ export function Import() {
   }, [parsedCases]);
 
   const analyticsStatus = parsedCases[0]?.analytics ?? null;
+  const uniqueLearnerCount = new Set(parsedCases.map((studyCase) => studyCase.meta.userId)).size;
 
   const handleUpload = async () => {
     if (selectedFiles.length === 0) {
@@ -193,6 +194,11 @@ export function Import() {
                     <p className="font-body text-xs text-[var(--text-muted)] mt-2">
                       Current import analytics are computed from the imported workbook cohort inside the backend service. If the cohort is too small, advanced models stay unavailable rather than returning fallback numbers. These analytics support teacher interpretation; they do not replace teacher scoring or feedback decisions.
                     </p>
+                    {uniqueLearnerCount <= 1 && parsedCases.length > 0 && (
+                      <p className="font-body text-xs text-[var(--text-sec)] mt-2">
+                        Single-student case detected. Available stations for this study mode: S01-S05 and S09-S12. Cohort-only stations S06-S08 stay hidden or unavailable.
+                      </p>
+                    )}
                     {analyticsStatus && (
                       <p className="font-body text-xs text-[var(--text-muted)] mt-2">
                         Cohort size: {analyticsStatus.cohort_size}. Clustering: {analyticsStatus.clustering.available ? 'available' : analyticsStatus.clustering.reason}. Prediction: {analyticsStatus.prediction.available ? 'available' : analyticsStatus.prediction.reason}. Bayesian: {analyticsStatus.bayesian.available ? 'available' : analyticsStatus.bayesian.reason}
@@ -258,6 +264,13 @@ export function Import() {
                     <p className="text-[var(--text-sec)] mb-6">
                       {parsedCases.length} student case{parsedCases.length !== 1 ? 's were' : ' was'} added. You can now select any imported student, choose a specific exercise, and activate the variables you want to examine from the dashboard.
                     </p>
+                    {uniqueLearnerCount <= 1 && (
+                      <div className="mb-6 rounded-lg border border-[var(--gold)]/20 bg-[var(--gold-dim)] px-4 py-3">
+                        <p className="font-body text-sm text-[var(--text-sec)]">
+                          Single-student case mode is now active. Use S01-S05 and S09-S12 for this file. S06-S08 remain hidden because they depend on cohort-level modelling.
+                        </p>
+                      </div>
+                    )}
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                       <div className="p-4 rounded-lg bg-[var(--bg-deep)] border border-[var(--border)]">

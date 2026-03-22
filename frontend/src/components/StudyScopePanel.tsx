@@ -118,7 +118,7 @@ export function StudyScopePanel({
         </div>
         {uniqueLearnerCount <= 1 && (
           <div className="rounded-lg border border-[var(--gold)]/20 bg-[var(--gold-dim)] px-4 py-3 font-body text-xs text-[var(--text-sec)]">
-            Single-student study mode is active. Cohort-only stations such as clustering and prediction stay hidden because the current workspace contains one learner case.
+            Single-student study mode is active. Available stations: S01-S05 and S09-S12. Cohort-only stations S06-S08 stay hidden because the current workspace contains one learner case.
           </div>
         )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
