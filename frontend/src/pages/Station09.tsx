@@ -53,17 +53,17 @@ export function Station09() {
     <PipelineLayout
       rightPanel={
         <PedagogicalInsightBadge
-          urgency="urgent"
-          label="Individual Diagnosis"
-          observation={`Asmaa matches ${totalIndicators} active pedagogical indicators.`}
-          implication="The case-level diagnosis points to strong effort and help-seeking, with the main quality gap concentrated in argument development."
-          action="Review the quality triggers first so the next feedback round closes the gap between effort and score."
+          urgency="monitor"
+          label="Teacher Review Note"
+          observation={`The current case matches ${totalIndicators} rule-based signals in the selected categories.`}
+          implication="These rule matches organize evidence for teacher review; they do not replace the instructor's interpretation of the student's needs."
+          action="Use the matched rules to guide your reading of the workbook, rubric, and revision trace before deciding the next teaching move."
           citation="Mislevy (1994) - Evidence-Centered Design in Assessment"
         />
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
-        <StationHeader id={9} title="Diagnosis Engine" subtitle="Layer 8: Diagnostic Synthesis (Logic Engine)" />
+        <StationHeader id={9} title="Diagnostic Signals" subtitle="Layer 8: Rule-Based Signals for Teacher Review" />
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
           <div className="flex gap-4 border-b border-[var(--border)] overflow-x-auto w-full md:w-auto">
@@ -82,12 +82,15 @@ export function Station09() {
             ))}
           </div>
           <div className="font-forensic text-sm text-[var(--text-sec)] bg-[var(--bg-raised)] px-4 py-2 rounded-lg border border-[var(--border)]">
-            Active Indicators for {student.name}: <span className="text-[var(--red)] font-bold text-lg">{totalIndicators}</span>
+            Matched Signals for {student.name}: <span className="text-[var(--red)] font-bold text-lg">{totalIndicators}</span>
           </div>
         </div>
 
-        <GlassCard elevation="high" className="p-6 md:p-8 mb-8" pedagogicalLabel="The diagnosis panel synthesises product and process indicators into a unified developmental profile.">
-          <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-6">Diagnostic Summary Panel</h3>
+        <GlassCard elevation="high" className="p-6 md:p-8 mb-8" pedagogicalLabel="This panel summarizes workbook-derived rule matches for teacher review.">
+          <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-3">Diagnostic Summary Panel</h3>
+          <p className="font-body text-sm text-[var(--text-sec)] mb-6">
+            The percentages below are summary views of workbook indicators. They help the teacher notice patterns quickly, but they are not a final diagnosis.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {summaryBars.map((item) => (
               <div key={item.label} className="p-4 bg-[var(--bg-deep)] rounded-lg border border-[var(--border)]">
@@ -116,22 +119,15 @@ export function Station09() {
 }
 
 function RuleCard({ rule }: { rule: typeof diagnosticRules[0] }) {
-  const [isActive, setIsActive] = useState(rule.active);
+  const isActive = rule.active;
 
   return (
     <GlassCard className={`p-6 border-l-4 transition-colors ${isActive ? (rule.hits > 0 ? 'border-l-[var(--red)]' : 'border-l-[var(--teal)]') : 'border-l-[var(--border)] opacity-60'}`}>
-      <div className="flex justify-between items-center mb-6">
-        <div className="font-navigation text-[10px] tracking-widest text-[var(--text-sec)] flex items-center gap-3">
-          RULE ID: <span className="text-[var(--text-primary)] font-forensic text-xs">{rule.id}</span>
-        </div>
-
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input type="checkbox" className="sr-only peer" checked={isActive} onChange={() => setIsActive(!isActive)} />
-          <div className="w-9 h-5 bg-[var(--bg-deep)] border border-[var(--border)] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[var(--text-sec)] peer-checked:after:bg-[var(--bg-deep)] after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[var(--lav)]"></div>
-          <span className="ml-3 text-xs font-navigation font-medium text-[var(--text-sec)] uppercase">
-            {isActive ? 'Active' : 'Muted'}
-          </span>
-        </label>
+          <div className="flex justify-between items-center mb-6">
+            <div className="font-navigation text-[10px] tracking-widest text-[var(--text-sec)] flex items-center gap-3">
+              RULE ID: <span className="text-[var(--text-primary)] font-forensic text-xs">{rule.id}</span>
+            </div>
+            <StatusChip variant={isActive ? 'lav' : 'gold'}>{isActive ? 'Shown' : 'Muted'}</StatusChip>
       </div>
 
       <div className="font-forensic text-sm space-y-4 mb-6 text-[var(--text-primary)]">
@@ -145,20 +141,20 @@ function RuleCard({ rule }: { rule: typeof diagnosticRules[0] }) {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[var(--border)]">
-        <div className="font-body text-[10px] text-[var(--text-sec)] max-w-[220px] leading-tight">
-          <span className="uppercase tracking-wide text-[var(--text-muted)] block mb-1">Theoretical Basis</span>
-          {rule.basis}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-[var(--border)]">
+          <div className="font-body text-[10px] text-[var(--text-sec)] max-w-[220px] leading-tight">
+            <span className="uppercase tracking-wide text-[var(--text-muted)] block mb-1">Theoretical Basis</span>
+            {rule.basis}
+          </div>
+          <div className="text-right">
+            <span className="font-navigation text-[10px] uppercase tracking-wider text-[var(--text-sec)] block mb-1">Case Match</span>
+            {isActive && rule.hits > 0 ? (
+              <StatusChip variant="red" className="shadow-[0_0_10px_var(--red-dim)]">MATCHED</StatusChip>
+            ) : (
+              <StatusChip variant="teal">NOT MATCHED</StatusChip>
+            )}
+          </div>
         </div>
-        <div className="text-right">
-          <span className="font-navigation text-[10px] uppercase tracking-wider text-[var(--text-sec)] block mb-1">Case Match</span>
-          {isActive && rule.hits > 0 ? (
-            <StatusChip variant="red" className="shadow-[0_0_10px_var(--red-dim)]">MATCHED</StatusChip>
-          ) : (
-            <StatusChip variant="teal">CLEAR</StatusChip>
-          )}
-        </div>
-      </div>
-    </GlassCard>
+      </GlassCard>
   );
 }

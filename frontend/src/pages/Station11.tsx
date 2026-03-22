@@ -7,9 +7,8 @@ import { primaryStudent, getStudentClusterName } from '../data/diagnostic';
 interface Intervention {
   student: string;
   archetype: string;
-  tier: 'Alpha' | 'Beta';
+  priority: 'Immediate' | 'Planned';
   type: string;
-  retention: number;
   timeline: string;
   completed: number;
   total: number;
@@ -26,9 +25,8 @@ const interventions: Intervention[] = student
       {
         student: student.name,
         archetype: getStudentClusterName(student),
-        tier: 'Beta',
+        priority: 'Planned',
         type: 'Directed scaffolding for cohesion and argumentation',
-        retention: 92.4,
         timeline: 'Weeks 4-10',
         completed: 2,
         total: 3,
@@ -37,49 +35,49 @@ const interventions: Intervention[] = student
   : [];
 
 export function Station11() {
-  const alphaInterventions = interventions.filter((intervention) => intervention.tier === 'Alpha');
-  const betaInterventions = interventions.filter((intervention) => intervention.tier === 'Beta');
+  const immediateActions = interventions.filter((intervention) => intervention.priority === 'Immediate');
+  const plannedActions = interventions.filter((intervention) => intervention.priority === 'Planned');
 
   return (
     <PipelineLayout
       rightPanel={
         <PedagogicalInsightBadge
           urgency="monitor"
-          label="Retention Trajectory"
-          observation="One monitored case is active. Asmaa stays in the Beta tier because engagement is strong but writing quality still needs directed support."
-          implication="Retention risk is currently low, yet unresolved argumentation gaps could slow progress if feedback becomes too general."
-          action="Continue monitoring Asmaa through the next rubric cycle and escalate only if revision quality stalls."
+          label="Teacher Action Planning"
+          observation="The workbook evidence points to a learner who is engaged, responsive to feedback, and still in need of directed support for cohesion and argumentation."
+          implication="This station organizes possible instructional actions for the teacher. It does not calculate a live retention probability or assign a final intervention tier."
+          action="Use the planning cards below to decide the next classroom action, follow-up point, and review window."
           citation="Tinto (1987) - Leaving College & Student Mortality"
         />
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
-        <StationHeader id={11} title="Intervention Tracking" subtitle="Layer 10: Onsite Adaptive Intervention" />
+        <StationHeader id={11} title="Intervention Planning" subtitle="Layer 10: Teacher-Led Instructional Action" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <div className="space-y-4">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--red)] mb-4 flex items-center gap-2">
-              <ShieldAlert size={16} /> Alpha Tier (Intensive)
+              <ShieldAlert size={16} /> Immediate Attention
             </h3>
-            {alphaInterventions.length > 0 ? (
-              alphaInterventions.map((intervention, index) => (
+            {immediateActions.length > 0 ? (
+              immediateActions.map((intervention, index) => (
                 <InterventionCard key={index} data={intervention} />
               ))
             ) : (
-              <EmptyTier message="No intensive intervention is required at the current checkpoint." />
+              <EmptyTier message="No immediate high-priority action is required at the current checkpoint." />
             )}
           </div>
 
           <div className="space-y-4">
             <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--gold)] mb-4 flex items-center gap-2">
-              <Activity size={16} /> Beta Tier (Monitoring)
+              <Activity size={16} /> Planned Follow-Up
             </h3>
-            {betaInterventions.length > 0 ? (
-              betaInterventions.map((intervention, index) => (
+            {plannedActions.length > 0 ? (
+              plannedActions.map((intervention, index) => (
                 <InterventionCard key={index} data={intervention} />
               ))
             ) : (
-              <EmptyTier message="No monitoring interventions are active." />
+              <EmptyTier message="No planned follow-up action is active." />
             )}
           </div>
         </div>
@@ -99,22 +97,10 @@ function EmptyTier({ message }: { message: string }) {
 }
 
 function InterventionCard({ data }: InterventionCardProps) {
-  const getRetentionColor = (value: number) => {
-    if (value < 50) return 'text-[var(--red)]';
-    if (value < 80) return 'text-[var(--gold)]';
-    return 'text-[var(--teal)]';
-  };
-
-  const getRetentionRisk = (value: number) => {
-    if (value < 50) return 'HIGH RISK';
-    if (value < 80) return 'MODERATE';
-    return 'LOW RISK';
-  };
-
   const progressPct = (data.completed / data.total) * 100;
 
   return (
-    <GlassCard className="p-5 border-l-2" style={{ borderLeftColor: data.tier === 'Alpha' ? 'var(--red)' : 'var(--gold)' }} pedagogicalLabel="Retention trajectory estimates persistence probability based on intervention engagement.">
+    <GlassCard className="p-5 border-l-2" style={{ borderLeftColor: data.priority === 'Immediate' ? 'var(--red)' : 'var(--gold)' }} pedagogicalLabel="Teacher action planning summarizes workbook evidence into a follow-up plan.">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h4 className="font-navigation text-lg font-medium text-[var(--text-primary)] flex items-center gap-2">
@@ -126,11 +112,8 @@ function InterventionCard({ data }: InterventionCardProps) {
           <p className="font-body text-xs text-[var(--lav)] mt-1">{data.type}</p>
         </div>
         <div className="text-right">
-          <div className={`font-forensic text-xl ${getRetentionColor(data.retention)}`}>
-            {data.retention.toFixed(1)}%
-          </div>
-          <div className={`font-navigation text-[10px] uppercase ${getRetentionColor(data.retention)}`}>
-            {getRetentionRisk(data.retention)}
+          <div className={`font-navigation text-[10px] uppercase ${data.priority === 'Immediate' ? 'text-[var(--red)]' : 'text-[var(--gold)]'}`}>
+            {data.priority}
           </div>
         </div>
       </div>

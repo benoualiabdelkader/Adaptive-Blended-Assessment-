@@ -32,16 +32,16 @@ export function Station10() {
       rightPanel={
         <PedagogicalInsightBadge
           urgency="positive"
-          label="Intervention Efficacy"
-          observation="Asmaa reopened the feedback trail within roughly half a day and returned a revision in about 1.2 days."
-          implication="The short loop suggests usable feedback uptake rather than passive viewing."
-          action="Keep feedback narrow, direct, and tied to one structural target at a time."
+          label="Teacher Feedback Planning"
+          observation="The workbook trace shows that the student reopened feedback quickly and returned a revision within a short cycle."
+          implication="This timing evidence helps the teacher judge whether the current feedback format is usable and whether the next round should stay narrow or become more explicit."
+          action="Use the timing and message trace below to plan the next teacher comment. The actual feedback remains the instructor's decision."
           citation="Carless & Boud (2018) - Feedback Literacy / Formative Feedback"
         />
       }
     >
       <div className="max-w-6xl mx-auto p-6 md:p-8 pb-32">
-        <StationHeader id={10} title="Feedback Delivery & Latency" subtitle="Layer 9: Pedagogical Decision (Feedback Delivery)" />
+        <StationHeader id={10} title="Feedback Planning" subtitle="Layer 9: Feedback Timing and Teacher Review" />
 
         <GlassCard elevation="high" className="p-6 md:p-8 mb-8 overflow-x-auto" pedagogicalLabel="Swimlane topography visualises the temporal relationship between feedback delivery and revision response.">
           <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-6">Feedback Response Topography</h3>
@@ -95,13 +95,16 @@ export function Station10() {
         </GlassCard>
 
         <GlassCard className="p-6 mb-8">
-          <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)] mb-6">Targeted Feedback Preview</h3>
+          <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-sec)] mb-2">Possible Teacher Focus</h3>
+          <p className="font-body text-xs text-[var(--text-sec)] mb-6">
+            This is a planning prompt derived from the workbook evidence. It is not final feedback delivered automatically to the student.
+          </p>
           <div className="space-y-4">
             {swimlaneData.map((s, i) => (
               <div key={i} className="p-4 bg-[var(--bg-deep)] rounded border border-[var(--border)] border-l-4 border-l-[var(--lav)]">
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-navigation text-xs font-bold text-[var(--text-primary)]">CASE {s.id}</span>
-                  <span className="font-forensic text-[10px] text-[var(--text-muted)] uppercase tracking-widest">Instructor-facing synthesis</span>
+                  <span className="font-forensic text-[10px] text-[var(--text-muted)] uppercase tracking-widest">Teacher planning prompt</span>
                 </div>
                 <p className="font-body text-sm text-[var(--text-sec)] italic leading-relaxed">
                   &quot;{s.feedback || 'Your writing shows good progress. Focus on connecting your arguments more clearly.'}&quot;
@@ -136,7 +139,7 @@ export function Station10() {
 
           <GlassCard accent="lav" glow className="p-6 flex flex-col justify-center bg-[var(--bg-base)]">
             <div className="font-forensic text-3xl text-[var(--lav)] mb-2">1.2 Days</div>
-            <p className="font-navigation text-sm text-[var(--text-sec)] mb-4">Observed revision loop after targeted feedback</p>
+            <p className="font-navigation text-sm text-[var(--text-sec)] mb-4">Observed revision loop after teacher feedback</p>
             <div className="font-forensic text-xl text-[var(--text-muted)] mb-2">3.0 Days</div>
             <p className="font-navigation text-sm text-[var(--text-sec)]">Monitoring threshold for delayed response</p>
             <p className="font-body text-xs text-[var(--text-sec)] mt-6">Workbook viewed timestamp: {caseStudyMeta.feedbackViewedAt}</p>

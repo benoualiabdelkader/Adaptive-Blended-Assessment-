@@ -27,9 +27,9 @@ const stations = [
   { id: 6, name: 'Cluster Mapping', icon: Map, path: '/pipeline/6' },
   { id: 7, name: 'Predictive Model', icon: BrainCircuit, path: '/pipeline/7' },
   { id: 8, name: 'Bayesian Synthesis', icon: Sparkles, path: '/pipeline/8' },
-  { id: 9, name: 'Diagnosis Engine', icon: AlertOctagon, path: '/pipeline/9' },
-  { id: 10, name: 'Feedback Delivery', icon: MessageSquare, path: '/pipeline/10' },
-  { id: 11, name: 'Intervention Tracking', icon: ShieldAlert, path: '/pipeline/11' },
+  { id: 9, name: 'Diagnostic Signals', icon: AlertOctagon, path: '/pipeline/9' },
+  { id: 10, name: 'Feedback Planning', icon: MessageSquare, path: '/pipeline/10' },
+  { id: 11, name: 'Intervention Planning', icon: ShieldAlert, path: '/pipeline/11' },
   { id: 12, name: 'Revision Cycle', icon: RefreshCw, path: '/pipeline/12' },
 ];
 

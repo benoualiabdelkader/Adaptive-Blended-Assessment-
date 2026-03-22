@@ -34,8 +34,6 @@ const longitudinalData: TrendDatum[] = student
     }))
   : [];
 
-const firstPoint = longitudinalData[0] ?? { draft: 'Draft 1', cohesion: 0, lexical: 0, grammar: 0, arg: 0 };
-const lastPoint = longitudinalData[longitudinalData.length - 1] ?? firstPoint;
 const beforeArtifact = writingArtifacts.find((artifact) => artifact.id === paragraphComparison.beforeId) ?? writingArtifacts[0];
 const afterArtifact = writingArtifacts.find((artifact) => artifact.id === paragraphComparison.afterId) ?? writingArtifacts[writingArtifacts.length - 1];
 const kindTone = {
@@ -58,16 +56,16 @@ export function Station12() {
       rightPanel={
         <PedagogicalInsightBadge
           urgency="positive"
-          label="Growth Trajectory"
-          observation={`Asmaa improved her scaled score from ${firstPoint.grammar.toFixed(1)} to ${lastPoint.grammar.toFixed(1)} across the tracked revision cycle.`}
-          implication="The clearest improvement is in cohesion and revision persistence, though argument precision still needs deliberate support."
-          action="Use the next module to convert this momentum into stronger structural complexity and tighter academic phrasing."
+          label="Teacher Review Note"
+          observation="The revision sequence shows clearer improvement in cohesion, evidence use, and persistence across the writing cycle."
+          implication="The clearest gains are visible in the compared texts and the revision timeline, while vocabulary precision and argument control still need deliberate support."
+          action="Use this revision evidence to plan the next teacher response around stronger claim-evidence explanation and tighter academic phrasing."
           citation="Zimmerman (2002) - Self-Regulated Learning & Writing Development"
         />
       }
     >
       <div className="max-w-7xl mx-auto p-6 md:p-8 pb-32">
-        <StationHeader id={12} title="Revision Cycle Synthesis" subtitle="Layer 12: Growth Measurement (Revision Cycle)" />
+        <StationHeader id={12} title="Revision Cycle Evidence" subtitle="Layer 12: Workbook-Derived Growth Across Drafts" />
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
@@ -78,8 +76,6 @@ export function Station12() {
               <span>Paragraph 1: {beforeArtifact.wordCount} words</span>
               <span className="text-[var(--border-bright)]">to</span>
               <span>Paragraph 2 Final: {afterArtifact.wordCount} words</span>
-              <span className="text-[var(--border-bright)]">to</span>
-              <span className="text-[var(--text-primary)] font-bold">Current writing estimate: {lastPoint.grammar.toFixed(1)}</span>
             </div>
           </div>
           <div className="flex gap-3">
@@ -188,7 +184,7 @@ export function Station12() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <MiniTrendChart title="Cohesion" dataKey="cohesion" data={longitudinalData} trend="+ Improving" color="var(--teal)" />
-          <MiniTrendChart title="Lexical Density" dataKey="lexical" data={longitudinalData} trend="+ Improving" color="var(--lav)" />
+          <MiniTrendChart title="Lexical Variety" dataKey="lexical" data={longitudinalData} trend="+ Improving" color="var(--lav)" />
           <MiniTrendChart title="Grammar Accuracy" dataKey="grammar" data={longitudinalData} trend="+ Improving" color="var(--red)" />
           <MiniTrendChart title="Argument Structure" dataKey="arg" data={longitudinalData} trend="+ Improving" color="var(--gold)" />
         </div>
