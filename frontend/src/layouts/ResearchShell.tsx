@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, LayoutDashboard, Users, FileText, FileEdit, Lightbulb, Search, BookOpen, Settings as SettingsIcon } from 'lucide-react';
+import { Menu, LayoutDashboard, Users, FileText, FileEdit, Lightbulb, Search, BookOpen, Settings as SettingsIcon, Workflow } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { GlassCard } from '../components/GlassCard';
@@ -111,6 +111,13 @@ export function ResearchShell({ children }: ResearchShellProps) {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            className="text-[var(--text-sec)] hover:text-[var(--lav)] transition-colors flex items-center gap-2 text-sm font-navigation"
+            onClick={() => navigate('/pipeline/1')}
+          >
+            <Workflow size={16} />
+            <span className="hidden sm:inline">Open Pipeline</span>
+          </button>
           <button 
             className="text-[var(--text-sec)] hover:text-[var(--lav)] transition-colors flex items-center gap-2 text-sm font-navigation"
             onClick={() => navigate('/notes')}
@@ -165,6 +172,12 @@ export function ResearchShell({ children }: ResearchShellProps) {
               className="rounded-full border border-[var(--border)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--text-sec)] hover:text-[var(--text-primary)] hover:border-[var(--border-bright)] transition-colors"
             >
               Open teacher report
+            </button>
+            <button
+              onClick={() => navigate('/pipeline/1')}
+              className="rounded-full border border-[var(--lav-border)] bg-[var(--lav-glow)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)] hover:text-[var(--text-primary)] hover:border-[var(--lav)] transition-colors"
+            >
+              Open Pipeline
             </button>
           </div>
         </div>

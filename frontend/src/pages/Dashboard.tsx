@@ -21,6 +21,7 @@ import {
   MessagesSquare,
   PenTool,
   Scale,
+  Workflow,
   type LucideIcon,
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -108,6 +109,7 @@ export function Dashboard() {
             </p>
           </div>
           <div className="flex gap-3">
+            <Button variant="primary" onClick={() => navigate('/pipeline/1')}><Workflow size={16} /> Open Pipeline</Button>
             <Button variant="ghost" onClick={() => navigate('/students')}><History size={16} /> Open student registry</Button>
             <Button variant="secondary" onClick={() => navigate('/import')}><Upload size={16} /> Import workbooks</Button>
           </div>
