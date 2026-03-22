@@ -169,19 +169,24 @@ export function Station05() {
         </GlassCard>
 
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 mb-8">
-          <GlassCard elevation="high" className="xl:col-span-3 p-6 md:p-8 overflow-x-auto" pedagogicalLabel="The matrix visualises how behavioural, writing, and outcome signals align inside the selected verified case.">
+          <GlassCard elevation="high" className="xl:col-span-3 p-4 md:p-6 overflow-hidden" pedagogicalLabel="The matrix visualises how behavioural, writing, and outcome signals align inside the selected verified case.">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-2">Case Signal Alignment</h3>
             <p className="font-body text-sm text-[var(--text-sec)] leading-relaxed mb-6">
               Each cell is a normalized proximity score built from the selected student's workbook metrics. It helps the teacher inspect which process and product signals move together inside one learner trace.
             </p>
 
-            <div className="min-w-[620px]">
-              <div className="flex">
-                <div className="w-32 shrink-0"></div>
+            <div className="mb-3 font-body text-xs text-[var(--text-muted)]">
+              Scroll horizontally if needed. Short labels stay in the grid; full labels remain available on hover and in the interpretation panel.
+            </div>
+
+            <div className="overflow-x-auto pb-2">
+              <div className="min-w-[540px] md:min-w-[620px]">
+                <div className="flex">
+                  <div className="w-24 md:w-28 shrink-0"></div>
                 {variables.map((variable) => (
                   <div
                     key={`header-${variable.shortLabel}`}
-                    className="flex-1 text-center font-navigation text-[10px] uppercase tracking-wider text-[var(--text-sec)] px-1 pb-6"
+                    className="flex-1 min-w-[42px] md:min-w-[52px] text-center font-navigation text-[9px] md:text-[10px] uppercase tracking-wider text-[var(--text-sec)] px-0.5 pb-4 md:pb-6"
                     title={variable.label}
                   >
                     {variable.shortLabel}
@@ -189,34 +194,35 @@ export function Station05() {
                 ))}
               </div>
 
-              <div className="flex flex-col gap-1 mt-4">
-                {evidenceMatrix.map((row, rowIndex) => (
-                  <div key={`row-${rowIndex}`} className="flex gap-1 items-center">
-                    <div className="w-32 shrink-0 font-navigation text-xs text-[var(--text-sec)] text-right pr-4 leading-snug" title={variables[rowIndex].sourceNote}>
-                      {variables[rowIndex].label}
+                <div className="flex flex-col gap-1 mt-3">
+                  {evidenceMatrix.map((row, rowIndex) => (
+                    <div key={`row-${rowIndex}`} className="flex gap-1 items-center">
+                      <div className="w-24 md:w-28 shrink-0 font-navigation text-[11px] md:text-xs text-[var(--text-sec)] text-right pr-2 md:pr-3 leading-tight" title={variables[rowIndex].sourceNote}>
+                        {variables[rowIndex].label}
+                      </div>
+                      {row.map((value, colIndex) => {
+                        const isSelected = selectedCell?.row === rowIndex && selectedCell?.col === colIndex;
+                        return (
+                          <div
+                            key={`cell-${rowIndex}-${colIndex}`}
+                            onClick={() => handleCellClick(rowIndex, colIndex, value)}
+                            className={`flex-1 min-w-[42px] md:min-w-[52px] h-[42px] md:h-[52px] rounded flex items-center justify-center font-forensic text-[9px] md:text-[10px] transition-transform cursor-pointer
+                              ${rowIndex === colIndex ? 'cursor-default' : 'hover:scale-105 hover:shadow-lg hover:z-10'}
+                              ${isSelected ? 'ring-2 ring-[var(--lav)] scale-105 z-10' : ''}
+                            `}
+                            style={{
+                              backgroundColor: getColorForAlignment(value),
+                              color: rowIndex === colIndex ? 'var(--text-muted)' : getTextColorForAlignment(value),
+                            }}
+                            title={`${variables[rowIndex].label} x ${variables[colIndex].label}: ${value.toFixed(2)}`}
+                          >
+                            {value.toFixed(2).replace('1.00', '1.0')}
+                          </div>
+                        );
+                      })}
                     </div>
-                    {row.map((value, colIndex) => {
-                      const isSelected = selectedCell?.row === rowIndex && selectedCell?.col === colIndex;
-                      return (
-                        <div
-                          key={`cell-${rowIndex}-${colIndex}`}
-                          onClick={() => handleCellClick(rowIndex, colIndex, value)}
-                          className={`flex-1 aspect-square rounded flex items-center justify-center font-forensic text-[10px] transition-transform cursor-pointer
-                            ${rowIndex === colIndex ? 'cursor-default' : 'hover:scale-105 hover:shadow-lg hover:z-10'}
-                            ${isSelected ? 'ring-2 ring-[var(--lav)] scale-105 z-10' : ''}
-                          `}
-                          style={{
-                            backgroundColor: getColorForAlignment(value),
-                            color: rowIndex === colIndex ? 'var(--text-muted)' : getTextColorForAlignment(value),
-                          }}
-                          title={`${variables[rowIndex].label} x ${variables[colIndex].label}: ${value.toFixed(2)}`}
-                        >
-                          {value.toFixed(2).replace('1.00', '1.0')}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -311,7 +317,7 @@ export function Station05() {
                 {comparisonMetrics.slice(0, 4).map((metric) => (
                   <div key={metric.label} className="rounded-2xl border border-[var(--border)] bg-[var(--bg-base)] p-4">
                     <div className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-sec)] mb-2">{metric.label}</div>
-                    <div className="font-body text-sm text-[var(--text-primary)]">{metric.before} → {metric.after}</div>
+                    <div className="font-body text-sm text-[var(--text-primary)]">{metric.before} {'->'} {metric.after}</div>
                     <div className="font-forensic text-sm text-[var(--lav)] mt-1">Delta {metric.delta}</div>
                   </div>
                 ))}

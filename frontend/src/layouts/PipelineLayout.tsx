@@ -161,15 +161,15 @@ export function PipelineLayout({
           </AnimatePresence>
         </main>
 
-        <aside className="w-[360px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] flex flex-col hidden xl:flex overflow-y-auto">
-          <div className="p-6 space-y-6">
+        <aside className="w-[380px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] hidden xl:flex overflow-y-auto">
+          <div className="p-5 xl:p-6 space-y-5 min-w-0 w-full">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="text-[var(--lav)]" size={18} />
               <h3 className="font-navigation text-sm uppercase tracking-widest text-[var(--text-primary)]">Pedagogical Interpretation</h3>
             </div>
 
             {verifiedEnabled && rightPanel ? (
-              <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
+              <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500 min-w-0">
                 {rightPanel}
               </div>
             ) : (
