@@ -1,5 +1,5 @@
 const xlsx = require('xlsx');
-const { evaluateAdaptiveDecision, getClusterLabelDescription } = require('./adaptiveDecision');
+const { evaluateAdaptiveDecision } = require('./adaptiveDecision');
 
 function readWorkbook(input) {
   if (Buffer.isBuffer(input)) {
@@ -77,6 +77,58 @@ function countMatches(text, patterns) {
   return patterns.reduce((count, pattern) => count + (pattern.test(source) ? 1 : 0), 0);
 }
 
+const COHESION_PATTERNS = [
+  /\bfor instance\b/,
+  /\bfor example\b/,
+  /\bover time\b/,
+  /\balso\b/,
+  /\bbecause\b/,
+  /\banother\b/,
+  /\btherefore\b/,
+  /\bhowever\b/,
+  /\bwhile\b/,
+  /\balthough\b/,
+  /\bso universities\b/,
+];
+
+const ACADEMIC_FOCUS_PATTERNS = [
+  /\bfair(?:ness)?\b/,
+  /\btrust\b/,
+  /\brelationship(?:s)?\b/,
+  /\bcritical thinking\b/,
+  /\bproblem solving\b/,
+  /\bacademic integrity\b/,
+  /\bhonesty\b/,
+  /\bresponsibility\b/,
+  /\bevidence\b/,
+  /\bcitation\b/,
+  /\breasoning\b/,
+  /\bmotivat/,
+  /\bindependent\b/,
+  /\bcheat/,
+];
+
+function countCitations(text) {
+  return (cleanText(text).match(/\([^)]+,\s*\d{4}\)/g) ?? []).length;
+}
+
+function computeScaledTtr(text) {
+  const words = tokenizeWords(text);
+  const uniqueWords = new Set(words).size;
+  const rawTtr = words.length > 0 ? uniqueWords / words.length : 0;
+  return round(clamp(rawTtr * 0.85, 0.3, 0.75), 2);
+}
+
+function computeComparisonSignals(text, declaredWordCount = 0) {
+  return {
+    wordCount: declaredWordCount || tokenizeWords(text).length,
+    cohesionMarkers: countMatches(text, COHESION_PATTERNS),
+    citations: countCitations(text),
+    academicFocusSignals: countMatches(text, ACADEMIC_FOCUS_PATTERNS),
+    ttr: computeScaledTtr(text),
+  };
+}
+
 function countHelpSeekingMessages(chatRows) {
   const messages = chatRows.map((row) => cleanText(row.message).toLowerCase());
   const feedbackLocationCount = messages.filter((message) => /where i can find|comments section/.test(message)).length;
@@ -87,30 +139,16 @@ function countHelpSeekingMessages(chatRows) {
   return feedbackLocationCount + progressCount + vocabularyCount + feedbackFollowupCount;
 }
 
-function analyzeWriting(finalText, revisionFrequency, feedbackViews, helpSeekingMessages) {
+function analyzeWriting(finalText, declaredWordCount, revisionFrequency, feedbackViews, helpSeekingMessages) {
   const words = tokenizeWords(finalText);
-  const uniqueWords = new Set(words).size;
-  const rawTtr = words.length > 0 ? uniqueWords / words.length : 0;
-  const ttr = round(clamp(rawTtr * 0.85, 0.3, 0.75), 2);
-
-  const cohesionHits = countMatches(finalText, [
-    /for instance/,
-    /for example/,
-    /over time/,
-    /also/,
-    /because/,
-    /another/,
-    /therefore/,
-    /however/,
-    /while/,
-    /although/,
-    /so universities/,
-  ]);
+  const ttr = computeScaledTtr(finalText);
+  const cohesionHits = countMatches(finalText, COHESION_PATTERNS);
+  const computedWordCount = declaredWordCount || words.length;
 
   const cohesionIndex = clamp(Math.round(cohesionHits / 3) + 2, 1, 6);
   const cohesion = round(clamp(2.3 + cohesionIndex * 0.3, 1, 5), 1);
 
-  const citationCount = (finalText.match(/\([^)]+,\s*\d{4}\)/g) ?? []).length;
+  const citationCount = countCitations(finalText);
   const argumentMarkers = countMatches(finalText, [/for instance/, /because/, /while/, /also/, /so universities/]);
   const argumentation = round(clamp(1.8 + citationCount * 0.6 + argumentMarkers * 0.12 + revisionFrequency * 0.1, 1, 5), 1);
 
@@ -121,7 +159,7 @@ function analyzeWriting(finalText, revisionFrequency, feedbackViews, helpSeeking
   const scoreGain = round(0.8 + revisionFrequency * 0.4 + feedbackViews * 0.25, 1);
 
   return {
-    wordCount: words.length,
+    wordCount: computedWordCount,
     ttr,
     cohesionIndex,
     cohesion,
@@ -144,25 +182,9 @@ function buildDiagnostics(studentRecord, privateMessages) {
 
 function buildMetrics() {
   return {
-    rf_metrics: {
-      mae: 0.31,
-      r2: 0.68,
-    },
-    rf_importance: [
-      { feature: 'revision_frequency', importance: 0.24 },
-      { feature: 'feedback_views', importance: 0.18 },
-      { feature: 'argumentation', importance: 0.16 },
-      { feature: 'resource_access_count', importance: 0.14 },
-      { feature: 'cohesion_index', importance: 0.12 },
-      { feature: 'time_on_task', importance: 0.09 },
-      { feature: 'help_seeking_messages', importance: 0.07 },
-    ],
-    cluster_centroids: [
-      { time_on_task: 75, revision_frequency: 1, feedback_views: 0, rubric_views: 1, help_seeking_messages: 0, total_score: 10, ttr: 0.38, cohesion_index: 2, word_count: 135, cluster_label: 0, cluster_profile: getClusterLabelDescription(0) },
-      { time_on_task: 115, revision_frequency: 2, feedback_views: 1, rubric_views: 2, help_seeking_messages: 1, total_score: 22, ttr: 0.57, cohesion_index: 4, word_count: 210, cluster_label: 1, cluster_profile: getClusterLabelDescription(1) },
-      { time_on_task: 155, revision_frequency: 3, feedback_views: 2, rubric_views: 4, help_seeking_messages: 2, total_score: 16, ttr: 0.47, cohesion_index: 3, word_count: 180, cluster_label: 2, cluster_profile: getClusterLabelDescription(2) },
-      { time_on_task: 180, revision_frequency: 4, feedback_views: 4, rubric_views: 6, help_seeking_messages: 5, total_score: 20.5, ttr: 0.52, cohesion_index: 4, word_count: 199, cluster_label: 3, cluster_profile: getClusterLabelDescription(3) },
-    ],
+    rf_metrics: null,
+    rf_importance: [],
+    cluster_centroids: [],
   };
 }
 
@@ -311,7 +333,75 @@ function findActivityEntry(entries, predicate, pick = 'first') {
   return pick === 'last' ? matches[matches.length - 1] : matches[0];
 }
 
-function buildActivitySummary(activityRows) {
+function serializeActivityEntries(entries) {
+  return entries.map((entry) => ({
+    timestamp: entry.timestamp,
+    context: entry.context,
+    component: entry.component,
+    event: entry.event,
+    description: entry.description,
+  }));
+}
+
+function inferActivityContextFromWritingRow(header) {
+  const cleanHeader = cleanText(header);
+
+  if (/Second Body Paragraph/i.test(cleanHeader)) {
+    return 'Assignment: Argumentative Essay: Second Body Paragraph';
+  }
+
+  if (/First Body Paragraph/i.test(cleanHeader)) {
+    return 'Assignment: Argumentative body paragraphs: First paragraph';
+  }
+
+  if (/Argumentative Essay Intro/i.test(cleanHeader)) {
+    return 'Assignment: Argumentative Essay - Writing an Effective Introduction';
+  }
+
+  return '';
+}
+
+function computeFirstAccessDelayMinutes(sessions, targetContext = '') {
+  const normalizedTargetContext = cleanText(targetContext);
+  const session = [...sessions].reverse().find((candidate) =>
+    candidate.some(
+      (entry) =>
+        entry.component === 'Online text submissions' &&
+        entry.event === 'Submission created' &&
+        (!normalizedTargetContext || cleanText(entry.context) === normalizedTargetContext)
+    )
+  );
+
+  if (!session) {
+    return 10;
+  }
+
+  const submissionEntry = [...session].reverse().find(
+    (entry) =>
+      entry.component === 'Online text submissions' &&
+      entry.event === 'Submission created' &&
+      (!normalizedTargetContext || cleanText(entry.context) === normalizedTargetContext)
+  );
+
+  if (!submissionEntry) {
+    return 10;
+  }
+
+  const assignmentView = session.find(
+    (entry) =>
+      entry.component === 'Assignment' &&
+      entry.event === 'Course module viewed' &&
+      cleanText(entry.context) === (normalizedTargetContext || cleanText(submissionEntry.context))
+  );
+
+  if (!assignmentView) {
+    return 10;
+  }
+
+  return Math.max(0, Math.round((submissionEntry.time - assignmentView.time) / 60000));
+}
+
+function buildActivitySummary(activityRows, targetContext = '') {
   const entries = buildActivityEntries(activityRows);
   const sessions = [];
   let currentSession = [];
@@ -337,6 +427,8 @@ function buildActivitySummary(activityRows) {
   if (currentSession.length > 0) {
     sessions.push(currentSession);
   }
+
+  const firstAccessDelayMinutes = computeFirstAccessDelayMinutes(sessions, targetContext);
 
   const estimatedActiveMinutes = sessions.reduce(
     (sum, session) => sum + Math.round((session[session.length - 1].time - session[0].time) / 60000),
@@ -456,7 +548,9 @@ function buildActivitySummary(activityRows) {
     totalEvents: entries.length,
     activeSessions: sessions.length,
     estimatedActiveMinutes,
+    firstAccessDelayMinutes,
     sessionGapRule: '20-minute inactivity gap between logged events',
+    entries: serializeActivityEntries(entries),
     clickSignals: [
       {
         label: 'Logged Events',
@@ -568,25 +662,73 @@ function buildWritingArtifacts(writingRows) {
 }
 
 function buildParagraphComparison(artifacts) {
+  const beforeArtifact = artifacts.find((artifact) => artifact.id === 'body1-original') ?? null;
+  const afterArtifact = artifacts.find((artifact) => artifact.id === 'body2-final') ?? null;
+  const beforeSignals = computeComparisonSignals(beforeArtifact?.text ?? '', beforeArtifact?.wordCount ?? 0);
+  const afterSignals = computeComparisonSignals(afterArtifact?.text ?? '', afterArtifact?.wordCount ?? 0);
+  const commentary = [];
+
+  if (/\bdepend|critical thinking|passive learning\b/i.test(beforeArtifact?.text ?? '') && /\bfair|trust|relationship\b/i.test(afterArtifact?.text ?? '')) {
+    commentary.push('The later paragraph shifts from dependence-on-AI concerns toward fairness, trust, and peer relationships, which is consistent with the workbook progression.');
+  }
+
+  if (afterSignals.citations > beforeSignals.citations) {
+    commentary.push('The later paragraph adds explicit evidence through an in-text citation, which was not present in the earlier paragraph.');
+  }
+
+  if (afterSignals.cohesionMarkers > beforeSignals.cohesionMarkers) {
+    commentary.push('Cohesion improves in the later paragraph because it uses more linking moves and clearer progression between ideas.');
+  }
+
+  if (afterSignals.ttr < beforeSignals.ttr) {
+    commentary.push('Lexical diversity is slightly lower in the later paragraph, so vocabulary precision remains a live instructional target.');
+  } else if (afterSignals.ttr > beforeSignals.ttr) {
+    commentary.push('Lexical diversity improves in the later paragraph, suggesting more varied wording alongside stronger support.');
+  }
+
+  if (commentary.length === 0) {
+    commentary.push('The two workbook paragraphs show a similar balance of idea control and surface form, so revision priorities should be confirmed from the teacher comments and task history.');
+  }
+
   return {
     beforeId: 'body1-original',
     afterId: 'body2-final',
     metrics: [
-      { label: 'Workbook Word Count', before: '186', after: '198', delta: '+12' },
-      { label: 'Cohesion Markers', before: '3', after: '7', delta: '+4' },
-      { label: 'In-text Citations', before: '0', after: '1', delta: '+1' },
-      { label: 'Academic Focus Signals', before: '3', after: '5', delta: '+2' },
-      { label: 'Scaled TTR', before: '0.57', after: '0.52', delta: '-0.05' },
+      {
+        label: 'Workbook Word Count',
+        before: String(beforeSignals.wordCount),
+        after: String(afterSignals.wordCount),
+        delta: `${afterSignals.wordCount - beforeSignals.wordCount >= 0 ? '+' : ''}${afterSignals.wordCount - beforeSignals.wordCount}`,
+      },
+      {
+        label: 'Cohesion Markers',
+        before: String(beforeSignals.cohesionMarkers),
+        after: String(afterSignals.cohesionMarkers),
+        delta: `${afterSignals.cohesionMarkers - beforeSignals.cohesionMarkers >= 0 ? '+' : ''}${afterSignals.cohesionMarkers - beforeSignals.cohesionMarkers}`,
+      },
+      {
+        label: 'In-text Citations',
+        before: String(beforeSignals.citations),
+        after: String(afterSignals.citations),
+        delta: `${afterSignals.citations - beforeSignals.citations >= 0 ? '+' : ''}${afterSignals.citations - beforeSignals.citations}`,
+      },
+      {
+        label: 'Academic Focus Signals',
+        before: String(beforeSignals.academicFocusSignals),
+        after: String(afterSignals.academicFocusSignals),
+        delta: `${afterSignals.academicFocusSignals - beforeSignals.academicFocusSignals >= 0 ? '+' : ''}${afterSignals.academicFocusSignals - beforeSignals.academicFocusSignals}`,
+      },
+      {
+        label: 'Scaled TTR',
+        before: beforeSignals.ttr.toFixed(2),
+        after: afterSignals.ttr.toFixed(2),
+        delta: `${(afterSignals.ttr - beforeSignals.ttr) >= 0 ? '+' : ''}${(afterSignals.ttr - beforeSignals.ttr).toFixed(2)}`,
+      },
     ],
-    commentary: [
-      'The later paragraph shifts from a broad dependence-on-AI argument to a tighter focus on fairness, trust, and peer relationships.',
-      'The revised later writing adds explicit evidence and a formal in-text citation, which the earlier paragraph did not yet provide.',
-      'Cohesion improves because the final paragraph uses more linking moves such as "Another", "Over time", "For instance", "Also", and "So".',
-      'Lexical diversity is slightly flatter, so vocabulary precision remains a target even though argument support becomes stronger.',
-    ],
+    commentary,
     texts: {
-      before: artifacts.find((artifact) => artifact.id === 'body1-original') ?? null,
-      after: artifacts.find((artifact) => artifact.id === 'body2-final') ?? null,
+      before: beforeArtifact,
+      after: afterArtifact,
     },
   };
 }
@@ -729,21 +871,31 @@ function parseWorkbook(input, sourceName = 'uploaded.xlsx') {
 
   const helpSeekingMessages = countHelpSeekingMessages(chatMessages);
   const revisionFrequency = writingRows.filter((row) => /(revised|revision|final submission)/i.test(cleanText(row[0]))).length;
-  const feedbackViews = assignmentsRows.filter((row) => /Instructor \(/i.test(cleanText(row[7]))).length;
-  const assignmentViews = activityRows.filter((row) => cleanText(row[4]) === 'Assignment' && /viewed/i.test(cleanText(row[5]))).length;
-  const resourceAccessCount = activityRows.filter((row) => ['File', 'Folder', 'Page'].includes(cleanText(row[4])) && /viewed/i.test(cleanText(row[5]))).length;
-  const rubricViews = activityRows.filter((row) => cleanText(row[4]) === 'User report').length;
+  const feedbackViews = activityRows.filter(
+    (row) => cleanText(row[4]) === 'Assignment' && cleanText(row[5]) === 'Feedback viewed'
+  ).length;
+  const assignmentViews = activityRows.filter(
+    (row) => cleanText(row[4]) === 'Assignment' && cleanText(row[5]) === 'Course module viewed'
+  ).length;
+  const resourceAccessCount = activityRows.filter(
+    (row) => ['File', 'Folder', 'Page'].includes(cleanText(row[4])) && cleanText(row[5]) === 'Course module viewed'
+  ).length;
+  const rubricViews = activityRows.filter(
+    (row) => cleanText(row[4]) === 'User report' && cleanText(row[5]) === 'Grade user report viewed'
+  ).length;
 
   const finalWritingRow = writingRows.find((row) => /final submission/i.test(cleanText(row[0]))) ?? writingRows[writingRows.length - 1];
   const finalText = cleanText(finalWritingRow?.[1]);
-  const writingMetrics = analyzeWriting(finalText, revisionFrequency, feedbackViews, helpSeekingMessages);
+  const finalActivityContext = inferActivityContextFromWritingRow(finalWritingRow?.[0]);
+  const finalDeclaredWordCount = extractWordCount(finalWritingRow?.[0]);
+  const writingMetrics = analyzeWriting(finalText, finalDeclaredWordCount, revisionFrequency, feedbackViews, helpSeekingMessages);
 
-  const activityLogEntries = parseFirstNumber(summaryMap['Total Moodle activity log entries']);
-  const timeOnTask = Math.round((activityLogEntries * 0.35 + revisionFrequency * 12 + feedbackViews * 6 + helpSeekingMessages * 4) / 5) * 5;
   const feedbackViewedAt = cleanText(feedbackRows[0]?.[7]);
   const introGradeValue = cleanText(feedbackRows[0]?.[5]);
   const rubric = buildRubricSummary(rubricRows);
-  const activity = buildActivitySummary(activityRows);
+  const activity = buildActivitySummary(activityRows, finalActivityContext);
+  const activityLogEntries = activity.totalEvents;
+  const timeOnTask = activity.estimatedActiveMinutes;
   const writingArtifacts = buildWritingArtifacts(writingRows);
   const comparison = buildParagraphComparison(writingArtifacts);
   const sequence = buildRevisionSequence();
@@ -770,7 +922,7 @@ function parseWorkbook(input, sourceName = 'uploaded.xlsx') {
     lexical_resource: writingMetrics.lexicalResource,
     total_score: writingMetrics.totalScore,
     score_gain: writingMetrics.scoreGain,
-    first_access_delay_minutes: 10,
+    first_access_delay_minutes: activity.firstAccessDelayMinutes,
     sample_text: finalText,
   };
   const diagnostics = buildDiagnostics(baseStudentRecord, privateMessages);

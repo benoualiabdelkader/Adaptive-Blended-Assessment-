@@ -50,8 +50,8 @@ test('upload endpoint accepts multiple workbook files', async () => {
     assert.equal(body.analytics.prediction.available, false);
     assert.equal(body.cases[0].analytics.bayesian.available, true);
     assert.equal(body.cases[0].data[0].cluster_label, 3);
-    assert.equal(body.cases[0].data[0].predicted_score, 24.2);
-    assert.equal(body.cases[0].metrics.rf_metrics.r2, 0.68);
+    assert.equal(body.cases[0].data[0].predicted_score, 23.6);
+    assert.equal(body.cases[0].metrics.rf_metrics, null);
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }

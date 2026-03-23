@@ -1,4 +1,4 @@
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+﻿import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
@@ -153,10 +153,12 @@ export function Station06() {
 
   const representedClusters = Object.values(clusterCounts).filter((count) => count > 0).length;
   const readiness = cohortBackedMode
-    ? getClusterReadiness(cohortSize, representedClusters)
-    : {
+      ? getClusterReadiness(cohortSize, representedClusters)
+      : {
         label: 'Case-level mode',
-        note: 'The imported cohort is still too small for verified K-Means training, so this station falls back to the learner profile and reference centroids already stored in the case record.',
+        note: centroids.length > 0
+          ? 'The imported cohort is still too small for verified K-Means training, so this station falls back to the learner profile and stored case references.'
+          : 'The imported cohort is still too small for verified K-Means training, so this station shows the selected learner point and profile label without synthetic cohort references.',
         accent: 'var(--gold)',
       };
 
@@ -217,7 +219,9 @@ export function Station06() {
             <div className="font-body text-xs text-[var(--text-sec)] mt-1">
               {cohortBackedMode
                 ? 'The selected learner is plotted against live cohort centroids.'
-                : 'The plotted references are retained from the case record so the station can still explain the learner profile.'}
+                : centroids.length > 0
+                  ? 'The plotted references are retained from the case record so the station can still explain the learner profile.'
+                  : 'The chart shows the selected learner directly because no verified cohort references are available yet.'}
             </div>
           </GlassCard>
           <GlassCard className="p-4">
@@ -243,16 +247,16 @@ export function Station06() {
           </GlassCard>
         </div>
 
-        <GlassCard elevation="high" className="p-6 md:p-8 mb-8 h-[500px] w-full relative" pedagogicalLabel="Profile references position the case against engagement and performance patterns, either from the cohort model or from the retained case-level profile record.">
-          <div className="absolute top-8 left-8">
+        <GlassCard elevation="high" className="mb-8 flex w-full flex-col p-6 md:p-8" pedagogicalLabel="Profile references position the case against engagement and performance patterns, either from the cohort model or from the retained case-level profile record.">
+          <div className="mb-5 pr-4 md:mb-6">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)]">Behavioral Profile Positioning</h3>
             <p className="font-body text-[var(--text-sec)] text-sm mb-6">
-              Subject: {student?.name} (ID: {student?.student_id}) {cohortBackedMode ? '· cohort-backed view' : '· case-level fallback view'}
+              Subject: {student?.name} (ID: {student?.student_id}) {cohortBackedMode ? ' - cohort-backed view' : ' - case-level fallback view'}
             </p>
           </div>
 
-          <div className="w-full h-full pt-16">
-            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={260}>
+          <div className="w-full flex-1 min-h-[320px] md:min-h-[380px]">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={320}>
               <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal vertical />
                 <XAxis
@@ -360,3 +364,4 @@ function ClusterCard({ title, count, color, description, strategy }: ClusterCard
     </GlassCard>
   );
 }
+

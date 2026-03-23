@@ -3,6 +3,8 @@ import { GlassCard } from '../components/GlassCard';
 import { PedagogicalInsightBadge } from '../components/PedagogicalInsightBadge';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Cell, ScatterChart, Scatter, ReferenceLine } from 'recharts';
 import { CheckCircle2, TrendingUp } from 'lucide-react';
+import { clamp } from '../utils/utils';
+import type { FeatureImportance, StudentRecord } from '../data/diagnostic';
 import { getSelectedStudyCase, useStudyScopeStore } from '../state/studyScope';
 
 interface FeatureBar {
@@ -12,11 +14,75 @@ interface FeatureBar {
 }
 
 const MAX_SCORE = 25;
+const FEATURE_COLORS = ['var(--teal)', 'var(--lav)', 'var(--gold)', 'var(--red)', 'var(--lav-dim)'];
 
 function formatFeatureName(name: string) {
   return name
     .replace(/_/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
+function getImprovementMultiplier(predictedImprovement?: string) {
+  if (predictedImprovement === 'High') {
+    return 1.2;
+  }
+  if (predictedImprovement === 'Moderate-High') {
+    return 1.05;
+  }
+  if (predictedImprovement === 'Moderate') {
+    return 0.9;
+  }
+  if (predictedImprovement === 'Low-Moderate') {
+    return 0.75;
+  }
+  return 0.6;
+}
+
+function estimateProjectedScore(student?: StudentRecord | null) {
+  if (!student) {
+    return null;
+  }
+
+  if (isFiniteNumber(student.predicted_score)) {
+    return Number(clamp(student.predicted_score, 0, MAX_SCORE).toFixed(1));
+  }
+
+  if (isFiniteNumber(student.predicted_score_estimate)) {
+    return Number(clamp(student.predicted_score_estimate, 0, MAX_SCORE).toFixed(1));
+  }
+
+  if (!isFiniteNumber(student.total_score)) {
+    return null;
+  }
+
+  const projected = student.total_score + Number(student.score_gain ?? 0) * getImprovementMultiplier(student.predicted_improvement);
+  return Number(clamp(projected, 0, MAX_SCORE).toFixed(1));
+}
+
+function buildCaseLevelFeatureFallback(student?: StudentRecord | null): FeatureImportance[] {
+  if (!student) {
+    return [];
+  }
+
+  return [
+    { feature: 'revision_frequency', importance: clamp(student.revision_frequency / 6) },
+    { feature: 'feedback_views', importance: clamp(student.feedback_views / 6) },
+    { feature: 'argumentation', importance: clamp(student.argumentation / 5) },
+    { feature: 'cohesion_index', importance: clamp(student.cohesion_index / 6) },
+    { feature: 'time_on_task', importance: clamp(student.time_on_task / 240) },
+    { feature: 'word_count', importance: clamp(student.word_count / 250) },
+    { feature: 'help_seeking_messages', importance: clamp(student.help_seeking_messages / 6) },
+  ]
+    .sort((left, right) => right.importance - left.importance)
+    .slice(0, 5)
+    .map((feature) => ({
+      ...feature,
+      importance: Number(feature.importance.toFixed(2)),
+    }));
 }
 
 function getModelReadiness(cohortSize: number, featureCount: number) {
@@ -52,14 +118,18 @@ export function Station07() {
   const student = selectedCase?.student;
   const cohortSize = selectedCase?.analytics?.cohort_size ?? 0;
   const cohortBackedMode = predictionAvailable && Boolean(metrics);
+  const projectedScore = estimateProjectedScore(student);
+  const hasStoredProjectedScore = isFiniteNumber(student?.predicted_score) || isFiniteNumber(student?.predicted_score_estimate);
 
-  const importance = selectedCase?.metrics?.rf_importance ?? [];
+  const hasStoredImportance = Boolean((selectedCase?.metrics?.rf_importance?.length ?? 0) > 0);
+  const importance = hasStoredImportance
+    ? selectedCase?.metrics?.rf_importance ?? []
+    : buildCaseLevelFeatureFallback(student);
   const featureData: FeatureBar[] = importance.slice(0, 5).map((feature, index) => {
-    const colors = ['var(--teal)', 'var(--lav)', 'var(--gold)', 'var(--red)', 'var(--lav-dim)'];
     return {
       name: formatFeatureName(feature.feature),
       value: feature.importance,
-      color: colors[index] ?? 'var(--text-muted)',
+      color: FEATURE_COLORS[index] ?? 'var(--text-muted)',
     };
   });
   const readiness = cohortBackedMode
@@ -76,12 +146,12 @@ export function Station07() {
       ? 'Attempts or revision signals appear influential here. That supports using the model to inspect persistence, but not to assume that more attempts always mean better learning.'
       : 'The strongest feature is not automatically the most important pedagogical priority. Feature importance still has to be interpreted in the context of the text, rubric evidence, and revision trace.';
 
-  const scatterData = student && typeof student.predicted_score === 'number'
+  const scatterData = student && isFiniteNumber(projectedScore)
     ? [
         {
           id: student.student_id,
           actual: Number(student.total_score.toFixed(1)),
-          predicted: Number(student.predicted_score.toFixed(1)),
+          predicted: projectedScore,
           color: 'var(--teal)',
         },
       ]
@@ -103,7 +173,7 @@ export function Station07() {
             label="Predictive Signal"
             observation={cohortBackedMode && metrics
               ? `The verified cohort model estimates ${student.name}'s writing score with R2 = ${metrics.r2.toFixed(2)} and MAE = ${metrics.mae.toFixed(2)}.`
-              : `${student.name} still has a case-level predictive output: ${student.random_forest_output ?? 'predictive summary available'}; projected score ${student.predicted_score?.toFixed?.(1) ?? student.predicted_score ?? 'N/A'}.`}
+              : `${student.name} still has a case-level predictive output: ${student.random_forest_output ?? 'predictive summary available'}; projected score ${isFiniteNumber(projectedScore) ? projectedScore.toFixed(1) : 'N/A'}${hasStoredProjectedScore ? '' : ' derived from the current score trajectory and improvement label'}.`}
             implication={featureData[0]
               ? `${featureData[0].name} is the strongest visible feature in the current model view, but the instructional meaning still requires teacher judgment.`
               : 'Even when the cohort is small, the predictive output can still guide attention to likely priorities; it should not be treated as an autonomous decision.'}
@@ -130,10 +200,10 @@ export function Station07() {
               <div className="w-10 h-10 rounded-full bg-[var(--bg-card)] border border-[var(--border)] flex items-center justify-center text-[var(--teal)]"><TrendingUp size={20} /></div>
               <div className="min-w-0">
                 <p className="font-forensic text-[var(--teal)] text-lg">
-                  {cohortBackedMode && metrics ? `MAE: ${metrics.mae.toFixed(2)}` : `Predicted: ${student?.predicted_score?.toFixed?.(1) ?? student?.predicted_score ?? 'N/A'}`}
+                  {cohortBackedMode && metrics ? `MAE: ${metrics.mae.toFixed(2)}` : `Predicted: ${isFiniteNumber(projectedScore) ? projectedScore.toFixed(1) : 'N/A'}`}
                 </p>
                 <p className="font-body text-[10px] text-[var(--text-sec)]">
-                  {cohortBackedMode ? 'Model-wide prediction error' : 'Case-level projected score'}
+                  {cohortBackedMode ? 'Model-wide prediction error' : hasStoredProjectedScore ? 'Case-level projected score' : 'Projected score derived from current trajectory'}
                 </p>
               </div>
             </div>
@@ -206,42 +276,60 @@ export function Station07() {
             <p className="font-body text-[var(--text-sec)] text-xs mb-6">
               {cohortBackedMode
                 ? 'Variables most influential in the selected learner\'s score estimate within the imported cohort.'
-                : 'Stored feature ordering for the selected learner. Treat this as a case-level support signal until the cohort is large enough for verified model fitting.'}
+                : hasStoredImportance
+                  ? 'Stored feature ordering for the selected learner. Treat this as a case-level support signal until the cohort is large enough for verified model fitting.'
+                  : 'No stored feature ordering was returned, so this fallback ranking is derived from the learner\'s current engagement, revision, and writing indicators.'}
             </p>
 
-            <ResponsiveContainer width="100%" height="80%" minWidth={0} minHeight={240}>
-              <BarChart data={featureData} layout="vertical" margin={{ top: 0, right: 30, left: 20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" horizontal vertical={false} stroke="var(--border)" />
-                <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-primary)', fontSize: 11, fontFamily: 'var(--font-navigation)' }} width={128} />
-                <RechartsTooltip cursor={{ fill: 'var(--bg-raised)' }} contentStyle={{ backgroundColor: 'var(--bg-high)', border: 'none', borderRadius: '4px' }} />
-                <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
-                  {featureData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            {featureData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="80%" minWidth={0} minHeight={240}>
+                <BarChart data={featureData} layout="vertical" margin={{ top: 0, right: 30, left: 20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" horizontal vertical={false} stroke="var(--border)" />
+                  <XAxis type="number" hide />
+                  <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-primary)', fontSize: 11, fontFamily: 'var(--font-navigation)' }} width={128} />
+                  <RechartsTooltip cursor={{ fill: 'var(--bg-raised)' }} contentStyle={{ backgroundColor: 'var(--bg-high)', border: 'none', borderRadius: '4px' }} />
+                  <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={24}>
+                    {featureData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="flex min-h-[240px] items-center justify-center rounded-md border border-dashed border-[var(--border)] bg-[var(--bg-raised)]/30 px-6 text-center font-body text-sm leading-relaxed text-[var(--text-sec)]">
+                Predictive feature importance is not available for this learner yet. Import more verified cases or keep using the case narrative and rubric evidence for decision support.
+              </div>
+            )}
           </GlassCard>
 
           <GlassCard elevation="high" className="p-6 md:p-8 min-h-[380px] md:min-h-[450px]" pedagogicalLabel="The single point represents the selected learner's current alignment between predicted and observed achievement.">
             <h3 className="font-navigation text-lg font-medium text-[var(--text-primary)] mb-2">Prediction vs Actual (Case Study)</h3>
-            <p className="font-body text-[var(--text-sec)] text-xs mb-6">Mapping the selected student's predicted and observed result on the same 25-point scale.</p>
+            <p className="font-body text-[var(--text-sec)] text-xs mb-6">
+              {hasStoredProjectedScore
+                ? 'Mapping the selected student\'s predicted and observed result on the same 25-point scale.'
+                : 'Mapping the selected student\'s derived projected score against the observed result on the same 25-point scale.'}
+            </p>
 
-            <ResponsiveContainer width="100%" height="80%" minWidth={0} minHeight={240}>
-              <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                <XAxis type="number" dataKey="predicted" name="Predicted" domain={[0, MAX_SCORE]} stroke="var(--text-sec)" tick={{ fontSize: 10, fontFamily: 'var(--font-forensic)' }} tickFormatter={(value: number) => value.toFixed(0)} />
-                <YAxis type="number" dataKey="actual" name="Actual" domain={[0, MAX_SCORE]} stroke="var(--text-sec)" tick={{ fontSize: 10, fontFamily: 'var(--font-forensic)' }} tickFormatter={(value: number) => value.toFixed(0)} />
-                <RechartsTooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: 'var(--bg-high)', border: '1px solid var(--border)' }} />
-                <ReferenceLine segment={[{ x: 0, y: 0 }, { x: MAX_SCORE, y: MAX_SCORE }]} stroke="var(--text-muted)" strokeDasharray="4 4" />
-                <Scatter name={student?.name ?? 'Selected student'} data={scatterData}>
-                  {scatterData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} r={10} />
-                  ))}
-                </Scatter>
-              </ScatterChart>
-            </ResponsiveContainer>
+            {scatterData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="80%" minWidth={0} minHeight={240}>
+                <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis type="number" dataKey="predicted" name="Predicted" domain={[0, MAX_SCORE]} stroke="var(--text-sec)" tick={{ fontSize: 10, fontFamily: 'var(--font-forensic)' }} tickFormatter={(value: number) => value.toFixed(0)} />
+                  <YAxis type="number" dataKey="actual" name="Actual" domain={[0, MAX_SCORE]} stroke="var(--text-sec)" tick={{ fontSize: 10, fontFamily: 'var(--font-forensic)' }} tickFormatter={(value: number) => value.toFixed(0)} />
+                  <RechartsTooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: 'var(--bg-high)', border: '1px solid var(--border)' }} />
+                  <ReferenceLine segment={[{ x: 0, y: 0 }, { x: MAX_SCORE, y: MAX_SCORE }]} stroke="var(--text-muted)" strokeDasharray="4 4" />
+                  <Scatter name={student?.name ?? 'Selected student'} data={scatterData}>
+                    {scatterData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} r={10} />
+                    ))}
+                  </Scatter>
+                </ScatterChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="flex min-h-[240px] items-center justify-center rounded-md border border-dashed border-[var(--border)] bg-[var(--bg-raised)]/30 px-6 text-center font-body text-sm leading-relaxed text-[var(--text-sec)]">
+                A numeric projected score is not available yet. The station still preserves the improvement label and predictive interpretation for teacher review.
+              </div>
+            )}
 
             <div className="flex justify-center gap-4 mt-2 font-navigation text-[10px] text-[var(--text-sec)] uppercase tracking-wider">
               <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-[var(--teal)]"></div> Target Alignment</span>

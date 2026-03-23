@@ -15,12 +15,45 @@ function shortDate(timestamp: string) {
   return new Date(parsed).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).replace(' ', ' ');
 }
 
-function buildTimeline(trace: NonNullable<ReturnType<typeof getSelectedStudyCase>>['activity']['trace']) {
-  const daily = new Map<string, { access: number; feedback: number; revision: number }>();
+type ActivityState = NonNullable<ReturnType<typeof getSelectedStudyCase>>['activity'];
 
-  trace.forEach((entry) => {
+function buildTimeline(activity: ActivityState) {
+  const entries = activity.entries ?? [];
+  const daily = new Map<string, { dateValue: number; access: number; feedback: number; revision: number }>();
+
+  if (entries.length > 0) {
+    entries.forEach((entry) => {
+      const parsed = Date.parse(entry.timestamp);
+      if (Number.isNaN(parsed)) {
+        return;
+      }
+
+      const label = shortDate(entry.timestamp);
+      const current = daily.get(label) ?? { dateValue: parsed, access: 0, feedback: 0, revision: 0 };
+      const text = `${entry.component} ${entry.event} ${entry.context} ${entry.description}`.toLowerCase();
+
+      if (/course module viewed|status of the submission has been viewed|course viewed|user list viewed|submission viewed/.test(text)) current.access += 1;
+      if (/feedback viewed|graded|feedback/.test(text)) current.feedback += 1;
+      if (/comment created|online text|submission created|submitted submission|file has been uploaded/.test(text)) current.revision += 1;
+
+      daily.set(label, current);
+    });
+
+    return Array.from(daily.entries())
+      .sort((left, right) => left[1].dateValue - right[1].dateValue)
+      .slice(-8)
+      .map(([date, counts]) => ({
+        date,
+        access: counts.access,
+        feedback: counts.feedback,
+        revision: counts.revision,
+      }));
+  }
+
+  activity.trace.forEach((entry) => {
     const label = shortDate(entry.timestamp);
-    const current = daily.get(label) ?? { access: 0, feedback: 0, revision: 0 };
+    const parsed = Date.parse(entry.timestamp);
+    const current = daily.get(label) ?? { dateValue: Number.isNaN(parsed) ? 0 : parsed, access: 0, feedback: 0, revision: 0 };
     const text = `${entry.event} ${entry.context} ${entry.detail}`.toLowerCase();
 
     if (/viewed|opened|reopened|access|submission/.test(text)) current.access += 1;
@@ -34,27 +67,45 @@ function buildTimeline(trace: NonNullable<ReturnType<typeof getSelectedStudyCase
   let feedback = 0;
   let revision = 0;
 
-  return Array.from(daily.entries()).slice(-8).map(([date, counts]) => {
-    access += counts.access;
-    feedback += counts.feedback;
-    revision += counts.revision;
-    return { date, access, feedback, revision };
-  });
+  return Array.from(daily.entries())
+    .sort((left, right) => left[1].dateValue - right[1].dateValue)
+    .slice(-8)
+    .map(([date, counts]) => {
+      access += counts.access;
+      feedback += counts.feedback;
+      revision += counts.revision;
+      return { date, access, feedback, revision };
+    });
 }
 
-function buildHeatmap(trace: NonNullable<ReturnType<typeof getSelectedStudyCase>>['activity']['trace']) {
+function buildHeatmap(activity: ActivityState) {
+  const entries = activity.entries ?? [];
   const datedCounts = new Map<string, number>();
 
-  trace.forEach((entry) => {
-    const parsed = Date.parse(entry.timestamp);
-    if (Number.isNaN(parsed)) {
-      return;
-    }
-    const key = new Date(parsed).toISOString().slice(0, 10);
-    datedCounts.set(key, (datedCounts.get(key) ?? 0) + 1);
-  });
+  if (entries.length > 0) {
+    entries.forEach((entry) => {
+      const parsed = Date.parse(entry.timestamp);
+      if (Number.isNaN(parsed)) {
+        return;
+      }
+      const key = new Date(parsed).toISOString().slice(0, 10);
+      datedCounts.set(key, (datedCounts.get(key) ?? 0) + 1);
+    });
+  } else {
+    activity.trace.forEach((entry) => {
+      const parsed = Date.parse(entry.timestamp);
+      if (Number.isNaN(parsed)) {
+        return;
+      }
+      const key = new Date(parsed).toISOString().slice(0, 10);
+      datedCounts.set(key, (datedCounts.get(key) ?? 0) + 1);
+    });
+  }
 
-  const lastDate = trace.length > 0 ? Date.parse(trace[trace.length - 1].timestamp) : Date.now();
+  const lastSource = entries.length > 0
+    ? entries[entries.length - 1]?.timestamp
+    : activity.trace[activity.trace.length - 1]?.timestamp;
+  const lastDate = lastSource ? Date.parse(lastSource) : Date.now();
   const days = Array.from({ length: 30 }, (_, index) => {
     const day = new Date(lastDate - (29 - index) * 86400000).toISOString().slice(0, 10);
     return datedCounts.get(day) ?? 0;
@@ -68,8 +119,8 @@ export function Station03() {
   const selectedCaseId = useStudyScopeStore((state) => state.selectedCaseId);
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
 
-  const timelineData = useMemo(() => (selectedCase ? buildTimeline(selectedCase.activity.trace) : []), [selectedCase]);
-  const heatmapIntensities = useMemo(() => (selectedCase ? buildHeatmap(selectedCase.activity.trace) : []), [selectedCase]);
+  const timelineData = useMemo(() => (selectedCase ? buildTimeline(selectedCase.activity) : []), [selectedCase]);
+  const heatmapIntensities = useMemo(() => (selectedCase ? buildHeatmap(selectedCase.activity) : []), [selectedCase]);
   const maxTimelineValue = Math.max(1, ...timelineData.flatMap((point) => [point.access, point.feedback, point.revision]));
   const clusterName = selectedCase?.clusterName ?? 'Unclassified';
   const risk = (selectedCase?.riskLevel ?? 'monitor').toUpperCase();

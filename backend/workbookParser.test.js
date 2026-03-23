@@ -13,7 +13,7 @@ test('parseWorkbook extracts deterministic case metadata from the workbook file'
   assert.equal(result.meta.studentName, 'Lahmarabbou Asmaa');
   assert.equal(result.meta.userId, '9263');
   assert.equal(result.meta.courseTitle, 'Academic Writing');
-  assert.equal(result.meta.activityLogEntries, 258);
+  assert.equal(result.meta.activityLogEntries, 260);
   assert.equal(result.meta.chatMessages, 17);
   assert.equal(result.meta.feedbackViewedAt, '12-02-2026 23:25');
   assert.ok(result.communication.dialogue.length >= 10);
@@ -33,18 +33,23 @@ test('parseWorkbook extracts deterministic case metadata from the workbook file'
   assert.match(result.communication.instructorComments[0].note, /more formal and academic/i);
 
   assert.equal(student.student_id, '9263');
-  assert.equal(student.assignment_views, 108);
+  assert.equal(student.assignment_views, 53);
   assert.equal(student.resource_access_count, 19);
   assert.equal(student.rubric_views, 6);
+  assert.equal(student.time_on_task, 179);
   assert.equal(student.revision_frequency, 4);
-  assert.equal(student.feedback_views, 4);
+  assert.equal(student.feedback_views, 2);
   assert.equal(student.help_seeking_messages, 5);
-  assert.equal(student.word_count, 199);
+  assert.equal(student.word_count, 198);
+  assert.equal(student.first_access_delay_minutes, 25);
   assert.equal(student.learner_profile, 'Feedback-responsive developing writer');
   assert.equal(student.triggered_rule_ids, 'C4; C5; B2');
   assert.equal(student.feedback_templates_selected, 'feedback_decoding; feedforward_guidance; argument_expansion');
   assert.equal(student.cluster_label, 3);
   assert.equal(student.clustering_output, 'Engaged or strategic writer');
+  assert.equal(result.metrics.rf_metrics, null);
+  assert.equal(result.metrics.rf_importance.length, 0);
+  assert.equal(result.metrics.cluster_centroids.length, 0);
   assert.ok(Array.isArray(student.rule_matches));
   assert.equal(student.rule_matches[0].rule_id, 'C4');
   assert.match(student.rule_matches[0].pedagogical_interpretation, /help decoding comments/i);
@@ -56,7 +61,7 @@ test('parseWorkbook accepts a raw workbook buffer', () => {
   assert.equal(result.meta.workbookName, 'buffer-upload.xlsx');
   assert.ok(Array.isArray(result.data));
   assert.equal(result.data.length, 1);
-  assert.equal(result.metrics.rf_metrics.r2, 0.68);
+  assert.equal(result.metrics.rf_metrics, null);
   assert.equal(result.communication.instructorComments[0].assessment, 'Argumentative essay Introduction');
   assert.equal(result.thresholds.privateMessages.thresholds.length, 4);
 });

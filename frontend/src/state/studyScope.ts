@@ -102,6 +102,14 @@ export interface TeacherStudyCase {
     activeSessions: number;
     estimatedActiveMinutes: number;
     sessionGapRule: string;
+    firstAccessDelayMinutes?: number;
+    entries?: Array<{
+      timestamp: string;
+      component: string;
+      event: string;
+      context: string;
+      description: string;
+    }>;
     clickSignals: Array<{
       label: string;
       value: string;
@@ -427,6 +435,8 @@ export function mapParsedCaseToStudyCase(parsed: ParsedWorkbookCaseResponse): Te
     activeSessions: 0,
     estimatedActiveMinutes: student.time_on_task,
     sessionGapRule: 'No detailed activity summary supplied.',
+    firstAccessDelayMinutes: student.first_access_delay_minutes,
+    entries: [],
     clickSignals: [],
     highlightedSessions: [],
     trace: [],
