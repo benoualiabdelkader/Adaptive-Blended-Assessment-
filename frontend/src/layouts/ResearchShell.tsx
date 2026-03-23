@@ -19,7 +19,7 @@ function InterpretationPanel() {
     : null;
 
   return (
-    <div className="w-[400px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] hidden xl:flex flex-col h-full sticky top-[60px] overflow-y-auto">
+    <div className="w-[320px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] hidden xl:flex flex-col h-full sticky top-[60px] overflow-y-auto">
       <div className="p-6">
         <h3 className="text-xs font-navigation uppercase tracking-widest text-[var(--text-sec)] mb-4 pb-2 border-b border-[var(--border)]">
           Teaching Meaning
@@ -94,7 +94,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
     : selectedStationIds.length;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-[var(--bg-deep)]">
+    <div className="flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-deep)]">
       <header className="h-[60px] shrink-0 z-50 bg-[var(--glass-bg)] backdrop-blur-[16px] border-b border-[var(--border)] px-4 lg:px-6 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <button
@@ -108,9 +108,9 @@ export function ResearchShell({ children }: ResearchShellProps) {
           </div>
 
           <nav className="hidden md:flex items-center gap-1 font-navigation text-sm ml-4">
-            <NavItem to="/dashboard" icon={LayoutDashboard} label="Overview" active={location.pathname === '/dashboard' || location.pathname === '/'} />
-            <NavItem to="/students" icon={Users} label="Student Cases" active={location.pathname.startsWith('/students')} />
-            <NavItem to="/reports" icon={FileText} label="Teacher Report" active={location.pathname.startsWith('/reports')} />
+            <NavItem to="/dashboard" icon={LayoutDashboard} label="Dashboard" active={location.pathname === '/dashboard' || location.pathname === '/'} />
+            <NavItem to="/students" icon={Users} label="Student Roster" active={location.pathname.startsWith('/students')} />
+            <NavItem to="/reports" icon={FileText} label="PDF Reports" active={location.pathname.startsWith('/reports')} />
           </nav>
         </div>
 
@@ -120,7 +120,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
             onClick={() => navigate('/pipeline/1')}
           >
             <Workflow size={16} />
-            <span className="hidden sm:inline">Open Pipeline</span>
+            <span className="hidden sm:inline">Run AI Assistant</span>
           </button>
           <button
             className="text-[var(--text-sec)] hover:text-[var(--lav)] transition-colors flex items-center gap-2 text-sm font-navigation"
@@ -151,13 +151,13 @@ export function ResearchShell({ children }: ResearchShellProps) {
             <LayoutDashboard size={16} /> Overview
           </Link>
           <Link to="/students" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
-            <Users size={16} /> Student Cases
+            <Users size={16} /> Student Roster
           </Link>
           <Link to="/reports" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
-            <FileText size={16} /> Teacher Report
+            <FileText size={16} /> PDF Reports
           </Link>
           <Link to="/pipeline/1" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
-            <Workflow size={16} /> Open Pipeline
+            <Workflow size={16} /> Run AI Assistant
           </Link>
         </div>
       )}
@@ -195,7 +195,7 @@ export function ResearchShell({ children }: ResearchShellProps) {
               onClick={() => navigate('/pipeline/1')}
               className="rounded-full border border-[var(--lav-border)] bg-[var(--lav-glow)] px-3 py-1 font-navigation text-[10px] uppercase tracking-widest text-[var(--lav)] hover:text-[var(--text-primary)] hover:border-[var(--lav)] transition-colors"
             >
-              Open Pipeline
+              Run AI Assistant
             </button>
           </div>
         </div>

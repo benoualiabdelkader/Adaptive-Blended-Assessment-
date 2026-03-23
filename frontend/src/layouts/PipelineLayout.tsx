@@ -64,7 +64,7 @@ export function PipelineLayout({
   };
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-[var(--bg-deep)]">
+    <div className="flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-deep)]">
       <header className="h-[60px] shrink-0 z-50 bg-[var(--glass-bg)] backdrop-blur-[16px] border-b border-[var(--border)] px-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link to="/dashboard" className="text-[var(--lav)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-2 font-navigation text-sm font-medium bg-[var(--lav-glow)] px-3 py-1.5 rounded-md border border-[var(--lav-border)]">
@@ -174,7 +174,7 @@ export function PipelineLayout({
           </AnimatePresence>
         </main>
 
-        <aside className="w-[380px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] hidden xl:flex overflow-y-auto">
+        <aside className="w-[320px] shrink-0 border-l border-[var(--border)] bg-[var(--bg-base)] hidden xl:flex overflow-y-auto">
           <div className="p-5 xl:p-6 space-y-5 min-w-0 w-full">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="text-[var(--lav)]" size={18} />

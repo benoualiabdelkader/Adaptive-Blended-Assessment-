@@ -79,6 +79,11 @@ body {
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  transition: all var(--duration-base) var(--ease-smooth);
+}
+.glass-card:hover {
+  border-color: var(--border-bright);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 .glass-card.accent-lav  { border-left: 3px solid var(--lav); }
 .glass-card.accent-teal { border-left: 3px solid var(--teal); }
@@ -138,17 +143,18 @@ body {
 }
 
 .btn-primary {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 14px;
+  font-family: var(--font-navigation);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.03em;
   padding: 10px 20px;
-  background: linear-gradient(135deg, var(--lav), var(--gold));
-  color: var(--bg-deep);
-  border: none;
+  background: linear-gradient(135deg, var(--lav), var(--lav-dim));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--duration-base) var(--ease-smooth);
-  box-shadow: 0 0 20px var(--lav-glow);
+  box-shadow: 0 4px 12px var(--lav-glow);
 }
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--lav), var(--red));
@@ -209,7 +215,12 @@ body {
 }
 
 .report-print-page {
-  min-height: 297mm;
+  min-height: auto;
+}
+@media (min-width: 1024px) {
+  .report-print-page {
+    min-height: 297mm;
+  }
 }
 
 .report-print-cover {
@@ -470,6 +481,8 @@ body {
 @media print {
   html, body {
     background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   body {

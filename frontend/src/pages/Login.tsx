@@ -58,10 +58,10 @@ export function Login() {
         >
           <div>
             <h1 className="font-editorial italic text-4xl lg:text-5xl lg:leading-[1.1] text-[var(--text-primary)] mb-4">
-              Forensic Intelligence for Adaptive Writing Assessment
+              AI Teaching Assistant for Academic English
             </h1>
             <p className="font-body text-[var(--text-sec)] text-lg">
-              Doctoral Research Study - Belhadj Bouchaib University
+              Automated Profiling & Feedback System
             </p>
           </div>
 
@@ -75,9 +75,9 @@ export function Login() {
           </blockquote>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            <StatCard icon={Users} label="Verified Workbooks" value="Import-driven" delay="100ms" isLoaded={isLoaded} accent="lav" />
-            <StatCard icon={Activity} label="Evidence Mode" value="Workbook Only" delay="180ms" isLoaded={isLoaded} accent="teal" />
-            <StatCard icon={BookOpen} label="Reports" value="Evidence-based" delay="340ms" isLoaded={isLoaded} accent="gold" />
+            <StatCard icon={Users} label="Student Data" value="Auto-Synced" delay="100ms" isLoaded={isLoaded} accent="lav" />
+            <StatCard icon={Activity} label="Review Mode" value="Guided Analytics" delay="180ms" isLoaded={isLoaded} accent="teal" />
+            <StatCard icon={BookOpen} label="Action Plans" value="Printable Reports" delay="340ms" isLoaded={isLoaded} accent="gold" />
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export function Login() {
         >
           <GlassCard elevation="high" className="p-8 border border-[var(--border-bright)] backdrop-blur-[32px]">
             <h2 className="font-navigation text-2xl font-medium text-[var(--text-primary)] mb-8">
-              Research Access
+              Instructor Portal
             </h2>
 
             <form onSubmit={handleLogin} className="flex flex-col gap-5">
@@ -140,7 +140,7 @@ export function Login() {
 
             <div className="mt-8 pt-6 border-t border-[var(--border)] text-center">
               <p className="font-forensic text-xs text-[var(--text-muted)]">
-                WriteLens Analytical Studio v2.0
+                WriteLens Teaching Portal v2.0
               </p>
             </div>
           </GlassCard>
