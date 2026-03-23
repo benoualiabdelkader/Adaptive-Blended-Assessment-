@@ -98,7 +98,7 @@ export function PipelineLayout({
                   )}
                 >
                   <Icon size={20} />
-                  <span className="font-navigation text-[9px] font-bold">
+                  <span className="font-navigation text-[10px] font-bold">
                     {String(station.id).padStart(2, '0')}
                   </span>
 
@@ -122,7 +122,7 @@ export function PipelineLayout({
                 )}
               >
                 <Icon size={20} className={isActive ? 'text-[var(--lav)]' : 'group-hover:text-[var(--text-primary)]'} />
-                <span className={clsx('font-navigation text-[9px] font-bold', isActive ? 'text-[var(--lav)]' : '')}>
+                <span className={clsx('font-navigation text-[10px] font-bold', isActive ? 'text-[var(--lav)]' : '')}>
                   {String(station.id).padStart(2, '0')}
                 </span>
 

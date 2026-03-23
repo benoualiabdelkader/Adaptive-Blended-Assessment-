@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
 const { parseWorkbook } = require('./workbookParser');
+const { evaluateAdaptiveDecision } = require('./adaptiveDecision');
 const { app } = require('./server');
 
 const workbookPath = path.join(__dirname, '..', 'lahmarabbou_asmaa_FULL_ENGLISH (1).xlsx');
@@ -62,8 +63,36 @@ async function main() {
   assert.equal(student.feedback_views, 4);
   assert.equal(student.help_seeking_messages, 5);
   assert.equal(student.word_count, 199);
-  assert.equal(student.triggered_rule_ids, 'B2; D1');
+  assert.equal(student.learner_profile, 'Feedback-responsive developing writer');
+  assert.equal(student.triggered_rule_ids, 'C4; C5; B2');
+  assert.equal(student.feedback_templates_selected, 'feedback_decoding; feedforward_guidance; argument_expansion');
   assert.equal(student.cluster_label, 3);
+
+  const disengagedCase = evaluateAdaptiveDecision({
+    assignment_views: 1,
+    resource_access_count: 0,
+    rubric_views: 0,
+    time_on_task: 12,
+    revision_frequency: 0,
+    feedback_views: 0,
+    help_seeking_messages: 0,
+    word_count: 70,
+    error_density: 4.5,
+    cohesion_index: 1,
+    cohesion: 2.2,
+    ttr: 0.39,
+    argumentation: 2.4,
+    grammar_accuracy: 2.5,
+    lexical_resource: 2.7,
+    total_score: 12.5,
+    score_gain: 0.4,
+    first_access_delay_minutes: 45,
+  });
+  assert.equal(disengagedCase.learner_profile, 'Disengaged / low-participation learner');
+  assert.equal(
+    disengagedCase.feedback_templates_selected,
+    'planning_scaffold; elaboration_prompt; revision_prompt; motivational_reengagement; metacognitive_prompt'
+  );
 
   const bufferResult = parseWorkbook(fs.readFileSync(workbookPath), 'buffer-upload.xlsx');
   assert.equal(bufferResult.meta.workbookName, 'buffer-upload.xlsx');

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { clamp } from '../utils/utils';
 import {
   getStudentClusterName,
   getStudentRiskLevel,
@@ -306,7 +307,7 @@ const DEFAULT_VARIABLE_IDS: StudyVariableId[] = [
 
 const DEFAULT_STATION_IDS: StudyStationId[] = STUDY_STATIONS.map((station) => station.id);
 
-const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+
 
 function buildScoreJourney(student: StudentRecord): Array<{ name: string; score: number }> {
   const current = clamp(Number((student.total_score / 5.55).toFixed(1)), 1, 5);

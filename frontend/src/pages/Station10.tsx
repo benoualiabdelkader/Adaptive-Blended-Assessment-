@@ -48,6 +48,10 @@ function buildFeedbackLoop(studyCase: TeacherStudyCase): FeedbackLoop | null {
 }
 
 function getPlanningPrompt(studyCase: TeacherStudyCase) {
+  if (studyCase.student.final_feedback_focus) {
+    return studyCase.student.final_feedback_focus;
+  }
+
   const focusAreas: string[] = [];
   if (studyCase.student.argumentation < 3.6) focusAreas.push('clearer claim-evidence explanation');
   if (studyCase.student.grammar_accuracy < 3.4) focusAreas.push('more controlled academic phrasing');
@@ -71,6 +75,7 @@ export function Station10() {
     ? [
         { range: '< 1 day', count: feedbackLoop.revisionDelayDays < 1 ? 1 : 0, fill: 'var(--teal)' },
         { range: '1-2 days', count: feedbackLoop.revisionDelayDays >= 1 && feedbackLoop.revisionDelayDays <= 2 ? 1 : 0, fill: 'var(--gold)' },
+        { range: '2-3 days', count: feedbackLoop.revisionDelayDays > 2 && feedbackLoop.revisionDelayDays <= 3 ? 1 : 0, fill: 'var(--lav)' },
         { range: '> 3 days', count: feedbackLoop.revisionDelayDays > 3 ? 1 : 0, fill: 'var(--red)' },
       ]
     : [];

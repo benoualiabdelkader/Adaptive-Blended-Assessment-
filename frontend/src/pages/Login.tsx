@@ -60,7 +60,7 @@ export function Login() {
             </footer>
           </blockquote>
 
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <StatCard icon={Users} label="Verified Workbooks" value="Import-driven" delay="100ms" isLoaded={isLoaded} accent="lav" />
             <StatCard icon={Activity} label="Evidence Mode" value="Workbook Only" delay="180ms" isLoaded={isLoaded} accent="teal" />
             <StatCard icon={BookOpen} label="Reports" value="Evidence-based" delay="340ms" isLoaded={isLoaded} accent="gold" />

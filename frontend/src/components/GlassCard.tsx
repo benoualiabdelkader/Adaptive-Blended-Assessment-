@@ -40,7 +40,7 @@ export function GlassCard({
     >
       {children}
       {pedagogicalLabel && (
-        <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--bg-high)] border border-[var(--border)] text-[var(--text-sec)] text-xs p-2 rounded -bottom-10 left-0 w-max max-w-xs z-50 pointer-events-none">
+        <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--bg-high)] border border-[var(--border)] text-[var(--text-sec)] text-xs p-2 rounded bottom-full mb-2 left-0 w-max max-w-xs z-50 pointer-events-none shadow-lg">
           {pedagogicalLabel}
         </div>
       )}

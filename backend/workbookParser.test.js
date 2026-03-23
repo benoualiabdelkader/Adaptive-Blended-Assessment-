@@ -40,7 +40,9 @@ test('parseWorkbook extracts deterministic case metadata from the workbook file'
   assert.equal(student.feedback_views, 4);
   assert.equal(student.help_seeking_messages, 5);
   assert.equal(student.word_count, 199);
-  assert.equal(student.triggered_rule_ids, 'B2; D1');
+  assert.equal(student.learner_profile, 'Feedback-responsive developing writer');
+  assert.equal(student.triggered_rule_ids, 'C4; C5; B2');
+  assert.equal(student.feedback_templates_selected, 'feedback_decoding; feedforward_guidance; argument_expansion');
   assert.equal(student.cluster_label, 3);
 });
 

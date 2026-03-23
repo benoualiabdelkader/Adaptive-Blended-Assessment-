@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, LayoutDashboard, Users, FileText, FileEdit, Lightbulb, Search, BookOpen, Settings as SettingsIcon, Workflow } from 'lucide-react';
+import { Menu, LayoutDashboard, Users, FileText, FileEdit, Lightbulb, Search, BookOpen, Workflow } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { GlassCard } from '../components/GlassCard';
@@ -131,10 +131,6 @@ export function ResearchShell({ children }: ResearchShellProps) {
           </button>
           <div className="w-px h-6 bg-[var(--border)] hidden sm:block"></div>
 
-          <Link to="/settings" className="text-[var(--text-sec)] hover:text-[var(--lav)] transition-colors" title="Settings">
-            <SettingsIcon size={18} />
-          </Link>
-
           <button
             onClick={() => navigate('/settings')}
             className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity ml-2 bg-transparent border-none p-0"
@@ -147,6 +143,24 @@ export function ResearchShell({ children }: ResearchShellProps) {
           </button>
         </div>
       </header>
+
+      {/* Mobile navigation menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-b border-[var(--border)] bg-[var(--bg-base)] px-4 py-3 space-y-1 animate-in slide-in-from-top-2 duration-200">
+          <Link to="/dashboard" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
+            <LayoutDashboard size={16} /> Overview
+          </Link>
+          <Link to="/students" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
+            <Users size={16} /> Student Cases
+          </Link>
+          <Link to="/reports" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
+            <FileText size={16} /> Teacher Report
+          </Link>
+          <Link to="/pipeline/1" className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-navigation text-[var(--text-sec)] hover:bg-[var(--bg-raised)]" onClick={() => setIsMobileMenuOpen(false)}>
+            <Workflow size={16} /> Open Pipeline
+          </Link>
+        </div>
+      )}
 
       <div className="shrink-0 border-b border-[var(--border)] bg-[var(--bg-base)]/90 backdrop-blur-[10px] px-4 lg:px-6 py-3">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">

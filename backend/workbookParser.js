@@ -1,4 +1,5 @@
 const xlsx = require('xlsx');
+const { evaluateAdaptiveDecision, getClusterLabelDescription } = require('./adaptiveDecision');
 
 function readWorkbook(input) {
   if (Buffer.isBuffer(input)) {
@@ -133,31 +134,12 @@ function analyzeWriting(finalText, revisionFrequency, feedbackViews, helpSeeking
   };
 }
 
-function buildDiagnostics(metrics, helpSeekingMessages, timeOnTask) {
-  const triggeredRules = [];
+function buildDiagnostics(studentRecord, privateMessages) {
+  const vocabularyHelpCount = privateMessages?.thresholds?.find((threshold) => threshold.id === 'msg-vocabulary')?.matched ?? 0;
 
-  if (metrics.argumentation <= 3.6) {
-    triggeredRules.push('B2');
-  }
-
-  if (helpSeekingMessages >= 4) {
-    triggeredRules.push('D1');
-  }
-
-  const interpretations = triggeredRules.includes('B2')
-    ? 'Argument development needs stronger evidence; adaptive help-seeking remains active.'
-    : 'Adaptive help-seeking remains active.';
-
-  return {
-    triggeredRuleIds: triggeredRules.join('; '),
-    interpretations,
-    feedbackTypes: 'higher_order_feedback; dialogic_scaffolding',
-    onsiteInterventions: 'claim_evidence_explanation_scaffold; short_clarification_conference',
-    predictedScore: round(metrics.totalScore + 1.6, 1),
-    personalizedFeedback:
-      'Your writing shows clear engagement and stronger control of structure. The next step is to deepen evidence, tighten academic phrasing, and explain how each example supports your main claim.',
-    clusterLabel: timeOnTask >= 170 && metrics.totalScore < 22 ? 3 : metrics.totalScore >= 22 ? 1 : 2,
-  };
+  return evaluateAdaptiveDecision(studentRecord, {
+    vocabularyHelpCount,
+  });
 }
 
 function buildMetrics() {
@@ -176,10 +158,10 @@ function buildMetrics() {
       { feature: 'help_seeking_messages', importance: 0.07 },
     ],
     cluster_centroids: [
-      { time_on_task: 75, revision_frequency: 1, feedback_views: 0, rubric_views: 1, help_seeking_messages: 0, total_score: 10, ttr: 0.38, cohesion_index: 2, word_count: 135, cluster_label: 0 },
-      { time_on_task: 115, revision_frequency: 2, feedback_views: 1, rubric_views: 2, help_seeking_messages: 1, total_score: 22, ttr: 0.57, cohesion_index: 4, word_count: 210, cluster_label: 1 },
-      { time_on_task: 155, revision_frequency: 3, feedback_views: 2, rubric_views: 4, help_seeking_messages: 2, total_score: 16, ttr: 0.47, cohesion_index: 3, word_count: 180, cluster_label: 2 },
-      { time_on_task: 180, revision_frequency: 4, feedback_views: 4, rubric_views: 6, help_seeking_messages: 5, total_score: 20.5, ttr: 0.52, cohesion_index: 4, word_count: 199, cluster_label: 3 },
+      { time_on_task: 75, revision_frequency: 1, feedback_views: 0, rubric_views: 1, help_seeking_messages: 0, total_score: 10, ttr: 0.38, cohesion_index: 2, word_count: 135, cluster_label: 0, cluster_profile: getClusterLabelDescription(0) },
+      { time_on_task: 115, revision_frequency: 2, feedback_views: 1, rubric_views: 2, help_seeking_messages: 1, total_score: 22, ttr: 0.57, cohesion_index: 4, word_count: 210, cluster_label: 1, cluster_profile: getClusterLabelDescription(1) },
+      { time_on_task: 155, revision_frequency: 3, feedback_views: 2, rubric_views: 4, help_seeking_messages: 2, total_score: 16, ttr: 0.47, cohesion_index: 3, word_count: 180, cluster_label: 2, cluster_profile: getClusterLabelDescription(2) },
+      { time_on_task: 180, revision_frequency: 4, feedback_views: 4, rubric_views: 6, help_seeking_messages: 5, total_score: 20.5, ttr: 0.52, cohesion_index: 4, word_count: 199, cluster_label: 3, cluster_profile: getClusterLabelDescription(3) },
     ],
   };
 }
@@ -715,7 +697,7 @@ function buildPrivateMessageThresholds(dialogueTrace) {
 
   return {
     matchedCount,
-    compositeThreshold: `D1 is triggered because ${matchedCount} private messages match the help-seeking threshold used in the study.`,
+    compositeThreshold: `Adaptive help-seeking is supported because ${matchedCount} private messages match the study threshold.`,
     thresholds,
   };
 }
@@ -758,7 +740,6 @@ function parseWorkbook(input, sourceName = 'uploaded.xlsx') {
 
   const activityLogEntries = parseFirstNumber(summaryMap['Total Moodle activity log entries']);
   const timeOnTask = Math.round((activityLogEntries * 0.35 + revisionFrequency * 12 + feedbackViews * 6 + helpSeekingMessages * 4) / 5) * 5;
-  const diagnostics = buildDiagnostics(writingMetrics, helpSeekingMessages, timeOnTask);
   const feedbackViewedAt = cleanText(feedbackRows[0]?.[7]);
   const introGradeValue = cleanText(feedbackRows[0]?.[5]);
   const rubric = buildRubricSummary(rubricRows);
@@ -768,7 +749,7 @@ function parseWorkbook(input, sourceName = 'uploaded.xlsx') {
   const sequence = buildRevisionSequence();
   const privateMessages = buildPrivateMessageThresholds(dialogueTrace);
 
-  const studentRecord = {
+  const baseStudentRecord = {
     student_id: userId,
     name: studentName,
     email: 'Unavailable in workbook export metadata',
@@ -791,13 +772,11 @@ function parseWorkbook(input, sourceName = 'uploaded.xlsx') {
     score_gain: writingMetrics.scoreGain,
     first_access_delay_minutes: 10,
     sample_text: finalText,
-    triggered_rule_ids: diagnostics.triggeredRuleIds,
-    interpretations: diagnostics.interpretations,
-    feedback_types: diagnostics.feedbackTypes,
-    onsite_interventions: diagnostics.onsiteInterventions,
-    cluster_label: diagnostics.clusterLabel,
-    predicted_score: diagnostics.predictedScore,
-    personalized_feedback: diagnostics.personalizedFeedback,
+  };
+  const diagnostics = buildDiagnostics(baseStudentRecord, privateMessages);
+  const studentRecord = {
+    ...baseStudentRecord,
+    ...diagnostics,
   };
 
   return {

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { clamp } from '../utils/utils';
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { PipelineLayout, StationHeader, StationFooter } from '../layouts/PipelineLayout';
 import { GlassCard } from '../components/GlassCard';
@@ -24,7 +25,7 @@ interface MatrixCellSelection {
   val: number;
 }
 
-const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+
 
 const getColorForAlignment = (value: number) => {
   if (value === 1) return 'rgba(24, 32, 52, 0.95)';

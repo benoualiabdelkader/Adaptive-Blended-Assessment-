@@ -1,4 +1,6 @@
-export type ClusterName = 'Engaged-Developing' | 'Efficient' | 'Struggling' | 'At-Risk';
+import { clamp } from '../utils/utils';
+
+export type ClusterName = string;
 
 export interface StudentRecord {
   student_id: string;
@@ -28,8 +30,26 @@ export interface StudentRecord {
   feedback_types: string;
   onsite_interventions: string;
   cluster_label: number;
-  predicted_score: number;
+  predicted_score: number | null;
   personalized_feedback: string;
+  learner_profile?: string;
+  cluster_profile?: string;
+  clustering_output?: string;
+  predicted_improvement?: string;
+  predicted_score_estimate?: number | null;
+  random_forest_output?: string;
+  bayesian_output?: string;
+  feedback_templates_selected?: string;
+  final_feedback_focus?: string;
+  teacher_validation_prompt?: string;
+  ai_forethought_state?: string;
+  ai_argument_state?: string;
+  ai_cohesion_state?: string;
+  ai_revision_state?: string;
+  ai_feedback_state?: string;
+  ai_linguistic_state?: string;
+  ai_lexical_state?: string;
+  ai_help_state?: string;
 }
 
 export interface FeatureImportance {
@@ -48,6 +68,7 @@ export interface ClusterCentroid {
   cohesion_index: number;
   word_count: number;
   cluster_label: number;
+  cluster_profile?: string;
 }
 
 export interface RfMetrics {
@@ -212,7 +233,7 @@ export const caseStudyMeta: CaseStudyMeta = {
   feedbackViewedAt: '12 Feb 2026 23:25',
   introGrade: '10 / 100',
   finalWordCount: 199,
-  dominantNeed: 'argument expansion and more academic phrasing',
+  dominantNeed: 'feedback decoding, deeper reasoning, and stronger support',
 };
 
 export const primaryStudent: StudentRecord = {
@@ -234,19 +255,39 @@ export const primaryStudent: StudentRecord = {
   argumentation: 3.4,
   grammar_accuracy: 3.2,
   lexical_resource: 3.6,
-  total_score: 20.5,
+  total_score: 20.6,
   score_gain: 3.4,
   first_access_delay_minutes: 10,
   sample_text:
     'Another major worry is how AI impacts fairness and student relationships. Some students use AI a lot to do their assignments while others do their work on their own, and that can make school unfair.',
-  triggered_rule_ids: 'B2; D1',
-  interpretations: 'Argument development needs stronger evidence; adaptive help-seeking remains active.',
-  feedback_types: 'higher_order_feedback; dialogic_scaffolding',
-  onsite_interventions: 'claim_evidence_explanation_scaffold; short_clarification_conference',
+  triggered_rule_ids: 'C4; C5; B2',
+  interpretations:
+    'The learner responds to feedback, but still needs help reading comments at a deeper level.; Feedforward guidance can turn current gains into future drafting habits.; Reasoning is present but still needs deeper explanation and fuller support.',
+  feedback_types: 'feedback_decoding; feedforward_guidance; argument_expansion',
+  onsite_interventions: 'feedback_to_revision_mapping; next_draft_transfer_prompt; guided_argument_development',
   cluster_label: 3,
-  predicted_score: 22.1,
+  predicted_score: 24.2,
+  learner_profile: 'Feedback-responsive developing writer',
+  cluster_profile: 'Engaged or strategic writer',
+  clustering_output: 'Feedback-responsive developing writer',
+  predicted_improvement: 'Moderate-High',
+  random_forest_output: 'Moderate to high improvement predicted if higher-order support continues',
+  bayesian_output: 'Feedback uptake = Medium-High; Argument competence = Medium',
+  feedback_templates_selected: 'feedback_decoding; feedforward_guidance; argument_expansion',
+  final_feedback_focus:
+    'Consolidate feedback use and push the learner from partial revision to deeper reasoning and stronger support.',
+  teacher_validation_prompt:
+    'Teacher validation required: confirm that the main focus should be "Consolidate feedback use and push the learner from partial revision to deeper reasoning and stronger support." before releasing the student-facing message.',
+  ai_forethought_state: 'High',
+  ai_argument_state: 'Medium',
+  ai_cohesion_state: 'Medium',
+  ai_revision_state: 'High',
+  ai_feedback_state: 'High',
+  ai_linguistic_state: 'Medium',
+  ai_lexical_state: 'Medium',
+  ai_help_state: 'Adaptive',
   personalized_feedback:
-    'Your writing shows clear engagement and stronger control of structure. The next step is to deepen evidence, tighten academic phrasing, and explain how each example supports your main claim.',
+    'You viewed the feedback, but your draft does not yet show enough change. Re-read the comments and apply at least one improvement to your ideas and one to your language. You improved some parts of the paragraph. Now use the feedback to deepen your explanation and improve the structure of your ideas. Your main idea is relevant, but it needs deeper explanation. After giving your example, explain why it proves your point.',
 };
 
 const rfMetrics: RfMetrics = {
@@ -276,6 +317,7 @@ const clusterCentroids: ClusterCentroid[] = [
     cohesion_index: 2,
     word_count: 135,
     cluster_label: 0,
+    cluster_profile: 'Disengaged / low-participation learner',
   },
   {
     time_on_task: 115,
@@ -288,6 +330,7 @@ const clusterCentroids: ClusterCentroid[] = [
     cohesion_index: 4,
     word_count: 210,
     cluster_label: 1,
+    cluster_profile: 'Efficient but fragile regulator',
   },
   {
     time_on_task: 155,
@@ -300,6 +343,7 @@ const clusterCentroids: ClusterCentroid[] = [
     cohesion_index: 3,
     word_count: 180,
     cluster_label: 2,
+    cluster_profile: 'Effortful but struggling writer',
   },
   {
     time_on_task: 180,
@@ -312,6 +356,7 @@ const clusterCentroids: ClusterCentroid[] = [
     cohesion_index: 4,
     word_count: 199,
     cluster_label: 3,
+    cluster_profile: 'Engaged or strategic writer',
   },
 ];
 
@@ -327,22 +372,19 @@ export const diagnosticData: DiagnosticData = {
 export const students = diagnosticData.students;
 
 const clusterMap: Record<number, ClusterName> = {
-  0: 'At-Risk',
-  1: 'Efficient',
-  2: 'Struggling',
-  3: 'Engaged-Developing',
+  0: 'Disengaged / low-participation learner',
+  1: 'Efficient but fragile regulator',
+  2: 'Effortful but struggling writer',
+  3: 'Engaged or strategic writer',
 };
 
-const clamp = (value: number, min = 0, max = 1) => {
-  return Math.max(min, Math.min(max, value));
-};
 
 export function getClusterNameFromLabel(label: number): ClusterName {
-  return clusterMap[label] ?? 'Engaged-Developing';
+  return clusterMap[label] ?? 'Engaged or strategic writer';
 }
 
 export function getStudentClusterName(student: StudentRecord): ClusterName {
-  return getClusterNameFromLabel(student.cluster_label);
+  return student.learner_profile ?? student.cluster_profile ?? getClusterNameFromLabel(student.cluster_label);
 }
 
 export function getStudentRiskLevel(student: StudentRecord): 'low' | 'monitor' | 'critical' {

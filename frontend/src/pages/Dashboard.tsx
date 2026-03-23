@@ -182,19 +182,19 @@ export function Dashboard() {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                 <div>
-                  <div className="text-[9px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Institution</div>
+                  <div className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Institution</div>
                   <div className="text-xs font-body text-[var(--text-sec)]">{selectedCase.meta.institution}</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Instructor</div>
+                  <div className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Instructor</div>
                   <div className="text-xs font-body text-[var(--text-sec)]">{selectedCase.meta.instructor}</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Period</div>
+                  <div className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Period</div>
                   <div className="text-xs font-body text-[var(--text-sec)]">{selectedCase.meta.periodCovered}</div>
                 </div>
                 <div>
-                  <div className="text-[9px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Workbook</div>
+                  <div className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] font-navigation">Workbook</div>
                   <div className="text-xs font-body text-[var(--text-sec)]">{selectedCase.workbookName}</div>
                 </div>
               </div>
@@ -363,7 +363,7 @@ export function Dashboard() {
                       </div>
                       <div className="min-w-0">
                         <p className="font-body text-xs text-[var(--text-primary)] leading-snug">{item.action}</p>
-                        <div className="flex items-center gap-1.5 mt-1 text-[var(--text-muted)] font-forensic text-[9px]">
+                        <div className="flex items-center gap-1.5 mt-1 text-[var(--text-muted)] font-forensic text-[10px]">
                           <Clock size={10} />
                           {item.time}
                         </div>

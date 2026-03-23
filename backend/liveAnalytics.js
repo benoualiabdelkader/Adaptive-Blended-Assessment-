@@ -1,5 +1,6 @@
 const { kmeans } = require('ml-kmeans');
 const { RandomForestRegression } = require('ml-random-forest');
+const { getClusterLabelDescription } = require('./adaptiveDecision');
 
 const CLUSTER_FEATURES = [
   'time_on_task',
@@ -136,6 +137,7 @@ function runClustering(students) {
     return {
       ...centroidObject,
       cluster_label: canonicalLabel,
+      cluster_profile: getClusterLabelDescription(canonicalLabel),
       size: centroid.size,
       error: round(centroid.error),
     };
@@ -231,6 +233,11 @@ function buildAnalyticsSummary(cases) {
         {
           ...student,
           cluster_label: clustering.available ? clustering.labelsById[studentId] : -1,
+          cluster_profile:
+            clustering.available && clustering.labelsById[studentId] >= 0
+              ? getClusterLabelDescription(clustering.labelsById[studentId])
+              : student.cluster_profile ?? null,
+          predicted_score_estimate: student.predicted_score ?? null,
           predicted_score: prediction.available ? prediction.predictionsById[studentId] : null,
         },
       ],

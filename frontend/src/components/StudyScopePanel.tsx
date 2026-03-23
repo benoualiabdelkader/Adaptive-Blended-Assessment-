@@ -170,7 +170,7 @@ export function StudyScopePanel({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <label className="space-y-2">
           <span className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[9px]">1</span>
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[10px]">1</span>
             <UserRoundSearch size={13} />
             Student
           </span>
@@ -192,7 +192,7 @@ export function StudyScopePanel({
 
         <label className="space-y-2">
           <span className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[9px]">2</span>
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[10px]">2</span>
             <BookMarked size={13} />
             Exercise
           </span>
@@ -232,7 +232,7 @@ export function StudyScopePanel({
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-4">
           <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[9px]">3</span>
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[10px]">3</span>
             <Waypoints size={13} />
             Analysis Sections
           </p>
@@ -283,7 +283,7 @@ export function StudyScopePanel({
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-4">
           <p className="font-navigation text-[10px] uppercase tracking-widest text-[var(--text-muted)] flex items-center gap-2">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[9px]">4</span>
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] text-[10px]">4</span>
             Indicators to show
           </p>
           <p className="font-body text-xs text-[var(--text-muted)]">Turn indicators on or off depending on what you want the teacher report to emphasize.</p>
