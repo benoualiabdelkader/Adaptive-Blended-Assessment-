@@ -41,3 +41,17 @@ export async function uploadWorkbooks(files: File[]): Promise<ParsedWorkbookCase
   const payload = (await response.json()) as UploadDatasetResponse & ParsedWorkbookCaseResponse;
   return extractCases(payload);
 }
+
+export async function autoLoadWorkbook(): Promise<ParsedWorkbookCaseResponse[]> {
+  const response = await fetch(`${API_BASE}/api/auto-load`, {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    const errorPayload = await response.json().catch(() => ({ error: 'Auto-load failed.' }));
+    throw new Error(errorPayload.error ?? 'Auto-load failed.');
+  }
+
+  const payload = (await response.json()) as UploadDatasetResponse & ParsedWorkbookCaseResponse;
+  return extractCases(payload);
+}

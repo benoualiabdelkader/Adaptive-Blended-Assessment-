@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { ResearchShell } from '../layouts/ResearchShell';
 import { GlassCard } from '../components/GlassCard';
 import { MetricCard } from '../components/MetricCard';
@@ -27,6 +28,7 @@ import {
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { autoLoadWorkbook } from '../services/workbookApi';
 import {
   STUDY_STATIONS,
   STUDY_VARIABLES,
@@ -35,6 +37,7 @@ import {
   getSelectedTaskId,
   getStudyCaseVariableValue,
   useStudyScopeStore,
+  mapParsedCaseToStudyCase,
   type StudyVariableId,
 } from '../state/studyScope';
 
@@ -68,6 +71,22 @@ export function Dashboard() {
   const selectedTaskByCase = useStudyScopeStore((state) => state.selectedTaskByCase);
   const selectedStationIds = useStudyScopeStore((state) => state.selectedStationIds);
   const selectedVariableIds = useStudyScopeStore((state) => state.selectedVariableIds);
+  const importCases = useStudyScopeStore((state) => state.importCases);
+  const [isAutoLoading, setIsAutoLoading] = useState(false);
+
+  useEffect(() => {
+    if (cases.length === 0) {
+      setIsAutoLoading(true);
+      autoLoadWorkbook()
+        .then((parsedCases) => {
+          const studyCases = parsedCases.map(mapParsedCaseToStudyCase);
+          importCases(studyCases);
+        })
+        .catch((err) => console.error('Auto-load failed', err))
+        .finally(() => setIsAutoLoading(false));
+    }
+  }, [cases.length, importCases]);
+
   const selectedCase = getSelectedStudyCase({ cases, selectedCaseId });
   const selectedTask = selectedCase
     ? getSelectedTask(selectedCase, getSelectedTaskId({ selectedCaseId, selectedTaskByCase }))
@@ -77,6 +96,19 @@ export function Dashboard() {
     ? STUDY_VARIABLES.filter((variable) => selectedVariableIds.includes(variable.id)).slice(0, 4)
     : [];
   const selectedStations = STUDY_STATIONS.filter((station) => visibleStationIds.includes(station.id));
+
+  if (isAutoLoading) {
+    return (
+      <ResearchShell>
+        <div className="max-w-5xl mx-auto p-6 md:p-8 pb-32">
+          <GlassCard accent="lav" glow className="p-8 md:p-10 flex flex-col items-center justify-center min-h-[40vh]">
+            <h1 className="font-editorial italic text-4xl text-[var(--lav)] animate-pulse">Loading Study Context...</h1>
+            <p className="mt-3 font-body text-sm text-[var(--text-sec)]">Retrieving student dataset.</p>
+          </GlassCard>
+        </div>
+      </ResearchShell>
+    );
+  }
 
   if (!selectedCase) {
     return (

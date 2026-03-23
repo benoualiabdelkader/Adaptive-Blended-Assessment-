@@ -74,6 +74,32 @@ app.post('/api/upload-dataset', upload.any(), (req, res) => {
   }
 });
 
+app.get('/api/auto-load', (req, res) => {
+  try {
+    const filePath = path.join(__dirname, 'data', 'dataset.xlsx');
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ error: 'Default dataset not found' });
+    }
+    const buffer = fs.readFileSync(filePath);
+    const parsedCases = [parseWorkbook(buffer, 'lahmarabbou_asmaa_FULL_ENGLISH.xlsx')];
+    const { cases, analytics } = buildAnalyticsSummary(parsedCases);
+    const firstCase = cases[0];
+    const studentCount = cases.reduce((sum, result) => sum + result.data.length, 0);
+
+    res.json({
+      message: 'Processing complete',
+      workbookCount: cases.length,
+      studentCount,
+      analytics,
+      cases,
+      ...firstCase,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: `Failed to process dataset: ${error.message}` });
+  }
+});
+
 app.post('/api/run-pipeline', upload.any(), (req, res) => {
   const files = Array.isArray(req.files) ? req.files : [];
   

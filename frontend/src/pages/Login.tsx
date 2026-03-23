@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from '../components/GlassCard';
 import { Button } from '../components/Atoms';
-import { BookOpen, Users, Activity, ArrowRight } from 'lucide-react';
+import { BookOpen, Users, Activity, ArrowRight, Loader } from 'lucide-react';
+import { autoLoadWorkbook } from '../services/workbookApi';
+import { useStudyScopeStore, mapParsedCaseToStudyCase } from '../state/studyScope';
 
 type StatCardAccent = 'lav' | 'teal' | 'red' | 'gold';
 
@@ -20,11 +22,23 @@ export function Login() {
   const [isLoaded] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const importCases = useStudyScopeStore((state) => state.importCases);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    sessionStorage.setItem('writelens-research-access', 'granted');
-    navigate('/dashboard');
+    setIsLoading(true);
+    try {
+      const parsedCases = await autoLoadWorkbook();
+      const studyCases = parsedCases.map(mapParsedCaseToStudyCase);
+      importCases(studyCases);
+    } catch (err) {
+      console.error('Failed to auto-load dataset:', err);
+    } finally {
+      setIsLoading(false);
+      sessionStorage.setItem('writelens-research-access', 'granted');
+      navigate('/dashboard');
+    }
   };
 
   return (
@@ -109,9 +123,18 @@ export function Login() {
                 />
               </div>
 
-              <Button type="submit" className="mt-4 w-full justify-between group">
-                Enter Research Workspace
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <Button type="submit" disabled={isLoading} className="mt-4 w-full justify-between group">
+                {isLoading ? (
+                  <>
+                    Loading Dataset...
+                    <Loader size={18} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Enter Research Workspace
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </Button>
             </form>
 
